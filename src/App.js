@@ -1,17 +1,9 @@
-import { useEffect } from 'react'
-import axios from 'axios'
+import Test from './components/test'
 
 function App() {
-  useEffect(() => {
-    axios.get('/api/seller').then(res => {
-      console.log(res)
-    })
-  }, [])
-
   return (
     <div>
-      <h1>test</h1>
-      <p>test</p>
+      <Test></Test>
     </div>
   );
 }
