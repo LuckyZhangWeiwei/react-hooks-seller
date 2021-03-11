@@ -154,7 +154,6 @@
   },
   "devDependencies": {
     "stylus": "^0.54.7",
-    "stylus-loader": "^3.0.2",
-    "postcss-px2rem": "^0.3.0"
+    "stylus-loader": "^3.0.2"
   }
 }
