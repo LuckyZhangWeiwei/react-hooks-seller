@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './assert/css/reset.css'
 import './assert/stylus/index.styl';
 import App from './App';
 
