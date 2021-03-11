@@ -10,7 +10,8 @@ function App() {
 
   return (
     <div>
-      test
+      <h1>test</h1>
+      <p>test</p>
     </div>
   );
 }
