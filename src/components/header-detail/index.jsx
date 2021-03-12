@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom'
 import { useState, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
+import SupportIcon from './../support-ico'
 
 import './index.styl'
 
@@ -34,15 +35,31 @@ const HeaderDetail = props => {
                 <div className="detail-wrapper clear-fix">
                   <div className="detail-main">
                     <h1 className="name">{seller.name}</h1>
+                    <div className="star-wrapper"></div>
                     <div className="title">
                       <div className="line" />
                       <div className="text">优惠信息</div>
                       <div className="line" />
                     </div>
-                    <div class="title">
-                      <div class="line" />
-                      <div class="text">公告</div>
-                      <div class="line" />
+                    {
+                      seller.supports &&
+                      <ul className="supports">
+                        {
+                          seller.supports.map((item, index) => {
+                            return (
+                              <li className="support-item"  key={index}>
+                                <SupportIcon size="2" type={item.type} />
+                                <span className="text">{item.description}</span>
+                              </li>
+                            )
+                          })
+                        }
+                      </ul>
+                    }
+                    <div className="title">
+                      <div className="line" />
+                      <div className="text">公告</div>
+                      <div className="line" />
                     </div>
                     <div className="bulletin">
                       <p className="content">{seller.bulletin}</p>
