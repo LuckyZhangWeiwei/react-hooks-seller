@@ -15,7 +15,10 @@ const HeaderDetail = props => {
 
   const hide = () => {
     setShowTransition(false)
-    props.hideHeaderDetail()  
+
+    setTimeout(() => {
+      props.hideHeaderDetail()    
+    }, 310)
   }
 
   return (
