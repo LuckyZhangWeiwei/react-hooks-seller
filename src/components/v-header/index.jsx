@@ -2,8 +2,13 @@ import './index.styl'
 
 const VHeader = props => {
   const seller = props.data
+
+  const showDetail = () => {
+    alert(1)
+  }
+
   return (
-    <div className="header">
+    <div className="header" onClick={() => showDetail()}>
       <div className="content-wrapper">
         <div className="avatar">
           <img src={seller.avatar} alt="" width="64" height="64"/>
