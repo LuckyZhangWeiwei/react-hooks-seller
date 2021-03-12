@@ -3,14 +3,14 @@
 @import './../../assert/stylus/mixin.styl'
 .header-detail
   position fixed
-  z-index: 100
   top 0
   left 0
   width 100%
   height 100%
   overflow auto
   background-filter blur(10px)
-  opacity 1
+  // opacity 1
+  opacity 0
   color: $color-white
   background: $color-background-s
   .detail-close
@@ -23,3 +23,11 @@
     clear: both
     font-size: $fontsize-large-xxxx
     margin-bottom: 10px
+&.fade-enter
+  opacity: 0
+  background: $color-background
+&.fade-enter-active
+  transition: all 0.3s
+  opacity: 1
+&.fade-enter-done
+  opacity: 1

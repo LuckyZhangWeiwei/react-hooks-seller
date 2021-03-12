@@ -1,19 +1,23 @@
 import ReactDOM from 'react-dom'
 import { useState, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
+
 import './index.styl'
 
 const HeaderDetail = props => {
   const [showTransition, setShowTransition] = useState(false)
 
   useEffect(() => {
-    setShowTransition(true)
-  }, [])
+    if (props.show) {
+      setShowTransition(true)  
+    }
+  }, [props.show])
 
   const hide = () => {
-    props.hideHeaderDetail()
+    setShowTransition(false)
+    props.hideHeaderDetail()  
   }
-  
+
   return (
     <>
       {
@@ -23,7 +27,9 @@ const HeaderDetail = props => {
           {
             ReactDOM.createPortal(
               <div className="header-detail">
-                <div className="detail-close" onClick={() => hide()}>
+                <div 
+                  className="detail-close" 
+                  onClick={() => hide()}>
                   <i className="icon-close" />
                 </div>
               </div>
