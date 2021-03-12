@@ -1,3 +1,5 @@
+import './index.styl'
+
 const SupportIco = props => {
   const iconCls = () => {
     const classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
