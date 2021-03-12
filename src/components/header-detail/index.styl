@@ -1,0 +1,25 @@
+@import './../../assert/stylus/cube/variable.styl'
+@import './../../assert/stylus/variable.styl'
+@import './../../assert/stylus/mixin.styl'
+.header-detail
+  position fixed
+  z-index: 100
+  top 0
+  left 0
+  width 100%
+  height 100%
+  overflow auto
+  background-filter blur(10px)
+  opacity 1
+  color: $color-white
+  background: $color-background-s
+  .detail-close
+    position: absolute
+    bottom: 0
+    left: 50%
+    transform: translateX(-15px)
+    width: 30px
+    height: 30px
+    clear: both
+    font-size: $fontsize-large-xxxx
+    margin-bottom: 10px
