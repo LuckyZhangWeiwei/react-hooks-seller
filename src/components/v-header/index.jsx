@@ -59,6 +59,7 @@ const VHeader = props => {
       <HeaderDetail 
         show={showDetail}
         hideHeaderDetail={() => hideHeaderDetail()}
+        data={seller}
       />
     </>
   )
