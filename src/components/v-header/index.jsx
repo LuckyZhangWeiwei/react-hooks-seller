@@ -1,3 +1,4 @@
+import SupportIcon from './../support-ico'
 import './index.styl'
 
 const VHeader = props => {
@@ -24,6 +25,7 @@ const VHeader = props => {
           {
             seller.supports &&
             <div className="support">
+              <SupportIcon size="1" type={seller.supports[0].type} />
               <span className="description">{seller.supports[0].description}</span>
             </div>
           }
