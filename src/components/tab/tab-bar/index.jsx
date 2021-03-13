@@ -7,7 +7,7 @@ const TabBar = props => {
       {
         props.children
       }
-      <TabBarSlider/>
+      <TabBarSlider transfromX={props.transfromX}/>
     </div>
   )
 }

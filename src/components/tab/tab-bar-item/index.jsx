@@ -1,7 +1,10 @@
+
 import './index.styl'
 const TabBarItem = props => {
   return (
-    <div className="tab-bar-item">
+    <div 
+      className={props.myClassName}
+      onClick={() => props.onClick()}>
       <i></i>
       <div>{props.title}</div>
     </div>
