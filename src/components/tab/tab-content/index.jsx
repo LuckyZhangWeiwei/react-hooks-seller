@@ -7,6 +7,7 @@ const TabContent = props => {
   const scroll = useRef(null)
 
   useEffect(() => {
+    if (!props.data) return 
     _initTab()
     window.addEventListener('resize', () => {
       if (scroll.current) {
@@ -23,19 +24,22 @@ const TabContent = props => {
       const transformScala = -pos.x / sliderRef.current.clientWidth
       props.onScroll(transformScala)
     })
-  }, [])
+  }, [props.data])
 
   useEffect(() => {
-    scroll.current &&
-     scroll.current.goToPage(props.currentIndex, 0, 200)
-  }, [props.currentIndex])
+    if (props.data && scroll.current) {
+      scroll.current.goToPage(props.currentIndex, 0, 200)
+    }
+  }, [props.currentIndex, props.data])
 
   const _initTab = () => {
+    if (!props.data) return
     _setTabWidth()
     _initScroll()
   }
 
   const _initScroll = () => {
+    if (!sliderRef.current) return
     BScroll.use(Slide)
     scroll.current = new BScroll(sliderRef.current, {
       scrollX: true,
@@ -54,6 +58,7 @@ const TabContent = props => {
   }
   const _setTabWidth = () =>{
     let tabItems = document.querySelectorAll('.slide-page')
+    if (!tabItems) return
     let tabItemWidth = sliderRef.current.clientWidth
     for (let tabItem of tabItems) {
       tabItem.style.width = `${tabItemWidth}px`
@@ -62,17 +67,28 @@ const TabContent = props => {
     document.querySelector('.slide-banner-content').style.width = `${totalWidth}px`
   }
   return (
-    <div className="slide-fullpage">
-       <div className="banner-wrapper">
+    <>
+    {
+    props.data &&
+      <div className="slide-fullpage">
+        <div className="banner-wrapper">
           <div className="slide-banner-wrapper" ref={sliderRef}>
             <div className="slide-banner-content">
-              <div className="slide-page page1">page1</div>
-              <div className="slide-page page2">page2</div>
-              <div className="slide-page page3">page3</div>
+              {
+                props.data.map((tab, index) => {
+                  return (
+                    <div key={index} className="slide-page">
+                      <tab.component />
+                    </div>
+                  )
+                })
+              }
             </div>
           </div>
         </div>
       </div>
+    }
+    </>
   )
 }
 export default TabContent
