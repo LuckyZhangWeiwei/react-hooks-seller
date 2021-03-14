@@ -46,7 +46,7 @@ const Tab = props => {
         }
       </TabBar> 
       <TabContent
-        tabInfo={tabInfo}
+        data={tabInfo}
         currentIndex={currentIndex}
         onPageChanged={currentPage => goToPage(currentPage.pageX)}
         onScroll={value => onSlideChange(value)}>
