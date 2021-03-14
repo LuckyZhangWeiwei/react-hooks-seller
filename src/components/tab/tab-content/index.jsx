@@ -11,7 +11,7 @@ const TabContent = props => {
    window.addEventListener('resize', () => {
      if (scroll.current) {
       _setTabWidth()
-      sliderRef.current.refresh()
+      scroll.current.refresh()
      }
    })
    scroll.current.on('slidePageChanged', page => {
