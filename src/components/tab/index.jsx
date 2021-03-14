@@ -20,7 +20,7 @@ const Tab = props => {
     setCurrentIndex(pageIndex)
   }
 
-  const onSlideChange = value => {
+  const onScrollValueChanged = value => {
     setTransfromX(value)
   }
 
@@ -49,7 +49,7 @@ const Tab = props => {
         data={tabInfo}
         currentIndex={currentIndex}
         onPageChanged={currentPage => goToPage(currentPage.pageX)}
-        onScroll={value => onSlideChange(value)}>
+        onScroll={value => onScrollValueChanged(value)}>
       </TabContent>
     </div>
   )
