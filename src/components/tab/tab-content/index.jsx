@@ -8,19 +8,21 @@ const TabContent = props => {
 
   useEffect(() => {
     _initTab()
-   window.addEventListener('resize', () => {
-     if (scroll.current) {
-      _setTabWidth()
-      scroll.current.refresh()
-     }
-   })
-   scroll.current.on('slidePageChanged', page => {
-     props.onPageChanged(page)
-   })
-   scroll.current.on('scroll', pos => {
-     const transform = -pos.x / sliderRef.current.clientWidth
-     props.onScroll(transform)
-   })
+    window.addEventListener('resize', () => {
+      if (scroll.current) {
+        _setTabWidth()
+        scroll.current.refresh()
+      }
+    })
+
+    scroll.current.on('slidePageChanged', page => {
+      props.onPageChanged(page)
+    })
+    
+    scroll.current.on('scroll', pos => {
+      const transformScala = -pos.x / sliderRef.current.clientWidth
+      props.onScroll(transformScala)
+    })
   }, [])
 
   useEffect(() => {
@@ -30,6 +32,10 @@ const TabContent = props => {
 
   const _initTab = () => {
     _setTabWidth()
+    _initScroll()
+  }
+
+  const _initScroll = () => {
     BScroll.use(Slide)
     scroll.current = new BScroll(sliderRef.current, {
       scrollX: true,
