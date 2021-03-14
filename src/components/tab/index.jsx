@@ -35,7 +35,7 @@ const Tab = props => {
               key={index}
               title={item.title}
               pageIndex={index}
-              myClassName={
+              className={
                 classnames('tab-bar-item', {
                 'active-tab-bar-item': currentIndex === index
               })}
