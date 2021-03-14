@@ -14,7 +14,13 @@ const Tab = props => {
   useEffect(() => {
     const { tabInfo } = props.data
     setTabInfo(tabInfo)
-  }, []) 
+  }, [])
+
+  useEffect(() => {
+    if (props.data) {
+      setCurrentIndex( props.data.initTabIndex)
+    }
+  }, [props.data])
  
   const goToPage = pageIndex => {
     setCurrentIndex(pageIndex)
