@@ -1,4 +1,4 @@
-import TabBarSlider from './../tab-bar-slider'
+import TabBarSlider from './../tab-bar-indicator'
 import './index.styl'
 
 const TabBar = props => {

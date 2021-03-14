@@ -4,7 +4,6 @@ import './index.styl'
 const TabBarSlider = props => {
   const sliderRef = useRef(null)
   const IndicatorWidthRef = useRef(null)
-  let IndicatorWidth;
   useEffect(() => {
     IndicatorWidthRef.current = sliderRef.current.clientWidth
   }, [])
