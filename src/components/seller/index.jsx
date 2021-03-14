@@ -1,4 +1,4 @@
-import 'index.styl'
+import './index.styl'
 
 const Seller = props => {
   return (
