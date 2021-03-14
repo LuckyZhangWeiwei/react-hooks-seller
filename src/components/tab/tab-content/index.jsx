@@ -4,36 +4,38 @@ import Slide from '@better-scroll/slide'
 import './index.styl'
 const TabContent = props => {
   const sliderRef = useRef(null)
-  const scroll = useRef(null)
+  const scrollRef = useRef(null)
+  const containerRef = useRef(null)
 
   useEffect(() => {
     if (!props.data) return 
     _initTab()
     window.addEventListener('resize', () => {
-      if (scroll.current) {
+      if (scrollRef.current) {
         _setTabWidth()
-        scroll.current.refresh()
+        scrollRef.current.refresh()
       }
     })
 
-    scroll.current.on('slidePageChanged', page => {
+    scrollRef.current.on('slidePageChanged', page => {
       props.onPageChanged(page)
     })
     
-    scroll.current.on('scroll', pos => {
+    scrollRef.current.on('scroll', pos => {
       const transformScala = -pos.x / sliderRef.current.clientWidth
       props.onScroll(transformScala)
     })
   }, [props.data])
 
   useEffect(() => {
-    if (props.data && scroll.current) {
-      scroll.current.goToPage(props.currentIndex, 0, 200)
+    if (props.data && scrollRef.current) {
+      scrollRef.current.goToPage(props.currentIndex, 0, 200)
     }
   }, [props.currentIndex, props.data])
 
   const _initTab = () => {
     if (!props.data) return
+    _setTabContentHeight()
     _setTabWidth()
     _initScroll()
   }
@@ -41,7 +43,7 @@ const TabContent = props => {
   const _initScroll = () => {
     if (!sliderRef.current) return
     BScroll.use(Slide)
-    scroll.current = new BScroll(sliderRef.current, {
+    scrollRef.current = new BScroll(sliderRef.current, {
       scrollX: true,
       scrollY: false,
       slide: {
@@ -56,6 +58,7 @@ const TabContent = props => {
       probeType: 3
     })
   }
+
   const _setTabWidth = () =>{
     let tabItems = document.querySelectorAll('.slide-page')
     if (!tabItems) return
@@ -66,24 +69,27 @@ const TabContent = props => {
     let totalWidth = tabItems.length * tabItemWidth
     document.querySelector('.slide-banner-content').style.width = `${totalWidth}px`
   }
+
+  const _setTabContentHeight = () => {
+    containerRef.current.style.height = `${window.screen.height - document.querySelector('.header').clientHeight - document.querySelector('.tab').clientHeight}px`
+  }
+
   return (
     <>
     {
     props.data &&
-      <div className="slide-fullpage">
-        <div className="banner-wrapper">
-          <div className="slide-banner-wrapper" ref={sliderRef}>
-            <div className="slide-banner-content">
-              {
-                props.data.map((tab, index) => {
-                  return (
-                    <div key={index} className="slide-page">
-                      <tab.component />
-                    </div>
-                  )
-                })
-              }
-            </div>
+      <div className="slide-fullpage" ref={containerRef}>
+        <div className="slide-banner-wrapper" ref={sliderRef}>
+          <div className="slide-banner-content">
+            {
+              props.data.map((tab, index) => {
+                return (
+                  <div key={index} className="slide-page">
+                    <tab.component />
+                  </div>
+                )
+              })
+            }
           </div>
         </div>
       </div>
