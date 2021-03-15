@@ -71,7 +71,8 @@ const TabContent = props => {
   }
 
   const _setTabContentHeight = () => {
-    containerRef.current.style.height = `${window.screen.height - document.querySelector('.header').clientHeight - document.querySelector('.tab').clientHeight}px`
+    containerRef.current.style.height = 
+    `${window.screen.height - document.querySelector('.header').clientHeight - document.querySelector('.tab').clientHeight}px`
   }
 
   return (
