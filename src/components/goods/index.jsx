@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getGoods } from './../../api'
 import GoodsNav from './../goods-nav'
 import GoodsPanel from './../goods-panel'
+import ShopCart from './../shop-cart'
 import './index.styl'
 
 const Goods = props => {
@@ -12,18 +13,21 @@ const Goods = props => {
     })
   }, [])
   return (
-    <div className="goods-container">
-      <div className="goods-panel">
-        <GoodsPanel
-          category={goodsCategory}
-        />
+    <>
+      <div className="goods-container">
+        <div className="goods-panel">
+          <GoodsPanel
+            category={goodsCategory}
+          />
+        </div>
+        <div className="goods-nav">
+          <GoodsNav
+            category={goodsCategory}
+          />
+        </div>
       </div>
-      <div className="goods-nav">
-        <GoodsNav
-          category={goodsCategory}
-        />
-      </div>
-    </div>
+      <ShopCart />
+    </>
   )
 }
 
