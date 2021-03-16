@@ -30,6 +30,19 @@ const GoodsPanel = props => {
                         <div className="content">
                           <h2 className="name">{food.name}</h2>
                           <p className="desc">{food.description}</p>
+                          <div className="extra">
+                            <span className="count">
+                            月售{food.sellCount}份</span><span>好评率{food.rating}%
+                            </span>
+                          </div>
+                          <div className="price">
+                            <span className="now">￥{food.price}</span>
+                            {
+                              food.oldPrice &&
+                              <span className="old">￥{food.oldPrice}</span>
+                            }
+                          </div>
+                          <div className="cart-control-wrapper"></div>
                         </div>
                       </li>
                     )

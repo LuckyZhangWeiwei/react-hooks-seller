@@ -1,3 +1,7 @@
+@import './../../assert/stylus/cube/variable.styl'
+@import './../../assert/stylus/variable.styl'
+@import './../../assert/stylus/mixin.styl'
+
 .category-item-container
   .category-title
     height: 26px;
@@ -13,22 +17,51 @@
   .food-item
     display: flex;
     margin: 18px;
-    padding-bottom: 18px;
     position: relative;
+    &:last-child
+      border-none()
+      margin-bottom: 0
     .icon
       flex: 0 0 57px;
       margin-right: 10px;
+      img 
+        border-radius: 2px
     .content
-      -webkit-box-flex: 1;
       flex: 1;
+      text-align: left
+      margin-left: 16px
+      padding: 0 10px
       .name
-        color: #333;
-        font-size: 14px;
-        height: 14px;
-        line-height: 14px;
-        margin: 2px 0 8px;
+        margin 2px 0 8px 0
+        height 14px
+        line-height 14px
+        font-size $fontsize-medium
+        color $color-dark-grey
+      .desc, .extra
+        line-height 10px
+        font-size $fontsize-small-s
+        color $color-light-grey
       .desc
-        line-height: 12px;
-        margin-bottom: 8px;
-        color: #999;
-        font-size: 10px;
+        line-height: 16px
+        margin-bottom: 8px
+        word-break break-all
+        overflow:hidden;
+        white-space: normal; 
+      .extra
+        .count
+          margin-right: 12px
+      .price
+        font-weight: 700
+        line-height: 24px
+        .now
+          margin-right 8px
+          font-size $fontsize-medium
+          color $color-red
+        .old
+          text-decoration line-through
+          font-size $fontsize-small-s
+          color $color-light-grey
+      .cart-control-wrapper
+        position absolute
+        right 0
+        bottom 12px
