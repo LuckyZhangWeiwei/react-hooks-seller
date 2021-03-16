@@ -13,13 +13,13 @@ const Goods = props => {
   }, [])
   return (
     <div className="goods-container">
-      <div className="goods-nav">
-        <GoodsNav
+      <div className="goods-panel">
+        <GoodsPanel
           category={goodsCategory}
         />
       </div>
-      <div className="goods-panel">
-        <GoodsPanel
+      <div className="goods-nav">
+        <GoodsNav
           category={goodsCategory}
         />
       </div>

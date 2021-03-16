@@ -1,3 +1,4 @@
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Scroller from './../scroller'
 import './index.styl'
 
@@ -18,11 +19,12 @@ const GoodsPanel = props => {
                     return (
                       <li key={foodIndex} className="food-item">
                         <div className="icon">
-                          <img 
+                          <LazyLoadImage 
                             src={food.image} 
-                            alt=""
+                            alt={food.name}
                             width="57"
                             height="57"
+                            effect="blur"
                             />
                         </div>
                         <div className="content">
