@@ -25,14 +25,14 @@ const GoodsPanel = props => {
                             width="57"
                             height="57"
                             effect="blur"
-                            />
+                          />
                         </div>
                         <div className="content">
                           <h2 className="name">{food.name}</h2>
                           <p className="desc">{food.description}</p>
                           <div className="extra">
                             <span className="count">
-                            月售{food.sellCount}份</span><span>好评率{food.rating}%
+                              月售{food.sellCount}份</span><span>好评率{food.rating}%
                             </span>
                           </div>
                           <div className="price">
