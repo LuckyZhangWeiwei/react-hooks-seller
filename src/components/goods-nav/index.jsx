@@ -1,11 +1,22 @@
+import classnames from 'classnames'
 import Scroller from './../scroller'
 import './index.styl'
 
 const GoodsNav = props => {
   const category = props.category
 
-  const foodNavClick = navItem => {
+  const foodNavClick = (navItem, ele) => {
     props.navItemClick(navItem)
+    _addStyleToNav(ele)
+    
+  }
+
+  const _addStyleToNav = (ele) => {
+    const allNavList = document.querySelectorAll('.category-item')
+    for (let e of allNavList) {
+      e.classList.remove('active')
+    }
+    ele.target.classList.add('active')
   }
 
   return (
@@ -18,8 +29,11 @@ const GoodsNav = props => {
           return (
             <div 
               key={index} 
-              className="categoryItem" 
-              onClick={() => foodNavClick(item)}>
+              className={
+                classnames('category-item', {
+                'active': index === 0
+              })}
+              onClick={e => foodNavClick(item, e)}>
               {
                 item.name
               }
