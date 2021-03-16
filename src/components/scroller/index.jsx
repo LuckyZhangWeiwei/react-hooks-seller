@@ -31,7 +31,9 @@ const Scroller = props => {
   }
 
   return (
-    <div ref={scrollerContainerRef} className="scroll-container">
+    <div 
+      className="scroll-container"
+      ref={scrollerContainerRef}>
       <div>
         {
           props.children
