@@ -19,7 +19,15 @@ const Scroller = props => {
     scrollerRef.current = new BScroll(scrollerContainerRef.current, {
       probeType: props.probeType,
       click: true
-    })  
+    })
+    
+    if (props.listenScroll) {
+      scrollerRef.current.on('scroll', pos => {
+        setTimeout(() => {
+          props.onScroll(pos)  
+        }, 20);
+      })
+    }
   }
 
   return (

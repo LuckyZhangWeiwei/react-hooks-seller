@@ -4,8 +4,18 @@ import './index.styl'
 
 const GoodsPanel = props => {
   const category = props.category
+
+  const onFoodsPanelScrolling = pos => {
+    console.log('pos:', pos)
+  }
+
   return (
-    <Scroller probeType="3" data={category}>
+    <Scroller 
+      probeType="3" 
+      data={category}
+      listenScroll="true"
+      onScroll={pos => onFoodsPanelScrolling(pos)}
+    >
       {
         category.map((item, index) => {
           return (
