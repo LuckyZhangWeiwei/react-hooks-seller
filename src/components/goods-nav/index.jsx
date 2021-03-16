@@ -9,7 +9,8 @@ const GoodsNav = props => {
   }
 
   return (
-    <Scroller 
+    <Scroller
+      ref={props.myRef}
       probeType="3" 
       data={category}>
       {

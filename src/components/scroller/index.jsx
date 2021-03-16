@@ -1,46 +1,61 @@
-import { useEffect, useRef } from 'react'
+import React from 'react'
 import BScroll from '@better-scroll/core'
 import './index.styl'
 
-const Scroller = props => {
+class Scroller extends React.Component {
 
-  const scrollerContainerRef = useRef(null)
-  const scrollerRef = useRef(null)
+  constructor(props) {
+    super(props)
+    this.scrollerContainerRef = React.createRef()
+  }
 
-  useEffect(() => {
-    _initScroll()
-  }, [])
+  componentWillReceiveProps(props) {
+    if (props.data.length) {
+      setTimeout(() => {
+        this.scroller.refresh()  
+      }, 16);
+      
+    }
+  }
 
-  useEffect(() => {
-    scrollerRef.current.refresh()
-  }, [props.data])
+  componentDidMount() {
+    setTimeout(() => {
+      this._initScroll()  
+    }, 16);
+  }
 
-  const _initScroll = () => {
-    scrollerRef.current = new BScroll(scrollerContainerRef.current, {
-      probeType: props.probeType,
+  _initScroll () {
+    this.scroller = new BScroll(this.scrollerContainerRef.current, {
+      probeType: this.props.probeType,
       click: true
     })
     
-    if (props.listenScroll) {
-      scrollerRef.current.on('scroll', pos => {
+    if (this.props.listenScroll) {
+      this.scroller.on('scroll', pos => {
         setTimeout(() => {
-          props.onScroll(pos)  
-        }, 20);
+          this.props.onScroll(pos)  
+        }, 16);
       })
     }
   }
 
-  return (
-    <div 
-      className="scroll-container"
-      ref={scrollerContainerRef}>
-      <div>
-        {
-          props.children
-        }
+  scrollToElement() {
+    this.scroller &&	this.scroller.scrollToElement.apply(this.scroller, arguments)
+  }
+
+  render() {
+    return (
+      <div 
+        className="scroll-container"
+        ref={this.scrollerContainerRef}>
+        <div>
+          {
+            this.props.children
+          }
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 } 
 
 export default Scroller

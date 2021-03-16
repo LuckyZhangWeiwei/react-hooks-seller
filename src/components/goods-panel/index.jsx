@@ -11,6 +11,7 @@ const GoodsPanel = props => {
 
   return (
     <Scroller 
+      ref={props.myRef}
       probeType="3" 
       data={category}
       listenScroll="true"
@@ -19,7 +20,7 @@ const GoodsPanel = props => {
         category.map((item, index) => {
           return (
             <div key={index} className="category-item-container">
-              <div className="category-title">
+              <div className="category-title" data-category={item.name}>
                 <h2 className="category-name">{item.name}</h2>
               </div>
               <ul>
