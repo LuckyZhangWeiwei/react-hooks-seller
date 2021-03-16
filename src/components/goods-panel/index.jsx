@@ -14,8 +14,7 @@ const GoodsPanel = props => {
       probeType="3" 
       data={category}
       listenScroll="true"
-      onScroll={pos => onFoodsPanelScrolling(pos)}
-    >
+      onScroll={pos => onFoodsPanelScrolling(pos)}>
       {
         category.map((item, index) => {
           return (

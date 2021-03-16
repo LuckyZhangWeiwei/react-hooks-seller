@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { getGoods } from './../../api'
 import GoodsNav from './../goods-nav'
 import GoodsPanel from './../goods-panel'
@@ -7,11 +7,17 @@ import './index.styl'
 
 const Goods = props => {
   const [goodsCategory, setGoodsCategory] = useState([])
+
   useEffect(() => {
     getGoods().then(res => {
       setGoodsCategory(res)
     })
   }, [])
+
+  const onNavItemClick = item => {
+    console.log(item)
+  }
+
   return (
     <>
       <div className="goods-container">
@@ -23,6 +29,7 @@ const Goods = props => {
         <div className="goods-nav">
           <GoodsNav
             category={goodsCategory}
+            navItemClick={navItem => onNavItemClick(navItem)}
           />
         </div>
       </div>

@@ -4,12 +4,14 @@ import './index.styl'
 const GoodsNav = props => {
   const category = props.category
 
-  const foodNavClick = (navItem) => {
-    console.log('navItem', navItem)
+  const foodNavClick = navItem => {
+    props.navItemClick(navItem)
   }
 
   return (
-    <Scroller probeType="3" data={category}>
+    <Scroller 
+      probeType="3" 
+      data={category}>
       {
         category.map((item, index) => {
           return (
