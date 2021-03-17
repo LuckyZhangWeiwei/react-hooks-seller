@@ -62,7 +62,7 @@ const GoodsPanel = props => {
   return (
     <Scroller 
       ref={props.myRef}
-      probeType="3" 
+      probeType={3}
       data={category}
       listenScroll={pos => onFoodsPanelScrolling(pos)}>
       {
