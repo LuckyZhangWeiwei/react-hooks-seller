@@ -22,7 +22,6 @@ const GoodsNav = props => {
   return (
     <Scroller
       ref={props.myRef}
-      probeType="3" 
       data={category}>
       {
         category.map((item, index) => {
