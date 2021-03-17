@@ -54,8 +54,7 @@ const TabContent = props => {
       useTransition: false,
       momentum: false,
       bounce: false,
-      stopPropagation: true,
-      probeType: 3
+      stopPropagation: true
     })
   }
 
