@@ -7,6 +7,8 @@ import './index.styl'
 const GoodsPanel = props => {
   const category = props.category
 
+  const FIXED_TITLE_HEIGHT = 26
+
   const [listHeight, setListHeight] = useState([])
 
   const [currentNavItemIndex, setCurrentNavItemIndex] = useState(0)
@@ -70,10 +72,18 @@ const GoodsPanel = props => {
 			let h2 = listHeight[i + 1]
       if (-y >= h1 && -y < h2) {
         setCurrentNavItemIndex(i + 1)
+        // handle fixed title transition
+        if(h2 - FIXED_TITLE_HEIGHT <= -y) {
+          goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(h2 + y))}px, 0)`
+        } else {
+          goodsFixedCategoryRef.current.style.transform = `translate3d(0, 0, 0)`
+        }
         return
       }
     }
     setCurrentNavItemIndex(0)
+    // handle fixed title transition
+    goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(listHeight[0] + y))}px, 0)`
   }
 
   return (
