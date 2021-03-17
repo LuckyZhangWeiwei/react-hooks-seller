@@ -26,7 +26,7 @@ class Scroller extends React.Component {
 
   _initScroll () {
     this.scroller = new BScroll(this.scrollerContainerRef.current, {
-      probeType: this.props.probeType,
+      probeType: this.props.probeType ? this.props.probeType : 0,
       click: true
     })
     

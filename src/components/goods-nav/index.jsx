@@ -6,15 +6,15 @@ import './index.styl'
 const GoodsNav = props => {
   const category = props.category
 
-  const foodNavClick = (navItem, ele) => {
+  const foodNavClick = (navItem, clickedItemIndex) => {
     props.navItemClick(navItem)
-    _addStyleToNav(ele)
+    _addStyleToNav(clickedItemIndex)
     
   }
 
-  const _addStyleToNav = (ele) => {
+  const _addStyleToNav = (clickedItemIndex) => {
     _resetStyle()
-    ele.target.classList.add('active')
+    document.querySelectorAll('.category-item')[clickedItemIndex].classList.add('active')
   }
 
   const _resetStyle = () => {
@@ -37,7 +37,7 @@ const GoodsNav = props => {
                 classnames('category-item', {
                 'active': index === 0
               })}
-              onClick={e => foodNavClick(item, e)}>
+              onClick={() => foodNavClick(item, index)}>
                 {
                   item.type > 0 &&
                   <SupportIcon size="3" type={item.type} style={{width: '40%', marginRight: '3px'}} />
