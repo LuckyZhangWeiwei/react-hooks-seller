@@ -11,6 +11,8 @@ const GoodsPanel = props => {
 
   const [currentNavItemIndex, setCurrentNavItemIndex] = useState(0)
 
+  const [currentNavItemText, setCurrentNavItemText] = useState(null)
+
   const categoryContainerRef = useRef(null)
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const GoodsPanel = props => {
         }
         setListHeight(tempList)
       }
+      setCurrentNavItemText(category[0].name) // add init value
     }
   }, [props.category])
 
@@ -37,6 +40,9 @@ const GoodsPanel = props => {
     if (navItemDom) {
       _resetNavStyle()
       navItemDom.classList.add('active')
+    }
+    if (props.category.length) {
+      setCurrentNavItemText(props.category[currentNavItemIndex].name)
     }
   }, [currentNavItemIndex])
 
@@ -117,7 +123,7 @@ const GoodsPanel = props => {
           }
         </>
       </Scroller>
-      <GoodsFixedCategory categoryTitle="my test"/>
+      <GoodsFixedCategory categoryTitle={currentNavItemText}/>
     </>
   )
 }
