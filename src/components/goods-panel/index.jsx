@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Scroller from './../scroller'
 import GoodsFixedCategory from './../goods-fixed-category'
+import CartControl from './../cart-control'
 import './index.styl'
 
 const GoodsPanel = props => {
@@ -86,6 +87,10 @@ const GoodsPanel = props => {
     goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(listHeight[0] + y))}px, 0)`
   }
 
+  const onClickFoodItem = food => {
+    console.log('onClickFoodItem:', food)
+  }
+
   return (
     <>
       <Scroller 
@@ -105,7 +110,7 @@ const GoodsPanel = props => {
                     {
                       item.foods.map((food, foodIndex) => {
                         return (
-                          <li key={foodIndex} className="food-item">
+                          <li key={foodIndex} className="food-item" onClick={() => onClickFoodItem(food)}>
                             <div className="icon">
                               <LazyLoadImage 
                                 src={food.image} 
@@ -130,7 +135,11 @@ const GoodsPanel = props => {
                                   <span className="old">￥{food.oldPrice}</span>
                                 }
                               </div>
-                              <div className="cart-control-wrapper"></div>
+                              <div className="cart-control-wrapper">
+                                <CartControl
+                                 food={food}
+                                />
+                              </div>
                             </div>
                           </li>
                         )
