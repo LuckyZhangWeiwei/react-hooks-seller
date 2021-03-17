@@ -6,7 +6,7 @@ const SupportIco = props => {
     return `icon-${props.size} ${classMap[props.type]}`
   }
   return (
-    <span className={`support-ico ${iconCls()}`}/>
+    <span className={`support-ico ${iconCls()}`} {...props}/>
   )
 }
 
