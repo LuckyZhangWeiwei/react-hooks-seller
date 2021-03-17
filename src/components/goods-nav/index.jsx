@@ -12,11 +12,15 @@ const GoodsNav = props => {
   }
 
   const _addStyleToNav = (ele) => {
+    _resetStyle()
+    ele.target.classList.add('active')
+  }
+
+  const _resetStyle = () => {
     const allNavList = document.querySelectorAll('.category-item')
     for (let e of allNavList) {
       e.classList.remove('active')
     }
-    ele.target.classList.add('active')
   }
 
   return (

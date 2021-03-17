@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Scroller from './../scroller'
 import './index.styl'
@@ -5,8 +6,57 @@ import './index.styl'
 const GoodsPanel = props => {
   const category = props.category
 
+  const [listHeight, setListHeight] = useState([])
+
+  const [currentNavItemIndex, setCurrentNavItemIndex] = useState(0)
+
+  const categoryContainerRef = useRef(null)
+
+  useEffect(() => {
+    if (props.category.length > 0) {
+      const categoryContainer = document.querySelectorAll('.category-item-container')
+      categoryContainerRef.current = categoryContainer
+
+      const list = Array.from(categoryContainerRef.current)
+      if (list.length > 0) {
+        let tempList = []
+        let height = 0
+        for (let item of list) {
+          height += item.clientHeight
+          tempList.push(height)
+        }
+        setListHeight(tempList)
+      }
+    }
+  }, [props.category])
+
+  useEffect(() => {
+    const navItemsDom = document.querySelectorAll('.category-item')
+    const navItemDom = navItemsDom[currentNavItemIndex]
+    if (navItemDom) {
+      _resetNavStyle()
+      navItemDom.classList.add('active')
+    }
+  }, [currentNavItemIndex])
+
+  const _resetNavStyle = () => {
+    const allNavList = document.querySelectorAll('.category-item')
+    for (let e of allNavList) {
+      e.classList.remove('active')
+    }
+  }
+
   const onFoodsPanelScrolling = pos => {
-    console.log('pos:', pos)
+    const { y } = pos
+    for (let i = 0; i < listHeight.length; i++) {
+      let h1 = listHeight[i]
+			let h2 = listHeight[i + 1]
+      if (-y >= h1 && -y < h2) {
+        setCurrentNavItemIndex(i + 1)
+        return
+      }
+    }
+    setCurrentNavItemIndex(0)
   }
 
   return (

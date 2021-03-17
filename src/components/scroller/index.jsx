@@ -34,7 +34,7 @@ class Scroller extends React.Component {
       this.scroller.on('scroll', pos => {
         setTimeout(() => {
           this.props.listenScroll(pos)  
-        }, 16);
+        }, 10);
       })
     }
   }
