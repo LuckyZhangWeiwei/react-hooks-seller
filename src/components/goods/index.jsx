@@ -18,7 +18,6 @@ const Goods = props => {
   }, [])
 
   const onNavItemClick = item => {
-    // console.log(item)
     const ele = document.querySelector(`[data-category=${item.name}]`)
     goodsPanelRef.current.scrollToElement(ele, 0)
   }
