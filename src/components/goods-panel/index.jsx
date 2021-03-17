@@ -15,6 +15,8 @@ const GoodsPanel = props => {
 
   const categoryContainerRef = useRef(null)
 
+  const goodsFixedCategoryRef = useRef(null)
+
   useEffect(() => {
     if (props.category.length > 0) {
       const categoryContainer = document.querySelectorAll('.category-item-container')
@@ -55,6 +57,14 @@ const GoodsPanel = props => {
 
   const onFoodsPanelScrolling = pos => {
     const { y } = pos
+
+    // when pull down the scroller, should hide the fixed title
+    if (y > 0) {
+      goodsFixedCategoryRef.current.style.display = "none"
+    } else {
+      goodsFixedCategoryRef.current.style.display = "block"
+    }
+
     for (let i = 0; i < listHeight.length; i++) {
       let h1 = listHeight[i]
 			let h2 = listHeight[i + 1]
@@ -123,7 +133,10 @@ const GoodsPanel = props => {
           }
         </>
       </Scroller>
-      <GoodsFixedCategory categoryTitle={currentNavItemText}/>
+      <GoodsFixedCategory 
+        categoryTitle={currentNavItemText}
+        myRef={goodsFixedCategoryRef}
+      />
     </>
   )
 }
