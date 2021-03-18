@@ -24,24 +24,45 @@ const Goods = props => {
   }
 
   const onAddFood = (selectedCategory, selectedFood) => {
-    goodsCategory.forEach(category => {
-      if (category.name === selectedCategory.name) {
-        category.foods.forEach(food => {
-          if (food.name === selectedFood.name) {
-            if (food.count) {
-              food.count += 1
-            } else {
-              food.count = 1
-            }
-          }
-        })
-      }
+   const immeredState = produce((draft) => {
+
+    const selectedCateIndex = goodsCategory.findIndex(category => {
+      return category.name === selectedCategory.name
     })
-    setGoodsCategory(JSON.parse(JSON.stringify(goodsCategory)))
+
+    const selectedFoodIndex = goodsCategory[selectedCateIndex].foods.findIndex(food => {
+      return food.name === selectedFood.name
+    })
+
+    if (draft[selectedCateIndex].foods[selectedFoodIndex].count) {
+      draft[selectedCateIndex].foods[selectedFoodIndex].count += 1
+    } else {
+      draft[selectedCateIndex].foods[selectedFoodIndex].count = 1
+    }
+    
+   })
+   setGoodsCategory(immeredState)
   }
 
-  const onSubtractFood = (category, food) => {
-    console.log('onSubtractFood:', category, food)
+  const onSubtractFood = (selectedCategory, selectedFood) => {
+    const immeredState = produce((draft) => {
+
+      const selectedCateIndex = goodsCategory.findIndex(category => {
+        return category.name === selectedCategory.name
+      })
+  
+      const selectedFoodIndex = goodsCategory[selectedCateIndex].foods.findIndex(food => {
+        return food.name === selectedFood.name
+      })
+  
+      if (draft[selectedCateIndex].foods[selectedFoodIndex].count > 1) {
+        draft[selectedCateIndex].foods[selectedFoodIndex].count -= 1
+      } else {
+        draft[selectedCateIndex].foods[selectedFoodIndex].count = undefined
+      }
+      
+     }) 
+     setGoodsCategory(immeredState)
   }
 
   const onJumpToDetailPage = food => {
