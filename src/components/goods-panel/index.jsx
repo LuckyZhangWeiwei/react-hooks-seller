@@ -84,7 +84,7 @@ const GoodsPanel = props => {
     }
     setCurrentNavItemIndex(0)
     // handle fixed title transition
-    goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(listHeight[0] + y))}px, 0)`
+    // goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(listHeight[0] + y))}px, 0)`
   }
 
   const onClickFoodItem = food => {
