@@ -28,7 +28,7 @@ const CartControl = props => {
           food.count && 
           <div className="cart-count">{food.count}</div>
         }
-        <div className="cart-add icon-add_circle" onClick={e => {add(e)}} />
+        <div className="cart-add icon-add_circle" onClick={e => add(e)} />
       </div>
     }
     </>
