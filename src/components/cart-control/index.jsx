@@ -5,12 +5,12 @@ const CartControl = props => {
 
   const descrease = (e) => {
     e.stopPropagation()
-    console.log('descrease')
+    props.onDescrease(food)
   }
 
   const add = (e) => {
     e.stopPropagation()
-    console.log('add')
+    props.onAdd(food)
   }
 
   return (

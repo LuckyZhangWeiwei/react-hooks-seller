@@ -60,7 +60,6 @@ const GoodsPanel = props => {
 
   const onFoodsPanelScrolling = pos => {
     const { y } = pos
-
     // when pull down the scroller, should hide the fixed title
     if (y > 0) {
       goodsFixedCategoryRef.current.style.display = "none"
@@ -84,11 +83,20 @@ const GoodsPanel = props => {
     }
     setCurrentNavItemIndex(0)
     // handle fixed title transition
-    // goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(listHeight[0] + y))}px, 0)`
+    if (listHeight[0] - (-y) < FIXED_TITLE_HEIGHT)
+      goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(listHeight[0] + y))}px, 0)`
   }
 
   const onClickFoodItem = food => {
     console.log('onClickFoodItem:', food)
+  }
+
+  const descrease = (food) => {
+    console.log('descrease:', food)
+  }
+
+  const increase = (food) => {
+    console.log('increase:', food)
   }
 
   return (
@@ -138,6 +146,8 @@ const GoodsPanel = props => {
                               <div className="cart-control-wrapper">
                                 <CartControl
                                  food={food}
+                                 onDescrease={(food) => descrease(food)}
+                                 onAdd={(food) => increase(food)}
                                 />
                               </div>
                             </div>
