@@ -22,13 +22,29 @@ const Goods = props => {
     goodsPanelRef.current.scrollToElement(ele, 0)
   }
 
+  const onAddFood = food => {
+    console.log('onAddFood:', food)
+  }
+
+  const onSubtractFood = food => {
+    console.log('onSubtractFood:', food)
+  }
+
+  const onJumpToDetailPage = food => {
+    console.log('onJumpToDetailPage:', food)
+  }
+
   return (
     <>
       <div className="goods-container">
         <div className="goods-panel">
           <GoodsPanel
             category={goodsCategory}
-            myRef={goodsPanelRef} />
+            myRef={goodsPanelRef}
+            addFood={food => onAddFood(food)}
+            subtractFood={food => onSubtractFood(food)}
+            jumpToDetailPage={food => onJumpToDetailPage(food)}
+          />
         </div>
         <div className="goods-nav">
           <GoodsNav

@@ -88,15 +88,15 @@ const GoodsPanel = props => {
   }
 
   const onClickFoodItem = food => {
-    console.log('onClickFoodItem:', food)
+    props.jumpToDetailPage(food)
   }
 
   const descrease = (food) => {
-    console.log('descrease:', food)
+    props.addFood(food)
   }
 
   const increase = (food) => {
-    console.log('increase:', food)
+    props.subtractFood(food)
   }
 
   return (
