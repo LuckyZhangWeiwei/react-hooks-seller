@@ -46,6 +46,7 @@ const TabContent = props => {
     scrollRef.current = new BScroll(sliderRef.current, {
       scrollX: true,
       scrollY: false,
+      probeType: 3,
       slide: {
         threshold: 100,
         loop: false,
