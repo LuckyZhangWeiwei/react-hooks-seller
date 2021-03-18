@@ -23,6 +23,7 @@ const Goods = props => {
   }
 
   const onAddFood = food => {
+    console.log('goodsCategory:', goodsCategory)
     console.log('onAddFood:', food)
   }
 

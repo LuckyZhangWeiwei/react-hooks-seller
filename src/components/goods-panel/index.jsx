@@ -92,11 +92,11 @@ const GoodsPanel = props => {
   }
 
   const descrease = (food) => {
-    props.addFood(food)
+    props.subtractFood(food)
   }
 
   const increase = (food) => {
-    props.subtractFood(food)
+    props.addFood(food)
   }
 
   return (
