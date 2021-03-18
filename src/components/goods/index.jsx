@@ -20,7 +20,7 @@ const Goods = props => {
 
   const onNavItemClick = item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
-    goodsPanelRef.current.scrollToElement(ele, 0)
+    goodsPanelRef.current.scrollToElement(ele, 500)
   }
 
   const onAddFood = (selectedCategory, selectedFood) => {
@@ -88,7 +88,7 @@ const Goods = props => {
             myRef={goodsNavRef} />
         </div>
       </div>
-      <ShopCart />
+      <ShopCart goods={goodsCategory} />
     </>
   )
 }
