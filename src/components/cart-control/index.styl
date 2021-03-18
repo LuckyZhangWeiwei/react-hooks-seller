@@ -7,7 +7,8 @@
   .cart-decrease
     display inline-block
     padding 6px
-    opacity 1
+    // opacity 0
+    transform translate3d(48px, 0, 0)
     .inner
       display inline-block
       line-height: 24px
@@ -15,6 +16,27 @@
       color $color-blue
       transition all 0.3s linear
       transform rotate(0)
+     &.move-enter-active
+      transition all 0.3s linear
+      transform translate3d(0, 0, 0)
+      opacity: 1
+      transform rotate(180deg)
+     &.move-enter-done
+      transform translate3d(0, 0, 0)
+      opacity: 1
+      .inner
+        transform rotate(180deg)
+     &.move-exit
+      transform translate3d(0, 0, 0)
+      // opacity: 1
+     &.move-exit-active
+      transition all 0.3s linear
+      transform translate3d(48px, 0, 0)
+      // opacity: 1
+      // transform rotate(180deg)
+     &.move-exit-done
+      transform translate3d(48px, 0, 0)
+      // opacity: 0
   .cart-count
     width: 12px
     line-height: 24px
