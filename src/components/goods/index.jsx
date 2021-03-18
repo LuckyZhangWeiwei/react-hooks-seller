@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import produce from 'immer'
 import { getGoods } from './../../api'
 import GoodsNav from './../goods-nav'
 import GoodsPanel from './../goods-panel'
@@ -22,9 +23,21 @@ const Goods = props => {
     goodsPanelRef.current.scrollToElement(ele, 0)
   }
 
-  const onAddFood = (category, food) => {
-    console.log('goodsCategory:', goodsCategory)
-    console.log('onAddFood:', category, food)
+  const onAddFood = (selectedCategory, selectedFood) => {
+    goodsCategory.forEach(category => {
+      if (category.name === selectedCategory.name) {
+        category.foods.forEach(food => {
+          if (food.name === selectedFood.name) {
+            if (food.count) {
+              food.count += 1
+            } else {
+              food.count = 1
+            }
+          }
+        })
+      }
+    })
+    setGoodsCategory(JSON.parse(JSON.stringify(goodsCategory)))
   }
 
   const onSubtractFood = (category, food) => {

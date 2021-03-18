@@ -21,7 +21,7 @@ const CartControl = props => {
         {
           food.count &&
           <div className="cart-decrease" onClick={e => descrease(e)}>
-            <span class="inner icon-remove_circle_outline" />
+            <span className="inner icon-remove_circle_outline" />
           </div>
         }
         {
