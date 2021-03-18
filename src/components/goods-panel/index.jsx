@@ -91,12 +91,12 @@ const GoodsPanel = props => {
     props.jumpToDetailPage(food)
   }
 
-  const descrease = (food) => {
-    props.subtractFood(food)
+  const descrease = (category, food) => {
+    props.subtractFood(category, food)
   }
 
-  const increase = (food) => {
-    props.addFood(food)
+  const increase = (category, food) => {
+    props.addFood(category, food)
   }
 
   return (
@@ -146,8 +146,8 @@ const GoodsPanel = props => {
                               <div className="cart-control-wrapper">
                                 <CartControl
                                  food={food}
-                                 onDescrease={(food) => descrease(food)}
-                                 onAdd={(food) => increase(food)}
+                                 onDescrease={(food) => descrease(item, food)}
+                                 onAdd={(food) => increase(item, food)}
                                 />
                               </div>
                             </div>
