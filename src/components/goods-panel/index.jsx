@@ -146,9 +146,9 @@ const GoodsPanel = props => {
                               </div>
                               <div className="cart-control-wrapper">
                                 <CartControl
-                                 food={food}
-                                 onDescrease={(food) => descrease(item, food)}
-                                 onAdd={(food) => increase(item, food)}
+                                  food={food}
+                                  onDescrease={(food) => descrease(item, food)}
+                                  onAdd={(food) => increase(item, food)}
                                 />
                               </div>
                             </div>

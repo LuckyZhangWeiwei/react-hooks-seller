@@ -68,6 +68,9 @@ const Goods = props => {
   const adjustNavPos = activeNavIndex => {
     console.log('activeNavIndex:', activeNavIndex)
     console.log(goodsNavRef.current)
+    if (activeNavIndex >= 4) {
+      goodsNavRef.current.scroller.scrollTo(0, -30, 300)
+    } 
   }
   
   const onJumpToDetailPage = food => {
