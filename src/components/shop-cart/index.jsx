@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import classnames from 'classnames'
+import Bubble from './../bubble'
 import './index.styl'
 
 const ShopCart = props => {
@@ -65,7 +66,9 @@ const ShopCart = props => {
               </div>
               {
                 totalCount &&
-                <div className="num"></div>
+                <div className="num">
+                  <Bubble count={totalCount}/>
+                </div>
               }
             </div>
             <div className="price" className={classnames('price', {'highlight': totalCount > 0})}>
