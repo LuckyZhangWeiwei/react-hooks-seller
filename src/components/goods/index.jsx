@@ -67,6 +67,7 @@ const Goods = props => {
 
   const adjustNavPos = activeNavIndex => {
     console.log('activeNavIndex:', activeNavIndex)
+    console.log(goodsNavRef.current)
   }
   
   const onJumpToDetailPage = food => {
