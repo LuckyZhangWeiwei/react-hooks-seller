@@ -1,15 +1,36 @@
+import { useState, useEffect } from 'react'
+import produce from 'immer'
 import classnames from 'classnames'
 import Scroller from './../scroller'
 import SupportIcon from './../support-ico'
+import Bubble from './../bubble'
 import './index.styl'
 
 const GoodsNav = props => {
   const category = props.category
 
+  const [navItems, setNavItems] = useState(category)
+
+  useEffect(() => {
+    if (!category.length) return
+    let immeredState = produce(category, draft => {
+      draft.forEach(category => {
+        let categoryCount = 0
+        category.foods.forEach(food => {
+          let count = !food.count ? 0 : food.count
+          categoryCount += count
+        })
+        category.totalCount = categoryCount
+      })
+      return draft
+    })
+
+    setNavItems(immeredState)
+  }, [category])
+
   const foodNavClick = (navItem, clickedItemIndex) => {
     props.navItemClick(navItem)
     _addStyleToNav(clickedItemIndex)
-    
   }
 
   const _addStyleToNav = (clickedItemIndex) => {
@@ -27,9 +48,9 @@ const GoodsNav = props => {
   return (
     <Scroller
       ref={props.myRef}
-      data={category}>
+      data={navItems}>
       {
-        category.map((item, index) => {
+        navItems.map((item, index) => {
           return (
             <div 
               key={index} 
@@ -43,6 +64,10 @@ const GoodsNav = props => {
                   <SupportIcon size="3" type={item.type} style={{width: '40%', marginRight: '3px'}} />
                 }
                 <span>{item.name}</span>
+                {
+                  item.totalCount > 0 &&
+                  <Bubble count={item.totalCount} />
+                }
             </div>
           )
         })
