@@ -49,6 +49,7 @@ const GoodsPanel = props => {
     if (props.category.length) {
       setCurrentNavItemText(props.category[currentNavItemIndex].name)
     }
+    props.adjustNavPosition(currentNavItemIndex)
   }, [currentNavItemIndex])
 
   const _resetNavStyle = () => {

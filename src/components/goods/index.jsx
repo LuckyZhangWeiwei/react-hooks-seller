@@ -65,6 +65,10 @@ const Goods = props => {
      setGoodsCategory(immeredState)
   }
 
+  const adjustNavPos = activeNavIndex => {
+    console.log('activeNavIndex:', activeNavIndex)
+  }
+  
   const onJumpToDetailPage = food => {
     console.log('onJumpToDetailPage:', food)
   }
@@ -79,6 +83,7 @@ const Goods = props => {
             addFood={(category, food) => onAddFood(category, food)}
             subtractFood={(category, food) => onSubtractFood(category, food)}
             jumpToDetailPage={food => onJumpToDetailPage(food)}
+            adjustNavPosition={acitveNavIndex => adjustNavPos(acitveNavIndex)}
           />
         </div>
         <div className="goods-nav">
