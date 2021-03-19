@@ -11,6 +11,8 @@ const GoodsNav = props => {
 
   const [navItems, setNavItems] = useState(category)
 
+  const [activeIndex, setActiveIndex] = useState(0)
+
   useEffect(() => {
     if (!category.length) return
     let immeredState = produce(category, draft => {
@@ -28,21 +30,13 @@ const GoodsNav = props => {
     setNavItems(immeredState)
   }, [category])
 
+  useEffect(() => {
+    setActiveIndex(props.ActiveNavIndex)
+  }, [props.ActiveNavIndex])
+
   const foodNavClick = (navItem, clickedItemIndex) => {
     props.navItemClick(navItem)
-    _addStyleToNav(clickedItemIndex)
-  }
-
-  const _addStyleToNav = (clickedItemIndex) => {
-    _resetStyle()
-    document.querySelectorAll('.category-item')[clickedItemIndex].classList.add('active')
-  }
-
-  const _resetStyle = () => {
-    const allNavList = document.querySelectorAll('.category-item')
-    for (let e of allNavList) {
-      e.classList.remove('active')
-    }
+    setActiveIndex(clickedItemIndex)
   }
 
   return (
@@ -56,7 +50,7 @@ const GoodsNav = props => {
               key={index} 
               className={
                 classnames('category-item', {
-                'active': index === 0
+                'active': index === activeIndex
               })}
               onClick={() => foodNavClick(item, index)}>
                 {

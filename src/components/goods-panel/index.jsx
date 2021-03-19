@@ -40,24 +40,9 @@ const GoodsPanel = props => {
   }, [props.category])
 
   useEffect(() => {
-    const navItemsDom = document.querySelectorAll('.category-item')
-    const navItemDom = navItemsDom[currentNavItemIndex]
-    if (navItemDom) {
-      _resetNavStyle()
-      navItemDom.classList.add('active')
-    }
-    if (props.category.length) {
-      setCurrentNavItemText(props.category[currentNavItemIndex].name)
-    }
+    props.changeNavItemIndex(currentNavItemIndex)
     props.adjustNavPosition(currentNavItemIndex)
   }, [currentNavItemIndex])
-
-  const _resetNavStyle = () => {
-    const allNavList = document.querySelectorAll('.category-item')
-    for (let e of allNavList) {
-      e.classList.remove('active')
-    }
-  }
 
   const onFoodsPanelScrolling = pos => {
     const { y } = pos
@@ -73,6 +58,7 @@ const GoodsPanel = props => {
 			let h2 = listHeight[i + 1]
       if (-y >= h1 && -y < h2) {
         setCurrentNavItemIndex(i + 1)
+        setCurrentNavItemText(category[i + 1].name)
         // handle fixed title transition
         if(h2 - FIXED_TITLE_HEIGHT <= -y) {
           goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(h2 + y))}px, 0)`
@@ -83,9 +69,11 @@ const GoodsPanel = props => {
       }
     }
     setCurrentNavItemIndex(0)
+    setCurrentNavItemText(category[0].name)
     // handle fixed title transition
-    if (listHeight[0] - (-y) < FIXED_TITLE_HEIGHT)
+    if (listHeight[0] - (-y) < FIXED_TITLE_HEIGHT) {
       goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(listHeight[0] + y))}px, 0)`
+    }
   }
 
   const onClickFoodItem = food => {
@@ -104,7 +92,7 @@ const GoodsPanel = props => {
     <>
       <Scroller 
         ref={props.myRef}
-        probeType={2}
+        probeType={3}
         data={category}
         listenScroll={pos => onFoodsPanelScrolling(pos)}>
         <>

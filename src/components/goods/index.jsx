@@ -11,6 +11,8 @@ const Goods = props => {
 
   const [goodsCategory, setGoodsCategory] = useState([])
 
+  const [activeNavIndex, setActiveNavIndex] = useState(0)
+
   const goodsNavRef = useRef(null)
   const goodsPanelRef = useRef(null)
 
@@ -22,7 +24,7 @@ const Goods = props => {
 
   const onNavItemClick = item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
-    goodsPanelRef.current.scrollToElement(ele, 100)
+    goodsPanelRef.current.scrollToElement(ele, 300)
   }
 
   const onAddFood = (selectedCategory, selectedFood) => {
@@ -74,6 +76,10 @@ const Goods = props => {
     //   goodsNavRef.current.scroller.scrollBy(0, -156, 300)
     // }
   }
+
+  const onChangeNavItemIndex = activeNavIndex => {
+    setActiveNavIndex(activeNavIndex)
+  }
   
   const onJumpToDetailPage = food => {
     console.log('onJumpToDetailPage:', food)
@@ -90,13 +96,16 @@ const Goods = props => {
             subtractFood={(category, food) => onSubtractFood(category, food)}
             jumpToDetailPage={food => onJumpToDetailPage(food)}
             adjustNavPosition={acitveNavIndex => adjustNavPos(acitveNavIndex)}
+            changeNavItemIndex={acitveNavIndex => onChangeNavItemIndex(acitveNavIndex)}
           />
         </div>
         <div className="goods-nav">
           <GoodsNav
             category={goodsCategory}
             navItemClick={navItem => onNavItemClick(navItem)}
-            myRef={goodsNavRef} />
+            myRef={goodsNavRef} 
+            ActiveNavIndex={activeNavIndex}
+          />
         </div>
       </div>
       <ShopCart 
