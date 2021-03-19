@@ -7,6 +7,8 @@ import ShopCart from './../shop-cart'
 import './index.styl'
 
 const Goods = props => {
+  const seller = props.seller
+
   const [goodsCategory, setGoodsCategory] = useState([])
 
   const goodsNavRef = useRef(null)
@@ -97,7 +99,11 @@ const Goods = props => {
             myRef={goodsNavRef} />
         </div>
       </div>
-      <ShopCart goods={goodsCategory} />
+      <ShopCart 
+        goodsCategory={goodsCategory}
+        minPrice={seller.minPrice}
+        deliveryPrice={seller.deliveryPrice}
+      />
     </>
   )
 }

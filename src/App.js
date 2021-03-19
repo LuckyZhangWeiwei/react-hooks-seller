@@ -33,7 +33,10 @@ function App() {
   return (
     <div>
       <VHeader data={seller} />
-      <Tab data={tabData} />
+      <Tab 
+        data={tabData}
+        seller={seller} 
+      />
     </div>
   );
 }
