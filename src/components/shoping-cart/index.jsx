@@ -25,10 +25,10 @@ const ShopingCart = props => {
     setTotalPrice(total)
     setTotalCount(count)
 
-    if (totalPrice === 0) {
+    if (total === 0) {
       setDes(`￥${minPrice}元起送`)
-    } else if (totalPrice < minPrice) {
-      let diff = minPrice - totalPrice
+    } else if (total < minPrice) {
+      let diff = minPrice - total
       setDes(`还差${diff}元起送`)
     } else {
       return setDes('去结算')
