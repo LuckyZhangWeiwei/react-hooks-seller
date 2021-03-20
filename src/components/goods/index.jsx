@@ -125,7 +125,7 @@ const Goods = props => {
       </div>
       {
         showPopupModel &&
-        <ModelLayer>
+        <ModelLayer hide={() => setShowPopupModel(false)}>
           <ShoppingCartList
             selectedFoods={selectFoods}
           />
