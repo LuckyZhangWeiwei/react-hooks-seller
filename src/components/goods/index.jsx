@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import produce from 'immer'
+import { CSSTransition } from 'react-transition-group'
 import { getGoods } from './../../api'
 import GoodsNav from './../goods-nav'
 import GoodsPanel from './../goods-panel'
@@ -15,6 +16,7 @@ const Goods = props => {
   const [selectFoods, setSelectFoods] = useState([])
   const [activeNavIndex, setActiveNavIndex] = useState(0)
   const [showPopupModel, setShowPopupModel] = useState(false)
+  const [showTransition, setShowTransition] = useState(false)
 
   const goodsNavRef = useRef(null)
   const goodsPanelRef = useRef(null)
@@ -36,6 +38,14 @@ const Goods = props => {
     })
     setSelectFoods(array)
   }, [goodsCategory])
+
+  useEffect(() => {
+    if (showPopupModel) {
+      setShowTransition(true)
+    } else {
+      setShowTransition(false)
+    }
+  }, [showPopupModel])
 
   const onNavItemClick = item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
@@ -125,10 +135,20 @@ const Goods = props => {
       </div>
       {
         showPopupModel &&
-        <ModelLayer hide={() => setShowPopupModel(false)}>
-          <ShoppingCartList
-            selectedFoods={selectFoods}
-          />
+        <ModelLayer 
+          hide={
+            () => { 
+              setShowTransition(false)
+              setTimeout(() => {
+                setShowPopupModel(false)  
+              }, 310);
+            }}
+          >
+          <CSSTransition timeout={300} classNames="slide" in={showTransition}>
+            <ShoppingCartList
+              selectedFoods={selectFoods}
+            />
+          </CSSTransition>
         </ModelLayer>
       }
       {
@@ -137,7 +157,19 @@ const Goods = props => {
           selectFoods={selectFoods}
           minPrice={seller.minPrice}
           deliveryPrice={seller.deliveryPrice}
-          onClick={() =>  setShowPopupModel(!showPopupModel)}
+          onClick={
+            () =>  {
+              if (showPopupModel) {
+                setShowTransition(false)
+                setTimeout(() => {
+                  setShowPopupModel(false)    
+                }, 310);
+              } else {
+                setShowPopupModel(true)
+              }
+              
+            }
+          }
         />
       }
     </>

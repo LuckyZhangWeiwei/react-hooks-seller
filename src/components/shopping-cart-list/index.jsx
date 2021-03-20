@@ -4,7 +4,7 @@ import CartControl from './../cart-control'
 
 const ShoppingCartList = props => {
   return (
-    <div className="cube-popup-content" onClick={e => {e.stopPropagation()}}>
+    <div className="popup-content" onClick={e => {e.stopPropagation()}}>
       <div className="listHeader">
         <h1 className="title">购物车</h1>
         <span className="empty">清空</span>
