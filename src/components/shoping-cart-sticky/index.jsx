@@ -7,13 +7,16 @@ const ShopingCartSticky = props => {
   const {
     goodsCategory,
     minPrice,
-    deliveryPrice } = props
+    deliveryPrice,
+    onClick 
+  } = props
   return (
     ReactDOM.createPortal(
       <ShopingCart
         goodsCategory={goodsCategory}
         minPrice={minPrice}
         deliveryPrice={deliveryPrice}
+        click={() => onClick()}
       /> 
       ,document.body)
   )

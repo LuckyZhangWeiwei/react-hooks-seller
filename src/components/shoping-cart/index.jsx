@@ -60,7 +60,7 @@ const ShopingCart = props => {
   }
 
   return (
-    <div className="shopcart-container"  onClick={e => console.log(e)}>
+    <div className="shopcart-container"  onClick={() => props.click()}>
       <div className="shopcart">
         <div className="content">
           <div className="content-left">

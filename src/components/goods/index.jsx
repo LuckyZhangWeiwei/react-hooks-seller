@@ -4,6 +4,7 @@ import { getGoods } from './../../api'
 import GoodsNav from './../goods-nav'
 import GoodsPanel from './../goods-panel'
 import ShopingCartSticky from './../shoping-cart-sticky'
+import ModelLayer from './../model-layer'
 import './index.styl'
 
 const Goods = props => {
@@ -11,7 +12,7 @@ const Goods = props => {
 
   const [goodsCategory, setGoodsCategory] = useState([])
   const [activeNavIndex, setActiveNavIndex] = useState(0)
-  const [showStickyShoppingCart, setShowStickyShoppingCart] = useState(true)
+  const [showPopupModel, setShowPopupModel] = useState(false)
 
   const goodsNavRef = useRef(null)
   const goodsPanelRef = useRef(null)
@@ -109,11 +110,18 @@ const Goods = props => {
         </div>
       </div>
       {
+        showPopupModel &&
+        <ModelLayer>
+          <div>testtest</div>
+        </ModelLayer>
+      }
+      {
         (props.currentTabIndex === 0 || props.showShoppingCart) &&
         <ShopingCartSticky
           goodsCategory={goodsCategory}
           minPrice={seller.minPrice}
           deliveryPrice={seller.deliveryPrice}
+          onClick={() =>  setShowPopupModel(!showPopupModel)}
         />
       }
     </>
