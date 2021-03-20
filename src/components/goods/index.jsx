@@ -3,14 +3,14 @@ import produce from 'immer'
 import { getGoods } from './../../api'
 import GoodsNav from './../goods-nav'
 import GoodsPanel from './../goods-panel'
-import ShopCart from './../shop-cart'
+import ShopingCart from './../shoping-cart'
+import ShopingCartSticky from './../shoping-cart-sticky'
 import './index.styl'
 
 const Goods = props => {
   const seller = props.seller
 
   const [goodsCategory, setGoodsCategory] = useState([])
-
   const [activeNavIndex, setActiveNavIndex] = useState(0)
 
   const goodsNavRef = useRef(null)
@@ -108,11 +108,18 @@ const Goods = props => {
           />
         </div>
       </div>
-      <ShopCart 
+      <ShopingCart 
         goodsCategory={goodsCategory}
         minPrice={seller.minPrice}
         deliveryPrice={seller.deliveryPrice}
       />
+      {/* {
+        <ShopingCartSticky
+          goodsCategory={goodsCategory}
+          minPrice={seller.minPrice}
+          deliveryPrice={seller.deliveryPrice}
+        />
+      } */}
     </>
   )
 }

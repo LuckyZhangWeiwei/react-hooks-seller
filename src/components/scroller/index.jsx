@@ -11,17 +11,12 @@ class Scroller extends React.Component {
 
   componentWillReceiveProps(props) {
     if (props.data.length) {
-      setTimeout(() => {
-        this.scroller.refresh()  
-      }, 16);
-      
+      this.scroller.refresh()  
     }
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this._initScroll()  
-    }, 16);
+    this._initScroll()  
   }
 
   _initScroll () {

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import classnames from 'classnames'
-import Bubble from './../bubble'
+import Bubble from '../bubble'
 import './index.styl'
 
-const ShopCart = props => {
+const ShopingCart = props => {
   const {
     goodsCategory,
     minPrice,
@@ -87,4 +87,4 @@ const ShopCart = props => {
   )
 }
 
-export default ShopCart
+export default ShopingCart

@@ -34,9 +34,8 @@ const GoodsNav = props => {
     setActiveIndex(props.ActiveNavIndex)
   }, [props.ActiveNavIndex])
 
-  const foodNavClick = (navItem, clickedItemIndex) => {
+  const foodNavClick = (navItem) => {
     props.navItemClick(navItem)
-    setActiveIndex(clickedItemIndex)
   }
 
   return (
@@ -55,7 +54,11 @@ const GoodsNav = props => {
               onClick={() => foodNavClick(item, index)}>
                 {
                   item.type > 0 &&
-                  <SupportIcon size="3" type={item.type} style={{width: '40%', marginRight: '3px'}} />
+                  <SupportIcon 
+                    size="3" 
+                    type={item.type} 
+                    style={{width: '40%', marginRight: '3px'}} 
+                  />
                 }
                 <span>{item.name}</span>
                 {

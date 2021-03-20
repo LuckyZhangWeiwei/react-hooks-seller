@@ -151,7 +151,7 @@ const GoodsPanel = props => {
           }
         </>
       </Scroller>
-      <GoodsFixedCategory 
+      <GoodsFixedCategory
         categoryTitle={currentNavItemText}
         myRef={goodsFixedCategoryRef}
       />
