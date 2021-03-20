@@ -10,8 +10,8 @@ const ShoppingCartList = props => {
         <span className="empty">清空</span>
       </div>
       <div>
-        <div className="list-content">
-          <Scroller data={props.selectedFoods}>
+      <div className="list-content">
+        <Scroller data={props.selectedFoods}>
           {
             props.selectedFoods.map((food, index) => {
               return (
@@ -27,8 +27,8 @@ const ShoppingCartList = props => {
               )
             })
           }
-          </Scroller>
-        </div>
+        </Scroller>
+      </div>
       </div>
     </div>
    
