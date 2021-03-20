@@ -29,9 +29,9 @@ const TabContent = props => {
 
   useEffect(() => {
     if (props.data && scrollRef.current) {
-      scrollRef.current.goToPage(props.currentIndex, 0, 200)
+      scrollRef.current.goToPage(props.currentIndex, 0, 100)
     }
-  }, [props.currentIndex, props.data])
+  }, [props.currentIndex])
 
   const _initTab = () => {
     if (!props.data) return
@@ -52,7 +52,7 @@ const TabContent = props => {
         loop: false,
         autoplay: false
       },
-      useTransition: false,
+      useTransition: true,
       momentum: false,
       bounce: false,
       stopPropagation: true
