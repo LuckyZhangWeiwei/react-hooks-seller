@@ -6,7 +6,6 @@
   align-items center
   .cart-decrease
     display inline-block
-    padding 6px
     transform translate3d(48px, 0, 0)
     .inner
       display inline-block
@@ -29,9 +28,9 @@
       transform translate3d(0, 0, 0)
      &.move-exit-active
       transition all 0.3s linear
-      transform translate3d(48px, 0, 0)
+      transform translate3d(24px, 0, 0)
      &.move-exit-done
-      transform translate3d(48px, 0, 0)
+      transform translate3d(24px, 0, 0)
   .cart-count
     width: 12px
     line-height: 24px
@@ -40,7 +39,7 @@
     color $color-grey
   .cart-add
     display inline-block
-    padding 6px
+    padding 0 3px
     line-height 24px
     font-size $fontsize-large-xxx
     color $color-blue
