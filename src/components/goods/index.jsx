@@ -109,7 +109,7 @@ const Goods = props => {
         </div>
       </div>
       {
-        props.currentTabIndex === 0 && 
+        (props.currentTabIndex === 0 || props.showShoppingCart) &&
         <ShopingCartSticky
           goodsCategory={goodsCategory}
           minPrice={seller.minPrice}

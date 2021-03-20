@@ -11,6 +11,8 @@ const Tab = props => {
 
   const [tabInfo, setTabInfo] = useState(null)
 
+  const [showShoppingCart, setShowShoppingCart] = useState(false)
+
   useEffect(() => {
     const { tabInfo } = props.data
     setTabInfo(tabInfo)
@@ -28,6 +30,19 @@ const Tab = props => {
 
   const onScrollValueChanged = value => {
     setTransfromX(value)
+     _transformShoppingCart(value)
+     if (value < 1) {
+       if (!document.querySelector('.shopcart-container')) {
+        setShowShoppingCart(true)
+       }
+     }
+  }
+
+  const _transformShoppingCart = value => {
+    const shoppingCard = document.querySelector('.shopcart-container')
+    if (shoppingCard) {
+      shoppingCard.style.transform = `translateX(${-value * shoppingCard.clientWidth}px)`
+    }
   }
 
   return (
@@ -56,8 +71,9 @@ const Tab = props => {
         seller={props.seller}
         currentIndex={currentIndex}
         onPageChanged={currentPage => goToPage(currentPage.pageX)}
-        onScroll={value => onScrollValueChanged(value)}>
-      </TabContent>
+        onScroll={value => onScrollValueChanged(value)}
+        showShoppingCart={showShoppingCart} 
+      />
     </div>
   )
 }

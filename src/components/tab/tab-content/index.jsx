@@ -89,6 +89,7 @@ const TabContent = props => {
                     <tab.component
                      seller={props.seller}
                      currentTabIndex={props.currentIndex}
+                     showShoppingCart={props.showShoppingCart}
                     />
                   </div>
                 )
