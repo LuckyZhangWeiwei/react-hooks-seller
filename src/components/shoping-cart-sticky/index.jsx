@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom'
-import { useState, useEffect } from 'react'
 import ShopingCart from '../shoping-cart'
 import './index.styl'
 
@@ -10,6 +9,7 @@ const ShopingCartSticky = props => {
     deliveryPrice,
     onClick 
   } = props
+
   return (
     ReactDOM.createPortal(
       <ShopingCart

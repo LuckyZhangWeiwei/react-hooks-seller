@@ -16,7 +16,6 @@ const ShopingCart = props => {
   useEffect(() => {
     let total =0
     let count = 0
-    if (!props.selectFoods.length) return
     props.selectFoods.forEach(food => {
       total += food.price * food.count
       count += food.count

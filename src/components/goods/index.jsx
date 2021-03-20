@@ -5,6 +5,7 @@ import GoodsNav from './../goods-nav'
 import GoodsPanel from './../goods-panel'
 import ShopingCartSticky from './../shoping-cart-sticky'
 import ModelLayer from './../model-layer'
+import ShoppingCartList from './../shopping-cart-list'
 import './index.styl'
 
 const Goods = props => {
@@ -125,7 +126,9 @@ const Goods = props => {
       {
         showPopupModel &&
         <ModelLayer>
-          <div>testtest</div>
+          <ShoppingCartList
+            selectedFoods={selectFoods}
+          />
         </ModelLayer>
       }
       {
