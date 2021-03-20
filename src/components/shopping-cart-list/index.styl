@@ -1,3 +1,5 @@
+@import './../../assert/stylus/cube/variable.styl'
+@import './../../assert/stylus/variable.styl'
 .cube-popup-content
   opacity 1
   position absolute
@@ -6,20 +8,20 @@
   right 0
   min-height: 100px
   .listHeader
-    background: #f3f5f7;
+    background: $color-white;
     height: 40px;
     line-height: 40px;
     padding: 0 18px;
     .title
-      color: #333;
+      color: $color-dark-grey;
       float: left;
-      font-size: 14px;
+      font-size: $fontsize-medium;
     .empty
-      color: #00a0dc;
+      color: $color-blue;
       float: right;
-      font-size: 12px;
+      font-size: $fontsize-small;
 .list-content
-  background: #fff;
+  background: $color-white;
   overflow: hidden;
   padding: 0 18px;
   height: 250px
@@ -29,13 +31,13 @@
     padding: 12px 0;
     position: relative;
     .name
-      color: #333;
-      font-size: 14px;
+      color: $color-dark-grey;
+      font-size: $fontsize-medium;
       line-height: 24px;
     .price
       bottom: 12px;
-      color: #f01414;
-      font-size: 14px;
+      color: $color-red;
+      font-size: $fontsize-medium;
       font-weight: 700;
       line-height: 24px;
       position: absolute;
