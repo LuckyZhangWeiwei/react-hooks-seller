@@ -55,13 +55,17 @@ const ShopingCart = props => {
     }
   }
 
+  const pay = () => {
+    alert(1)
+  }
+
   return (
-    <div className="shopcart-container">
+    <div className="shopcart-container"  onClick={e => console.log(e)}>
       <div className="shopcart">
         <div className="content">
           <div className="content-left">
             <div className="logo-wrapper">
-              <div className={classnames('logo',{'highlight': totalCount > 0})}>
+              <div className={classnames('logo', {'highlight': totalCount > 0})}>
                 <i className="icon-shopping_cart"></i>
               </div>
               {
@@ -77,7 +81,7 @@ const ShopingCart = props => {
             <div className="desc">另需配送费￥{deliveryPrice}元</div>
           </div>
           <div className="content-right">
-            <div className={`pay ${payClass()}`}>
+            <div className={`pay ${payClass()}`} onClick={() => pay()}>
               {des}
             </div>
           </div>

@@ -86,7 +86,10 @@ const TabContent = props => {
               props.data.map((tab, index) => {
                 return (
                   <div key={index} className="slide-page">
-                    <tab.component seller={props.seller} />
+                    <tab.component
+                     seller={props.seller}
+                     currentTabIndex={props.currentIndex}
+                    />
                   </div>
                 )
               })
