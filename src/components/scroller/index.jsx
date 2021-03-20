@@ -40,6 +40,7 @@ class Scroller extends React.Component {
     return (
       <div 
         className="scroll-container"
+        style={this.props.myStyle}
         ref={this.scrollerContainerRef}>
         <div>
           {

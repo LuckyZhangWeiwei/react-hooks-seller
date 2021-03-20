@@ -11,7 +11,7 @@ const ShoppingCartList = props => {
       </div>
       <div>
       <div className="list-content">
-        <Scroller data={props.selectedFoods}>
+        <Scroller data={props.selectedFoods} myStyle={{maxHeight: '250px'}}>
           {
             props.selectedFoods.map((food, index) => {
               return (
