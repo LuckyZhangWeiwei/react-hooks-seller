@@ -11,6 +11,7 @@ const Goods = props => {
   const seller = props.seller
 
   const [goodsCategory, setGoodsCategory] = useState([])
+  const [selectFoods, setSelectFoods] = useState([])
   const [activeNavIndex, setActiveNavIndex] = useState(0)
   const [showPopupModel, setShowPopupModel] = useState(false)
 
@@ -22,6 +23,18 @@ const Goods = props => {
       setGoodsCategory(res)
     })
   }, [])
+
+  useEffect(() => {
+    let array = []
+    goodsCategory.forEach(category => {
+      category.foods.forEach(food => {
+        if (food.count) {
+          array.push(food)
+        }
+      })
+    })
+    setSelectFoods(array)
+  }, [goodsCategory])
 
   const onNavItemClick = item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
@@ -118,7 +131,7 @@ const Goods = props => {
       {
         (props.currentTabIndex === 0 || props.showShoppingCart) &&
         <ShopingCartSticky
-          goodsCategory={goodsCategory}
+          selectFoods={selectFoods}
           minPrice={seller.minPrice}
           deliveryPrice={seller.deliveryPrice}
           onClick={() =>  setShowPopupModel(!showPopupModel)}

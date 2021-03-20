@@ -5,7 +5,7 @@ import './index.styl'
 
 const ShopingCartSticky = props => {
   const {
-    goodsCategory,
+    selectFoods,
     minPrice,
     deliveryPrice,
     onClick 
@@ -13,7 +13,7 @@ const ShopingCartSticky = props => {
   return (
     ReactDOM.createPortal(
       <ShopingCart
-        goodsCategory={goodsCategory}
+        selectFoods={selectFoods}
         minPrice={minPrice}
         deliveryPrice={deliveryPrice}
         click={() => onClick()}

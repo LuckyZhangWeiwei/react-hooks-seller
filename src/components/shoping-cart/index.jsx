@@ -5,7 +5,6 @@ import './index.styl'
 
 const ShopingCart = props => {
   const {
-    goodsCategory,
     minPrice,
     deliveryPrice
   } = props
@@ -13,12 +12,12 @@ const ShopingCart = props => {
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalCount, setTotalCount] = useState(0)
   const [des, setDes] = useState(null)
-  const [selectFoods, setSelectFoods] = useState([])
 
   useEffect(() => {
     let total =0
     let count = 0
-    selectFoods.forEach(food => {
+    if (!props.selectFoods.length) return
+    props.selectFoods.forEach(food => {
       total += food.price * food.count
       count += food.count
     })
@@ -33,19 +32,7 @@ const ShopingCart = props => {
     } else {
       return setDes('去结算')
     }
-  }, [selectFoods])
-
-  useEffect(() => {
-    let array = []
-    goodsCategory.forEach(category => {
-      category.foods.forEach(food => {
-        if (food.count) {
-          array.push(food)
-        }
-      })
-    })
-    setSelectFoods(array)
-  }, [goodsCategory])
+  }, [props.selectFoods])
 
   const payClass = () => {
     if (!totalCount || totalPrice < minPrice) {
@@ -55,7 +42,8 @@ const ShopingCart = props => {
     }
   }
 
-  const pay = () => {
+  const pay = (e) => {
+    e.stopPropagation()
     alert(1)
   }
 
@@ -81,7 +69,7 @@ const ShopingCart = props => {
             <div className="desc">另需配送费￥{deliveryPrice}元</div>
           </div>
           <div className="content-right">
-            <div className={`pay ${payClass()}`} onClick={() => pay()}>
+            <div className={`pay ${payClass()}`} onClick={e => pay(e)}>
               {des}
             </div>
           </div>
