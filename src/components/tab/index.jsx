@@ -31,7 +31,7 @@ const Tab = props => {
   const onScrollValueChanged = value => {
     setTransfromX(value)
      _transformShoppingCart(value)
-     if (value < 1) {
+     if (value < 1) { // when from tab2 moving to tab1
        if (!document.querySelector('.shopcart-container')) {
         setShowShoppingCart(true)
        }
