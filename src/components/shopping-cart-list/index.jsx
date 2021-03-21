@@ -5,8 +5,8 @@ import CartControl from './../cart-control'
 const ShoppingCartLine = props => {
   const { food, selectedGoodsCategory, addFood, subtractFood } = props
 
-  const onAddFood = food => {
-    addFood(selectedGoodsCategory, food)
+  const onAddFood = (food, target) => {
+    addFood(selectedGoodsCategory, food, target)
   }
   const onDescrease = food => {
     subtractFood(selectedGoodsCategory, food)
@@ -18,7 +18,7 @@ const ShoppingCartLine = props => {
       <div className="cart-control-wrapper">
       <CartControl
         food={food}
-        onAdd={() => onAddFood(food)}
+        onAdd={(food, target) => onAddFood(food, target)}
         onDescrease={() => onDescrease(food)}
         useTransition={false}
       />

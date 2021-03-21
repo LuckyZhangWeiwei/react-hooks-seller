@@ -17,6 +17,7 @@ const Goods = props => {
   const [activeNavIndex, setActiveNavIndex] = useState(0)
   const [showPopupModel, setShowPopupModel] = useState(false)
   const [showTransition, setShowTransition] = useState(false)
+  const [showBallFlying, setShowBallFlying] = useState(null)
 
   const goodsNavRef = useRef(null)
   const goodsPanelRef = useRef(null)
@@ -58,7 +59,7 @@ const Goods = props => {
     goodsPanelRef.current.scrollToElement(ele, 300)
   }
 
-  const onAddFood = (selectedCategory, selectedFood) => {
+  const onAddFood = (selectedCategory, selectedFood, target) => {
     if (!selectedCategory || !selectedFood) return
     const immeredState = produce((draft) => {
 
@@ -75,9 +76,9 @@ const Goods = props => {
     } else {
       draft[selectedCateIndex].foods[selectedFoodIndex].count = 1
     }
-    
    })
    setGoodsCategory(immeredState)
+   setShowBallFlying({selectedCategory, selectedFood, target})
   }
 
   const onSubtractFood = (selectedCategory, selectedFood) => {
@@ -125,7 +126,7 @@ const Goods = props => {
           <GoodsPanel
             category={goodsCategory}
             myRef={goodsPanelRef}
-            addFood={(category, food) => onAddFood(category, food)}
+            addFood={(category, food, target) => onAddFood(category, food, target)}
             subtractFood={(category, food) => onSubtractFood(category, food)}
             jumpToDetailPage={food => onJumpToDetailPage(food)}
             adjustNavPosition={acitveNavIndex => adjustNavPos(acitveNavIndex)}
@@ -156,7 +157,7 @@ const Goods = props => {
             <ShoppingCartList
               selectedFoods={selectFoods}
               goodsCategory={goodsCategory}
-              addFood={(category, food) => onAddFood(category, food)}
+              addFood={(category, food, target) => onAddFood(category, food, target)}
               subtractFood={(category, food) => onSubtractFood(category, food)}
             />
           </CSSTransition>
@@ -168,6 +169,7 @@ const Goods = props => {
           selectFoods={selectFoods}
           minPrice={seller.minPrice}
           deliveryPrice={seller.deliveryPrice}
+          showBallFlying={showBallFlying}
           onClick={
             () =>  {
               if (!selectFoods.length) return
@@ -179,7 +181,6 @@ const Goods = props => {
               } else {
                 setShowPopupModel(true)
               }
-              
             }
           }
         />

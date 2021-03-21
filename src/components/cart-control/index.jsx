@@ -30,7 +30,7 @@ const CartControl = props => {
 
   const add = (e) => {
     e.stopPropagation()
-    props.onAdd(food)
+    props.onAdd(food, e)
   }
 
   return (

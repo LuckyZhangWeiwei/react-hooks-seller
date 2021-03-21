@@ -37,7 +37,7 @@ const GoodslItem = props => {
           <CartControl
             food={food}
             onDescrease={(food) => descrease(item, food)}
-            onAdd={(food) => increase(item, food)}
+            onAdd={(food, e) => increase(item, food, e)}
             useTransition={true}
           />
         </div>
@@ -125,8 +125,8 @@ const GoodsPanel = props => {
     props.subtractFood(category, food)
   }
 
-  const increase = (category, food) => {
-    props.addFood(category, food)
+  const increase = (category, food, e) => {
+    props.addFood(category, food, e)
   }
 
   return (
