@@ -1,24 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import './index.styl'
 
 const Balls = props => {
   const BALL_COUNT = 10
   const innerCls = 'inner-hook'
+
+  const dropBalls = useRef([])
   const [balls, setBalls] = useState([])
   const [showTransition, setShowTransition] = useState(false)
 
   const { showBallFlying } = props
 
   useEffect(() => {
-    if (showBallFlying)
-    console.log(showBallFlying)
-    setShowTransition(true)
+    if (showBallFlying) {
+      _triggerDrop(showBallFlying.target)
+    }
   }, [showBallFlying])
 
   useEffect(() => {
     let ret = []
-    for (let i = 0; i< BALL_COUNT; i++) {
+    for (let i = 0; i < BALL_COUNT; i++) {
       ret.push({
         show: false
       })
@@ -38,6 +40,20 @@ const Balls = props => {
     console.log('onEntered')
   }
 
+  const _triggerDrop = (el) => {
+    setShowTransition(true)
+
+    for (let i=0; i < balls.length; i++ ) {
+      const ball = balls[i]
+      if (!ball.show) {
+        ball.show = true
+        ball.el = el
+        dropBalls.current.push(ball)
+        return
+      }
+    }
+  }
+
   return (
     <div className="ball-container">
       {
@@ -53,8 +69,7 @@ const Balls = props => {
                 >
                 <div 
                   className="ball" 
-                  style={{display: ball.show ? 'block' : 'none'}}
-                >
+                  style={{display: ball.show ? 'block' : 'none'}}>
                   <div className="inner inner-hook"/>
                 </div>
               </CSSTransition>
