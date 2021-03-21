@@ -2,6 +2,21 @@ import './index.styl'
 import Scroller from './../scroller'
 import CartControl from './../cart-control'
 
+const ShoppingCartLine = props => {
+  const { food } = props
+  return (
+    <div className="food">
+      <span className="name">{food.name}</span>
+      <div className="price">￥{food.price}</div>
+      <div className="cart-control-wrapper">
+      <CartControl
+        food={food}
+      />
+      </div>
+    </div>
+  )
+}
+
 const ShoppingCartList = props => {
   return (
     <div className="popup-content" onClick={e => {e.stopPropagation()}}>
@@ -15,15 +30,10 @@ const ShoppingCartList = props => {
           {
             props.selectedFoods.map((food, index) => {
               return (
-              <div key={index} className="food">
-                <span className="name">{food.name}</span>
-                <div className="price">￥{food.price}</div>
-                <div className="cart-control-wrapper">
-                <CartControl
-                  food={food}
-                />
-                </div>
-              </div>
+              <ShoppingCartLine
+                key={index}
+                food={food}
+              />
               )
             })
           }
