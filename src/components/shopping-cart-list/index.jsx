@@ -28,6 +28,9 @@ const ShoppingCartLine = props => {
 }
 
 const ShoppingCartList = props => {
+  const clearShoppingCart = e => {
+    console.log(e)
+  }
   const getSelectedCategory = (goodsCategory, selectedFood) => {
     for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
       for (let foodIndex = 0; foodIndex < goodsCategory[categoryIndex].foods.length; foodIndex++) {
@@ -42,7 +45,7 @@ const ShoppingCartList = props => {
     <div className="popup-content" onClick={e => {e.stopPropagation()}}>
       <div className="listHeader">
         <h1 className="title">购物车</h1>
-        <span className="empty">清空</span>
+        <span className="empty" onClick={e => clearShoppingCart(e)}>清空</span>
       </div>
       <div>
       <div className="list-content">
