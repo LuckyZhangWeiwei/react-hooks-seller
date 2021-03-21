@@ -53,7 +53,8 @@ const Goods = props => {
   }
 
   const onAddFood = (selectedCategory, selectedFood) => {
-   const immeredState = produce((draft) => {
+    if (!selectedCategory || !selectedFood) return
+    const immeredState = produce((draft) => {
 
     const selectedCateIndex = goodsCategory.findIndex(category => {
       return category.name === selectedCategory.name
@@ -74,6 +75,7 @@ const Goods = props => {
   }
 
   const onSubtractFood = (selectedCategory, selectedFood) => {
+    if (!selectedCategory || !selectedFood) return
     const immeredState = produce((draft) => {
 
       const selectedCateIndex = goodsCategory.findIndex(category => {
@@ -147,6 +149,9 @@ const Goods = props => {
           <CSSTransition timeout={300} classNames="slide" in={showTransition}>
             <ShoppingCartList
               selectedFoods={selectFoods}
+              goodsCategory={goodsCategory}
+              addFood={(category, food) => onAddFood(category, food)}
+              subtractFood={(category, food) => onSubtractFood(category, food)}
             />
           </CSSTransition>
         </ModelLayer>

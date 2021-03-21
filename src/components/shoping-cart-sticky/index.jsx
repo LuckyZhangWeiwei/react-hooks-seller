@@ -7,7 +7,7 @@ const ShopingCartSticky = props => {
     selectFoods,
     minPrice,
     deliveryPrice,
-    onClick 
+    onClick
   } = props
 
   return (
