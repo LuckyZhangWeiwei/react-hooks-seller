@@ -65,8 +65,7 @@ const Balls = props => {
                 timeout={300}
                 onEnter={(ele, isAppearing) => onEnter(ele, isAppearing)}
                 onEntering={(ele, isAppearing) => onEntering(ele, isAppearing)}
-                onEntered={(ele, isAppearing) => onEntered(ele, isAppearing)}
-                >
+                onEntered={(ele, isAppearing) => onEntered(ele, isAppearing)}>
                 <div 
                   className="ball" 
                   style={{display: ball.show ? 'block' : 'none'}}>
