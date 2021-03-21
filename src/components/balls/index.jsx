@@ -28,22 +28,10 @@ const Balls = props => {
     setBalls(ret)
   }, [])
 
-  const onEnter = (ele, isAppearing) => {
-    console.log('onEnter')
-  }
-
-  const onEntering = (ele, isAppearing) => {
-    console.log('onEntering')
-  }
-
-  const onEntered = (ele, isAppearing) => {
-    console.log('onEntered')
-  }
-
   const _triggerDrop = (el) => {
     setShowTransition(true)
 
-    for (let i=0; i < balls.length; i++ ) {
+    for (let i = 0; i < balls.length; i++ ) {
       const ball = balls[i]
       if (!ball.show) {
         ball.show = true
@@ -53,6 +41,39 @@ const Balls = props => {
       }
     }
   }
+
+  const onEnter = (ele, isAppearing) => {
+    console.log('onEnter')
+    const ball = dropBalls.current[dropBalls.current.length - 1]
+    const rect = ball.el.target.getBoundingClientRect()
+    const x = rect.left - 32
+    const y = -(window.innerHeight - rect.top - 22)
+    ele.style.display = ''
+    ele.style.transform = ele.style.webkitTransform =  `translate3d(0, ${y}px, 0)`
+    const inner = ele.getElementsByClassName(innerCls)[0]
+    inner.style.transform = inner.style.webkitTransform =  `translate3d(${x}px, 0, 0)`
+  }
+
+  const onEntering = (ele, isAppearing) => {
+    console.log('onEntering')
+    // const _reflow = document.body.offsetHeight
+    ele.style.transform = ele.style.webkitTransform =  `translate3d(0, 0, 0)`
+    const inner = ele.getElementsByClassName(innerCls)[0]
+    inner.style.transform = inner.style.webkitTransform =  `translate3d(0, 0, 0)`
+    ele.addEventListener('transitionend', {})
+  }
+
+  const onEntered = (ele, isAppearing) => {
+    console.log('onEntered')
+    const ball = dropBalls.current.shift()
+    if (ball) {
+      ball.show = false
+      ele.style.display = 'none'
+    }
+    // setShowTransition(false)
+  }
+
+
 
   return (
     <div className="ball-container">
@@ -69,7 +90,7 @@ const Balls = props => {
                 <div 
                   className="ball" 
                   style={{display: ball.show ? 'block' : 'none'}}>
-                  <div className="inner inner-hook"/>
+                  <div className="inner inner-hook" />
                 </div>
               </CSSTransition>
             </div>
