@@ -6,11 +6,14 @@ const Balls = props => {
   const BALL_COUNT = 10
   const innerCls = 'inner-hook'
   const [balls, setBalls] = useState([])
+  const [showTransition, setShowTransition] = useState(false)
 
   const { showBallFlying } = props
 
   useEffect(() => {
+    if (showBallFlying)
     console.log(showBallFlying)
+    setShowTransition(true)
   }, [showBallFlying])
 
   useEffect(() => {
@@ -24,15 +27,15 @@ const Balls = props => {
   }, [])
 
   const onEnter = (ele, isAppearing) => {
-
+    console.log('onEnter')
   }
 
   const onEntering = (ele, isAppearing) => {
-
+    console.log('onEntering')
   }
 
   const onEntered = (ele, isAppearing) => {
-
+    console.log('onEntered')
   }
 
   return (
@@ -40,18 +43,22 @@ const Balls = props => {
       {
         balls.map((ball, index) => {
           return (
-            <CSSTransition
-              key={index}
-              timeout={300}
-              onEnter={(ele, isAppearing) => onEnter(ele, isAppearing)}
-              onEntering={(ele, isAppearing) => onEntering(ele, isAppearing)}
-              onEntered={(ele, isAppearing) => onEntered(ele, isAppearing)}>
-              <div 
-                className="ball" 
-                style={{display: ball.show ? 'block' : 'none'}}>
-                <div className="inner inner-hook"/>
-              </div>
-            </CSSTransition>
+            <div key={index}>
+              <CSSTransition
+                in={showTransition}
+                timeout={300}
+                onEnter={(ele, isAppearing) => onEnter(ele, isAppearing)}
+                onEntering={(ele, isAppearing) => onEntering(ele, isAppearing)}
+                onEntered={(ele, isAppearing) => onEntered(ele, isAppearing)}
+                >
+                <div 
+                  className="ball" 
+                  style={{display: ball.show ? 'block' : 'none'}}
+                >
+                  <div className="inner inner-hook"/>
+                </div>
+              </CSSTransition>
+            </div>
           )
         })
       }
