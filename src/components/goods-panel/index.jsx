@@ -5,6 +5,46 @@ import GoodsFixedCategory from './../goods-fixed-category'
 import CartControl from './../cart-control'
 import './index.styl'
 
+const GoodslItem = props => {
+  const {food, item, descrease, increase, onClickFoodItem} = props
+  return (
+    <li className="food-item" onClick={() => onClickFoodItem(food)}>
+      <div className="icon">
+        <LazyLoadImage 
+          src={food.image} 
+          alt={food.name}
+          width="57"
+          height="57"
+          effect="blur"
+        />
+      </div>
+      <div className="content">
+        <h2 className="name">{food.name}</h2>
+        <p className="desc">{food.description}</p>
+        <div className="extra">
+          <span className="count">
+            月售{food.sellCount}份</span><span>好评率{food.rating}%
+          </span>
+        </div>
+        <div className="price">
+          <span className="now">￥{food.price}</span>
+          {
+            food.oldPrice &&
+            <span className="old">￥{food.oldPrice}</span>
+          }
+        </div>
+        <div className="cart-control-wrapper">
+          <CartControl
+            food={food}
+            onDescrease={(food) => descrease(item, food)}
+            onAdd={(food) => increase(item, food)}
+          />
+        </div>
+      </div>
+    </li>
+  )
+}
+
 const GoodsPanel = props => {
   const category = props.category
 
@@ -107,40 +147,14 @@ const GoodsPanel = props => {
                     {
                       item.foods.map((food, foodIndex) => {
                         return (
-                          <li key={foodIndex} className="food-item" onClick={() => onClickFoodItem(food)}>
-                            <div className="icon">
-                              <LazyLoadImage 
-                                src={food.image} 
-                                alt={food.name}
-                                width="57"
-                                height="57"
-                                effect="blur"
-                              />
-                            </div>
-                            <div className="content">
-                              <h2 className="name">{food.name}</h2>
-                              <p className="desc">{food.description}</p>
-                              <div className="extra">
-                                <span className="count">
-                                  月售{food.sellCount}份</span><span>好评率{food.rating}%
-                                </span>
-                              </div>
-                              <div className="price">
-                                <span className="now">￥{food.price}</span>
-                                {
-                                  food.oldPrice &&
-                                  <span className="old">￥{food.oldPrice}</span>
-                                }
-                              </div>
-                              <div className="cart-control-wrapper">
-                                <CartControl
-                                  food={food}
-                                  onDescrease={(food) => descrease(item, food)}
-                                  onAdd={(food) => increase(item, food)}
-                                />
-                              </div>
-                            </div>
-                          </li>
+                          <GoodslItem
+                            key={foodIndex}
+                            food={food} 
+                            item={item} 
+                            descrease={descrease}
+                            increase={increase} 
+                            onClickFoodItem={onClickFoodItem}
+                          />
                         )
                       })
                     }
