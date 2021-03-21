@@ -159,6 +159,7 @@ const Goods = props => {
           deliveryPrice={seller.deliveryPrice}
           onClick={
             () =>  {
+              if (!selectFoods.length) return
               if (showPopupModel) {
                 setShowTransition(false)
                 setTimeout(() => {
