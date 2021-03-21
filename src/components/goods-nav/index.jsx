@@ -6,6 +6,32 @@ import SupportIcon from './../support-ico'
 import Bubble from './../bubble'
 import './index.styl'
 
+const GoodsNavItem = props => {
+  const {item, activeIndex, foodNavClick, index} = props
+  return (
+    <div 
+      className={
+        classnames('category-item', {
+        'active': index === activeIndex
+      })}
+      onClick={() => foodNavClick(item, index)}>
+        {
+          item.type > 0 &&
+          <SupportIcon 
+            size="3" 
+            type={item.type} 
+            style={{width: '40%', marginRight: '3px'}} 
+          />
+        }
+        <span>{item.name}</span>
+        {
+          item.totalCount > 0 &&
+          <Bubble count={item.totalCount} />
+        }
+    </div>
+  )
+}
+
 const GoodsNav = props => {
   const category = props.category
 
@@ -45,27 +71,13 @@ const GoodsNav = props => {
       {
         navItems.map((item, index) => {
           return (
-            <div 
-              key={index} 
-              className={
-                classnames('category-item', {
-                'active': index === activeIndex
-              })}
-              onClick={() => foodNavClick(item, index)}>
-                {
-                  item.type > 0 &&
-                  <SupportIcon 
-                    size="3" 
-                    type={item.type} 
-                    style={{width: '40%', marginRight: '3px'}} 
-                  />
-                }
-                <span>{item.name}</span>
-                {
-                  item.totalCount > 0 &&
-                  <Bubble count={item.totalCount} />
-                }
-            </div>
+            <GoodsNavItem
+             item={item} 
+             activeIndex={activeIndex} 
+             foodNavClick={foodNavClick}
+             key={index}
+             index={index}
+            />
           )
         })
       }

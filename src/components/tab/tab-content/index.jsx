@@ -29,7 +29,7 @@ const TabContent = props => {
 
   useEffect(() => {
     if (props.data && scrollRef.current) {
-      scrollRef.current.goToPage(props.currentIndex, 0, 100)
+      scrollRef.current.goToPage(props.currentIndex, 0, 300)
     }
   }, [props.currentIndex])
 
