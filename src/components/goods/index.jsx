@@ -47,6 +47,12 @@ const Goods = props => {
     }
   }, [showPopupModel])
 
+  useEffect(() => {
+    if (!selectFoods.length) {
+      setShowPopupModel(false)
+    }
+  }, [selectFoods])
+
   const onNavItemClick = item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
     goodsPanelRef.current.scrollToElement(ele, 300)
