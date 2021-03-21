@@ -4,25 +4,25 @@ import './index.styl'
 
 const CartControl = props => {
 
-  const { food } = props
+  const { food, useTransition } = props // useTransition - when from shopping cart, we don't need transtiton 
 
   const [showTransition, setShowTransition] = useState(false) 
 
   useEffect(() => {
     if (food.count) {
-      setShowTransition(true)
+      useTransition && setShowTransition(true)
     } else {
-      setShowTransition(false)
+      useTransition &&  setShowTransition(false)
     }
   }, [food.count])
 
   const descrease = (e) => {
     e.stopPropagation()
     if (food.count === 1) {
-      setShowTransition(false)
+      useTransition &&  setShowTransition(false)
       setTimeout(() => {
         props.onDescrease(food)  
-      }, 310);
+      }, !useTransition ? 0 : 310);
     } else {
       props.onDescrease(food)  
     }
@@ -47,6 +47,7 @@ const CartControl = props => {
             in={showTransition}>
             <div 
               className="cart-decrease"
+              style={{transform: !useTransition ? 'translate3d(0, 0, 0)' : null}}
               onClick={e => descrease(e)}>
               <span className="inner icon-remove_circle_outline" />
             </div>

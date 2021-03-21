@@ -20,6 +20,7 @@ const ShoppingCartLine = props => {
         food={food}
         onAdd={() => onAddFood(food)}
         onDescrease={() => onDescrease(food)}
+        useTransition={false}
       />
       </div>
     </div>

@@ -38,6 +38,7 @@ const GoodslItem = props => {
             food={food}
             onDescrease={(food) => descrease(item, food)}
             onAdd={(food) => increase(item, food)}
+            useTransition={true}
           />
         </div>
       </div>
