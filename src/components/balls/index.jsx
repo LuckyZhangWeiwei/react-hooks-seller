@@ -63,7 +63,7 @@ const Balls = props => {
     const inner = ele.getElementsByClassName(innerCls)[0]
     inner.style.transition = 'all 0.4s linear'
     inner.style.transform = inner.style.webkitTransform =  `translate3d(0, 0, 0)`
-    ele.addEventListener('transitionend', {})
+    // ele.addEventListener('transitionend', {})
   }
 
   const onEntered = (ele, isAppearing) => {
