@@ -44,8 +44,8 @@ const Balls = props => {
   }
 
   const onEnter = (ele, isAppearing) => {
-      const ball = dropBalls.current[dropBalls.current.length - 1]
-      const rect = ball.el.target.getBoundingClientRect()
+      const dropBall = dropBalls.current[dropBalls.current.length - 1]
+      const rect = dropBall.el.target.getBoundingClientRect()
       const x = rect.left - 32
       const y = -(window.innerHeight - rect.top - 22)
       ele.style.display = 'block'
