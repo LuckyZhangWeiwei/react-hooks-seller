@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import produce from 'immer'
 import './index.styl'
 
 const Balls = props => {
@@ -65,7 +64,7 @@ const Balls = props => {
 
   const onEntered = (ele, isAppearing) => {
       ele.style.display = 'none'
-      const ball = dropBalls.current.shift()
+      const droppedBall = dropBalls.current.shift()
       // balls[ball.id].show = false
       // balls[ball.id].showTransition = false
       setBalls([...balls, {id: balls.length + 1, show: false, showTransition: false}])
