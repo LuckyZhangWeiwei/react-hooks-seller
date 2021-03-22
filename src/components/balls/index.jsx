@@ -45,9 +45,8 @@ const Balls = props => {
   }
 
   const onEnter = (ele, isAppearing) => {
-    console.log('onEnter')
+    // console.log('onEnter')
     const ball = dropBalls.current[dropBalls.current.length - 1]
-    console.log(ball)
     const rect = ball.el.target.getBoundingClientRect()
     const x = rect.left - 32
     const y = -(window.innerHeight - rect.top - 22)
@@ -58,7 +57,7 @@ const Balls = props => {
   }
 
   const onEntering = (ele, isAppearing) => {
-    console.log('onEntering')
+    // console.log('onEntering')
     ele.style.transition = 'all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)'
     ele.style.transform = ele.style.webkitTransform =  `translate3d(0, 0, 0)`
     const inner = ele.getElementsByClassName(innerCls)[0]
@@ -68,7 +67,7 @@ const Balls = props => {
   }
 
   const onEntered = (ele, isAppearing) => {
-    console.log('onEntered')
+    // console.log('onEntered')
     ele.style.display = 'none'
     const ball = dropBalls.current.shift()
     // balls[ball.id].show = false
