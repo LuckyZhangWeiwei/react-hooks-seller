@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group'
 import './index.styl'
 
 const Balls = props => {
-  const BALL_COUNT = 10
+  const BALL_COUNT = 5
   const innerCls = 'inner-hook'
 
   const { showBallFlying } = props
@@ -64,7 +64,7 @@ const Balls = props => {
 
   const onEntered = (ele, isAppearing) => {
       ele.style.display = 'none'
-      const droppedBall = dropBalls.current.shift()
+      // const droppedBall = dropBalls.current.shift()
       // balls[ball.id].show = false
       // balls[ball.id].showTransition = false
       setBalls([...balls, {id: balls.length + 1, show: false, showTransition: false}])
