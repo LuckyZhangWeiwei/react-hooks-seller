@@ -70,7 +70,7 @@ const Balls = props => {
       ball.show = false
       ele.style.display = 'none'
     }
-    // setShowTransition(false)
+    setShowTransition(false)
   }
 
 
