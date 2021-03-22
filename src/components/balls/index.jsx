@@ -67,8 +67,8 @@ const Balls = props => {
       ele.style.display = 'none'
       const ball = dropBalls.current.shift()
       // balls[ball.id].show = false
-      balls[ball.id].showTransition = false
-      setBalls([...balls])
+      // balls[ball.id].showTransition = false
+      setBalls([...balls, {id: balls.length + 1, show: false, showTransition: false}])
   }
 
   const onExit = ele => {}
