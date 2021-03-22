@@ -45,40 +45,37 @@ const Balls = props => {
   }
 
   const onEnter = (ele, isAppearing) => {
-    // console.log('onEnter')
-    const ball = dropBalls.current[dropBalls.current.length - 1]
-    const rect = ball.el.target.getBoundingClientRect()
-    const x = rect.left - 32
-    const y = -(window.innerHeight - rect.top - 22)
-    ele.style.display = 'block'
-    ele.style.transform = ele.style.webkitTransform =  `translate3d(0, ${y}px, 0)`
-    const inner = ele.getElementsByClassName(innerCls)[0]
-    inner.style.transform = inner.style.webkitTransform =  `translate3d(${x}px, 0, 0)`
+      const ball = dropBalls.current[dropBalls.current.length - 1]
+      const rect = ball.el.target.getBoundingClientRect()
+      const x = rect.left - 32
+      const y = -(window.innerHeight - rect.top - 22)
+      ele.style.display = 'block'
+      ele.style.transform = ele.style.webkitTransform =  `translate3d(0, ${y}px, 0)`
+      const inner = ele.getElementsByClassName(innerCls)[0]
+      inner.style.transform = inner.style.webkitTransform =  `translate3d(${x}px, 0, 0)`  
   }
 
   const onEntering = (ele, isAppearing) => {
-    // console.log('onEntering')
-    ele.style.transition = 'all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)'
-    ele.style.transform = ele.style.webkitTransform =  `translate3d(0, 0, 0)`
-    const inner = ele.getElementsByClassName(innerCls)[0]
-    inner.style.transition = 'all 0.4s linear'
-    inner.style.transform = inner.style.webkitTransform =  `translate3d(0, 0, 0)`
-    // ele.addEventListener('transitionend', {})
+      ele.style.transition = 'all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)'
+      ele.style.transform = ele.style.webkitTransform =  `translate3d(0, 0, 0)`
+      const inner = ele.getElementsByClassName(innerCls)[0]
+      inner.style.transition = 'all 0.4s linear'
+      inner.style.transform = inner.style.webkitTransform =  `translate3d(0, 0, 0)`
   }
 
   const onEntered = (ele, isAppearing) => {
-    // console.log('onEntered')
-    ele.style.display = 'none'
-    const ball = dropBalls.current.shift()
-    // balls[ball.id].show = false
-    // balls[ball.id].showTransition = false
-    // setBalls([...balls])
-    // const immeredObj = produce(balls, draft => {
-    //   draft[ball.id].show = false
-    //   draft[ball.id].showTransition = false
-    // })
-    // setBalls(immeredObj)
+      ele.style.display = 'none'
+      const ball = dropBalls.current.shift()
+      // balls[ball.id].show = false
+      balls[ball.id].showTransition = false
+      setBalls([...balls])
   }
+
+  const onExit = ele => {}
+
+  const onExiting = ele => {}
+
+  const onExited = ele => {}
 
   return (
     <div className="ball-container">
@@ -88,10 +85,14 @@ const Balls = props => {
             <div key={index}>
               <CSSTransition
                 in={ball.showTransition}
-                timeout={410}
+                timeout={400}
                 onEnter={(ele, isAppearing) => onEnter(ele, isAppearing)}
                 onEntering={(ele, isAppearing) => onEntering(ele, isAppearing)}
-                onEntered={(ele, isAppearing) => onEntered(ele, isAppearing)}>
+                onEntered={(ele, isAppearing) => onEntered(ele, isAppearing)}
+                onExit={(ele, isAppearing) => onExit(ele)}
+                onExiting={(ele, isAppearing) => onExiting(ele)}
+                onExited={(ele, isAppearing) => onExited(ele)}
+                >
                 <div 
                   className="ball" 
                   style={{display: ball.show ? 'block' : 'none'}}>
