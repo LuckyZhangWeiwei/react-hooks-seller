@@ -194,6 +194,7 @@ const Goods = props => {
         <FoodPortal 
           food={food}
           show={showFoodDetail}
+          hideFoodPortal= {() => setShowFoodDetail(false)}
         />
       }
     </>
