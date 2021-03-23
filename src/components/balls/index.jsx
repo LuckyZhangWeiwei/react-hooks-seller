@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
+import produce from 'immer'
 import './index.styl'
 
 const Balls = props => {
-  const BALL_COUNT = 5
+  const BALL_COUNT = 15
   const innerCls = 'inner-hook'
 
   const { showBallFlying } = props
@@ -16,7 +17,7 @@ const Balls = props => {
       _triggerDrop(showBallFlying.target)
     }
   }, [showBallFlying])
-
+ 
   useEffect(() => {
     let ret = []
     for (let i = 0; i < BALL_COUNT; i++) {
@@ -30,17 +31,26 @@ const Balls = props => {
   }, [])
 
   const _triggerDrop = el => {
-    for (let i = 0; i < balls.length; i++ ) {
-      const ball = balls[i]
-      if (!ball.show) {
-        ball.show = true
-        ball.showTransition = true
-        ball.el = el
-        dropBalls.current.push(ball)
-        return
+    let tempObj = {}
+    const immeredObj = produce(balls, draft => {
+      for (let i = 0; i < draft.length; i++) {
+        if (!draft[i].show) {
+          draft[i].show = true
+          draft[i].showTransition = true
+          draft[i].el = el
+          tempObj = {
+            id: i,
+            show: true,
+            showTransition: true,
+            el
+          }
+          return
+        }
       }
-    }
-    setBalls([...balls])
+    })
+
+    dropBalls.current.push(tempObj)
+    setBalls(immeredObj)
   }
 
   const onEnter = (ele, isAppearing) => {
@@ -63,18 +73,32 @@ const Balls = props => {
   }
 
   const onEntered = (ele, isAppearing) => {
-      ele.style.display = 'none'
-      // const droppedBall = dropBalls.current.shift()
-      // balls[ball.id].show = false
-      // balls[ball.id].showTransition = false
-      setBalls([...balls, {id: balls.length + 1, show: false, showTransition: false}])
+      const droppedBall = dropBalls.current.shift()
+
+      const immeredObj = produce(balls, draft => {
+        for (let i = 0; i < draft.length; i++) {
+          if (draft[i].id === droppedBall.id) {
+            draft[i].show = false
+            draft[i].showTransition = false
+            delete draft[i].el
+            return
+          }
+        }
+      })
+      setBalls(immeredObj)
   }
 
-  const onExit = ele => {}
+  const onExit = ele => {
+    ele.classList.remove('exit-done')
+    ele.style = null
+    ele.children[0].style = null
+    ele.style.display = 'none'
+  }
 
   const onExiting = ele => {}
 
-  const onExited = ele => {}
+  const onExited = ele => {
+  }
 
   return (
     <div className="ball-container">
