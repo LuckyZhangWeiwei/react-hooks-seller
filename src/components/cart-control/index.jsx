@@ -6,7 +6,7 @@ const CartControl = props => {
 
   const { food, useTransition } = props // useTransition - when from shopping cart, we don't need transtiton 
 
-  const [showTransition, setShowTransition] = useState(false) 
+  const [showTransition, setShowTransition] = useState(false)
 
   useEffect(() => {
     if (food.count) {
@@ -30,7 +30,13 @@ const CartControl = props => {
 
   const add = (e) => {
     e.stopPropagation()
-    props.onAdd(food, e)
+    if (!food.count) { // avoid when click add btn very fast, transition show subtract bug
+      setTimeout(() => {
+        props.onAdd(food, e)
+      }, 310);
+    } else {
+      props.onAdd(food, e)
+    }
   }
 
   return (
