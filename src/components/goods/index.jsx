@@ -195,6 +195,9 @@ const Goods = props => {
           food={food}
           show={showFoodDetail}
           hideFoodPortal= {() => setShowFoodDetail(false)}
+          category={goodsCategory}
+          // addFood={(category, food, target) => onAddFood(category, food, target)}
+          // subtractFood={(category, food) => onSubtractFood(category, food)}
         />
       }
     </>
