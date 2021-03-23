@@ -7,6 +7,7 @@ import GoodsPanel from './../goods-panel'
 import ShopingCartSticky from './../shoping-cart-sticky'
 import ModelLayer from './../model-layer'
 import ShoppingCartList from './../shopping-cart-list'
+import FoodPortal from './../food'
 import './index.styl'
 
 const Goods = props => {
@@ -18,6 +19,8 @@ const Goods = props => {
   const [showPopupModel, setShowPopupModel] = useState(false)
   const [showTransition, setShowTransition] = useState(false)
   const [showBallFlying, setShowBallFlying] = useState(null)
+  const [showFoodDetail, setShowFoodDetail] = useState(false)
+  const [food, setFood] = useState(null)
 
   const goodsNavRef = useRef(null)
   const goodsPanelRef = useRef(null)
@@ -116,7 +119,8 @@ const Goods = props => {
   }
   
   const onJumpToDetailPage = food => {
-    console.log('onJumpToDetailPage:', food)
+    setShowFoodDetail(true)
+    setFood(food)
   }
 
   return (
@@ -183,6 +187,13 @@ const Goods = props => {
               }
             }
           }
+        />
+      }
+      {
+        showFoodDetail &&
+        <FoodPortal 
+          food={food}
+          show={showFoodDetail}
         />
       }
     </>

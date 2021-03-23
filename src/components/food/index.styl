@@ -1,0 +1,26 @@
+@import './../../assert/stylus/cube/variable.styl'
+@import './../../assert/stylus/variable.styl'
+
+.food-container
+  position: fixed
+  left 0
+  right: 0
+  top 0
+  bottom 0
+  z-index: 2
+  background: $color-background-ssss
+  transform: translateX(100%)
+  &.slide-enter
+    transform: translateX(100%)
+  &.slide-enter-active
+    transition: transform 0.3s ease-in
+    transform: translateX(0)
+  &.slide-enter-done
+    transform: translateX(0)
+  &.slide-exit
+    transform: translateX(0)
+  &.slide-exit-active
+    transition: transform 0.3s ease-in
+    transform: translateX(100%)
+  &.slide-exit-done
+    transform: translateX(100%)
