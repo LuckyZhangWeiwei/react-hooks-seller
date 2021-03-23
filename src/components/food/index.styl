@@ -92,3 +92,63 @@
         color: $color-white
         background: $color-blue
         opacity: 1
+    .info
+      padding: 18px
+      .title
+        line-height: 14px
+        margin-bottom: 6px
+        font-size: $fontsize-medium
+        color: $color-dark-grey
+      .text
+        line-height: 24px
+        padding: 0 8px
+        font-size: $fontsize-small
+        color: $color-grey
+    .rating
+      padding-top: 18px
+      .title
+        line-height: 14px
+        margin-left: 18px
+        font-size: $fontsize-medium
+        color: $color-dark-grey
+      .rating-wrapper
+        padding: 0 18px
+        .rating-item
+          position: relative
+          padding: 16px 0
+          &:last-child
+            border-none()
+          .user
+            position: absolute
+            right: 0
+            top: 16px
+            display: flex
+            align-items: center
+            line-height: 12px
+            .name
+              margin-right: 6px
+              font-size: $fontsize-small-s
+              color: $color-light-grey
+            .avatar
+              border-radius: 50%
+          .time
+            margin-bottom: 6px
+            line-height: 12px
+            font-size: $fontsize-small-s
+            color: $color-light-grey
+          .text
+            line-height: 16px
+            font-size: $fontsize-small
+            color: $color-dark-grey
+            .icon-thumb_up, .icon-thumb_down
+              margin-right: 4px
+              line-height: 16px
+              font-size: $fontsize-small
+            .icon-thumb_up
+              color: $color-blue
+            .icon-thumb_down
+              color: $color-light-grey
+        .no-rating
+          padding: 16px 0
+          font-size: $fontsize-small
+          color: $color-light-grey

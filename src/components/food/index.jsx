@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import Scroller from './../scroller'
 import CartControl from './../cart-control'
+import SplitLine from './../split-line'
 import './index.styl'
 
 const Food = props => {
@@ -61,9 +62,23 @@ const Food = props => {
                 </div>
               </CSSTransition>
             }
-
-            
           </div>
+            {
+              food.info &&
+              <>
+                <SplitLine />
+                <div className="info">
+                  <h1 className="title">商品评价</h1>
+                  <p className="text">{food.info}</p>
+                </div>
+              </>
+            }
+            <SplitLine />
+            <div className="rating">
+              <h1 className="title">商品评价</h1>
+              <div className="rating-wrapper">
+              </div>
+            </div>
         </div>
       </Scroller>
     </div>
