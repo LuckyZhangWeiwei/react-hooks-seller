@@ -7,18 +7,52 @@ import SplitLine from './../split-line'
 import './index.styl'
 
 const Food = props => {
-  const { food, subtractFood, addFood } = props
+  const { food, subtractFood, addFood, category } = props
   const scrollerRef = useRef(null)
+  const [selectedFood, setSelectedFood] = useState(null)
 
   useEffect(() => {
-    console.log('food:', food)
-  }, [food])
+    const selectedFood = getSelectedFood(category, food)
+    setSelectedFood(selectedFood)
+  }, [category])
+
+  const getSelectedCategory = (goodsCategory, selectedFood) => {
+    for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
+      for (let foodIndex = 0; foodIndex < goodsCategory[categoryIndex].foods.length; foodIndex++) {
+        if (goodsCategory[categoryIndex].foods[foodIndex].name === selectedFood.name) {
+          return goodsCategory[categoryIndex]
+        }
+      }
+    }
+  }
+
+  const getSelectedFood = (goodsCategory, selectedFood) => { 
+    for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
+      for (let foodIndex = 0; foodIndex < goodsCategory[categoryIndex].foods.length; foodIndex++) {
+        if (goodsCategory[categoryIndex].foods[foodIndex].name === selectedFood.name) {
+          return goodsCategory[categoryIndex].foods[foodIndex]
+        }
+      }
+    }
+  }
 
   const hide = () => {
     props.hide()
   }
 
-  const addFirst = () => {}
+  const addFirst = () => {
+
+  }
+
+  const onAddFood = (food, target) => {
+    const selectedCategory = getSelectedCategory(category, food)
+    addFood(selectedCategory, food, target)
+  }
+
+  const onDescrease = food => {
+    const selectedCategory = getSelectedCategory(category, food)
+    subtractFood(selectedCategory, food)
+  }
 
   return (
     <div className="food-container">
@@ -46,18 +80,24 @@ const Food = props => {
             {
               food.count && 
               <div className="cart-control-wrapper">
-                <CartControl
-                  food={food}
-                  onDescrease={subtractFood}
-                  onAdd={addFood}
-                  useTransition={true} 
-                />
+                {
+                  selectedFood &&
+                  <CartControl
+                    food={selectedFood}
+                    onAdd={(food, target) => onAddFood(food, target)}
+                    onDescrease={() => onDescrease(food)}
+                    useTransition={true} 
+                  />
+                }
+               
               </div>
             }
             {
               !food.count &&
               <CSSTransition timeout={300} classNames="fade">
-                <div className="buy" onClick={() => addFirst()}>
+                <div 
+                  className="buy" 
+                  onClick={() => addFirst()}>
                   加入购物车
                 </div>
               </CSSTransition>
@@ -110,6 +150,7 @@ const FoodPortal = props => {
             hide={() => hide()}
             addFood={props.addFood}
             subtractFood={props.subtractFood}
+            category={props.category}
           />
           ,document.body)
       }

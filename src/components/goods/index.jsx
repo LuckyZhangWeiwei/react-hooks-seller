@@ -73,7 +73,6 @@ const Goods = props => {
     const selectedFoodIndex = goodsCategory[selectedCateIndex].foods.findIndex(food => {
       return food.name === selectedFood.name
     })
-
     if (draft[selectedCateIndex].foods[selectedFoodIndex].count) {
       draft[selectedCateIndex].foods[selectedFoodIndex].count += 1
     } else {
@@ -119,8 +118,8 @@ const Goods = props => {
   }
   
   const onJumpToDetailPage = food => {
-    setShowFoodDetail(true)
     setFood(food)
+    setShowFoodDetail(true)
   }
 
   return (
@@ -190,14 +189,14 @@ const Goods = props => {
         />
       }
       {
-        showFoodDetail &&
+        showFoodDetail && food &&
         <FoodPortal 
           food={food}
           show={showFoodDetail}
           hideFoodPortal= {() => setShowFoodDetail(false)}
           category={goodsCategory}
-          // addFood={(category, food, target) => onAddFood(category, food, target)}
-          // subtractFood={(category, food) => onSubtractFood(category, food)}
+          addFood={(category, food, target) => onAddFood(category, food, target)}
+          subtractFood={(category, food) => onSubtractFood(category, food)}
         />
       }
     </>
