@@ -60,6 +60,10 @@ const GoodsNav = props => {
     setActiveIndex(props.ActiveNavIndex)
   }, [props.ActiveNavIndex])
 
+  useEffect(() => {
+    props.myRef.current.refresh()
+  }, [navItems])
+
   const foodNavClick = (navItem) => {
     props.navItemClick(navItem)
   }

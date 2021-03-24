@@ -36,6 +36,10 @@ class Scroller extends React.Component {
     this.scroller &&	this.scroller.scrollToElement.apply(this.scroller, arguments)
   }
 
+  refresh() {
+    this.scroller && this.scroller.refresh()
+  }
+
   render() {
     return (
       <div 
