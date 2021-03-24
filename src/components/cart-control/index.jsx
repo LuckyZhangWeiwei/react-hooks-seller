@@ -37,7 +37,7 @@ const CartControl = props => {
           food.count 
           &&
           <CSSTransition 
-            timeout={100} 
+            timeout={200} 
             classNames="move" 
             in={showTransition}>
             <div 

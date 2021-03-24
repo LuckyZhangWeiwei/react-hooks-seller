@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect} from 'react'
 import ReactDOM from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import Scroller from './../scroller'
@@ -8,7 +8,6 @@ import './index.styl'
 
 const Food = props => {
   const { food, subtractFood, addFood, category } = props
-  const scrollerRef = useRef(null)
 
   const getSelectedCategory = (goodsCategory, selectedFood) => {
     for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
@@ -41,7 +40,7 @@ const Food = props => {
 
   return (
     <div className="food-container">
-      <Scroller myRef={scrollerRef} data={food}>
+      <Scroller data={food}>
         <div className="food-content">
           <div className="image-header">
             <img src={food.image} alt="" />
