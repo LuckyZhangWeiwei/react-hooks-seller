@@ -20,23 +20,12 @@ const CartControl = props => {
     e.stopPropagation()
     if (food.count === 1) {
       useTransition &&  setShowTransition(false)
-      setTimeout(() => {
-        props.onDescrease(food)  
-      }, !useTransition ? 0 : 310);
-    } else {
-      props.onDescrease(food)  
-    }
+    } props.onDescrease(food)  
   }
 
   const add = (e) => {
     e.stopPropagation()
-    if (!food.count) { // avoid when click add btn very fast, transition show subtract bug
-      setTimeout(() => {
-        props.onAdd(food, e)
-      }, 310);
-    } else {
-      props.onAdd(food, e)
-    }
+    props.onAdd(food, e)
   }
 
   return (
@@ -48,7 +37,7 @@ const CartControl = props => {
           food.count 
           &&
           <CSSTransition 
-            timeout={300} 
+            timeout={100} 
             classNames="move" 
             in={showTransition}>
             <div 

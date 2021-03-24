@@ -97,11 +97,8 @@ const Balls = props => {
   const onExiting = ele => {}
 
   const onExited = ele => {
-    // ele.classList.remove('exit-done')
-    // ele.style = null
-    // ele.children[0].style = null
-    // ele.style.display = 'none'
-    // console.log(ele)
+    if (ele.style.display !== 'none')
+      ele.style.display = 'none'
   }
 
   return (
