@@ -36,12 +36,9 @@ const Food = props => {
     }
   }
 
-  const hide = () => {
-    props.hide()
-  }
-
-  const addFirst = () => {
-
+  const addFirst = (target) => {
+    const selectedCategory = getSelectedCategory(category, food)
+    addFood(selectedCategory, food, target)
   }
 
   const onAddFood = (food, target) => {
@@ -52,6 +49,10 @@ const Food = props => {
   const onDescrease = food => {
     const selectedCategory = getSelectedCategory(category, food)
     subtractFood(selectedCategory, food)
+  }
+
+  const hide = () => {
+    props.hide()
   }
 
   return (
@@ -97,7 +98,7 @@ const Food = props => {
               <CSSTransition timeout={300} classNames="fade">
                 <div 
                   className="buy" 
-                  onClick={() => addFirst()}>
+                  onClick={food => addFirst(food)}>
                   加入购物车
                 </div>
               </CSSTransition>
