@@ -91,7 +91,11 @@ const Goods = props => {
     }
    })
    setFood(immeredFood)
-   setShowBallFlying({selectedCategory, selectedFood, target})
+   
+   // fix on food page, when click add to cart butn 
+   if (target.target.classList[0] !== 'buy') {
+    setShowBallFlying({selectedCategory, selectedFood, target})
+   }
   }
 
   const onSubtractFood = (selectedCategory, selectedFood) => {
