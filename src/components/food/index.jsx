@@ -9,28 +9,12 @@ import './index.styl'
 const Food = props => {
   const { food, subtractFood, addFood, category } = props
   const scrollerRef = useRef(null)
-  const [selectedFood, setSelectedFood] = useState(null)
-
-  useEffect(() => {
-    const selectedFood = getSelectedFood(category, food)
-    setSelectedFood(selectedFood)
-  }, [category])
 
   const getSelectedCategory = (goodsCategory, selectedFood) => {
     for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
       for (let foodIndex = 0; foodIndex < goodsCategory[categoryIndex].foods.length; foodIndex++) {
         if (goodsCategory[categoryIndex].foods[foodIndex].name === selectedFood.name) {
           return goodsCategory[categoryIndex]
-        }
-      }
-    }
-  }
-
-  const getSelectedFood = (goodsCategory, selectedFood) => { 
-    for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
-      for (let foodIndex = 0; foodIndex < goodsCategory[categoryIndex].foods.length; foodIndex++) {
-        if (goodsCategory[categoryIndex].foods[foodIndex].name === selectedFood.name) {
-          return goodsCategory[categoryIndex].foods[foodIndex]
         }
       }
     }
@@ -82,9 +66,9 @@ const Food = props => {
               food.count && 
               <div className="cart-control-wrapper">
                 {
-                  selectedFood &&
+                  food &&
                   <CartControl
-                    food={selectedFood}
+                    food={food}
                     onAdd={(food, target) => onAddFood(food, target)}
                     onDescrease={() => onDescrease(food)}
                     useTransition={true} 

@@ -63,7 +63,9 @@ const Goods = props => {
   }
 
   const onAddFood = (selectedCategory, selectedFood, target) => {
+   
     if (!selectedCategory || !selectedFood) return
+    
     const immeredState = produce((draft) => {
 
     const selectedCateIndex = goodsCategory.findIndex(category => {
@@ -80,11 +82,21 @@ const Goods = props => {
     }
    })
    setGoodsCategory(immeredState)
+   const immeredFood = produce(food, draft => {
+    if (!draft) return
+    if(draft.count > 0) {
+      draft.count += 1
+    } else {
+      draft.count = 1
+    }
+   })
+   setFood(immeredFood)
    setShowBallFlying({selectedCategory, selectedFood, target})
   }
 
   const onSubtractFood = (selectedCategory, selectedFood) => {
     if (!selectedCategory || !selectedFood) return
+
     const immeredState = produce((draft) => {
 
       const selectedCateIndex = goodsCategory.findIndex(category => {
@@ -103,6 +115,16 @@ const Goods = props => {
       
      }) 
      setGoodsCategory(immeredState)
+
+     const immeredFood = produce(food, draft => {
+      if (!draft) return
+      if (draft.count > 0) {
+        draft.count -= 1
+      } else {
+        draft.count = null
+      }
+     })
+     setFood(immeredFood)
   }
 
   const adjustNavPos = activeNavIndex => {
