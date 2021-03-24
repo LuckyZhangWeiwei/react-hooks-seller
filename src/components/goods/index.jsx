@@ -66,7 +66,7 @@ const Goods = props => {
    
     if (!selectedCategory || !selectedFood) return
     
-    const immeredState = produce((draft) => {
+    const immeredState = produce(draft => {
 
     const selectedCateIndex = goodsCategory.findIndex(category => {
       return category.name === selectedCategory.name
@@ -97,7 +97,7 @@ const Goods = props => {
   const onSubtractFood = (selectedCategory, selectedFood) => {
     if (!selectedCategory || !selectedFood) return
 
-    const immeredState = produce((draft) => {
+    const immeredState = produce(draft => {
 
       const selectedCateIndex = goodsCategory.findIndex(category => {
         return category.name === selectedCategory.name
