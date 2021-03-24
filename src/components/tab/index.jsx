@@ -72,7 +72,7 @@ const Tab = props => {
         currentIndex={currentIndex}
         onPageChanged={currentPage => goToPage(currentPage.pageX)}
         onScroll={value => onScrollValueChanged(value)}
-        showShoppingCart={showShoppingCart} 
+        showShoppingCart={showShoppingCart}
       />
     </div>
   )
