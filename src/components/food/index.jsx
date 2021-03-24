@@ -71,10 +71,9 @@ const Food = props => {
                     food={food}
                     onAdd={(food, target) => onAddFood(food, target)}
                     onDescrease={() => onDescrease(food)}
-                    useTransition={true} 
+                    useTransition={true}
                   />
                 }
-               
               </div>
             }
             {
