@@ -35,7 +35,6 @@ const TabContent = props => {
 
   const _initTab = () => {
     if (!props.data) return
-    _setTabContentHeight()
     _setTabWidth()
     _initScroll()
   }
@@ -68,11 +67,6 @@ const TabContent = props => {
     }
     let totalWidth = tabItems.length * tabItemWidth
     document.querySelector('.slide-banner-content').style.width = `${totalWidth}px`
-  }
-
-  const _setTabContentHeight = () => {
-    containerRef.current.style.height = 
-    `${window.screen.height - document.querySelector('.header').clientHeight - document.querySelector('.tab').clientHeight}px`
   }
 
   return (
