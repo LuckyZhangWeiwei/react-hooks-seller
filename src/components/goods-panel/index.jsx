@@ -94,7 +94,7 @@ const GoodsPanel = props => {
       goodsFixedCategoryRef.current.style.display = "block"
     }
 
-    for (let i = 0; i < listHeight.length; i++) {
+    for (let i = 0; i < listHeight.length - 1; i++) {
       let h1 = listHeight[i]
 			let h2 = listHeight[i + 1]
       if (-y >= h1 && -y < h2) {
@@ -102,7 +102,8 @@ const GoodsPanel = props => {
         setCurrentNavItemText(category[i + 1].name)
         // handle fixed title transition
         if(h2 - FIXED_TITLE_HEIGHT <= -y) {
-          goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(h2 + y))}px, 0)`
+          let detla2 = -(FIXED_TITLE_HEIGHT-(h2 + y))
+          goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${detla2}px, 0)`
         } else {
           goodsFixedCategoryRef.current.style.transform = `translate3d(0, 0, 0)`
         }
@@ -113,7 +114,8 @@ const GoodsPanel = props => {
     setCurrentNavItemText(category[0].name)
     // handle fixed title transition
     if (listHeight[0] - (-y) < FIXED_TITLE_HEIGHT) {
-      goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${-(FIXED_TITLE_HEIGHT-(listHeight[0] + y))}px, 0)`
+      let detla = -(FIXED_TITLE_HEIGHT-(listHeight[0] + y))
+      goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${detla}px, 0)`
     }
   }
 
@@ -136,7 +138,9 @@ const GoodsPanel = props => {
         ref={props.myRef}
         probeType={3}
         data={category}
-        listenScroll={pos => onFoodsPanelScrolling(pos)}>
+        listenScroll={pos => { setTimeout(() => {
+          onFoodsPanelScrolling(pos)
+        }, 80)} }>
         <>
           {
             category.map((item, index) => {
