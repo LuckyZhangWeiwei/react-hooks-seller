@@ -1136,7 +1136,7 @@ const Goods = props => {
 
   const onNavItemClick = item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
-    goodsPanelRef.current.scrollToElement(ele, 300)
+    goodsPanelRef.current.scrollToElement(ele, 0)
   }
 
   const onAddFood = (selectedCategory, selectedFood, target) => {

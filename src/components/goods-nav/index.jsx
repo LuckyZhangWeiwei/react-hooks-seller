@@ -14,7 +14,10 @@ const GoodsNavItem = props => {
         classnames('category-item', {
         'active': index === activeIndex
       })}
-      onClick={() => foodNavClick(item, index)}>
+      onClick={e => {
+        e.stopPropagation(); 
+        foodNavClick(item, index)
+        }}>
         {
           item.type > 0 &&
           <SupportIcon 
@@ -33,7 +36,7 @@ const GoodsNavItem = props => {
 }
 
 const GoodsNav = props => {
-  const category = props.category
+  const  {ActiveNavIndex, category} = props
 
   const [navItems, setNavItems] = useState(category)
 
@@ -57,8 +60,8 @@ const GoodsNav = props => {
   }, [category])
 
   useEffect(() => {
-    setActiveIndex(props.ActiveNavIndex)
-  }, [props.ActiveNavIndex])
+    setActiveIndex(ActiveNavIndex)
+  }, [ActiveNavIndex])
 
   useEffect(() => {
     props.myRef.current.refresh()
