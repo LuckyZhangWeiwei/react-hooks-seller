@@ -87,10 +87,10 @@ const Balls = props => {
       })
       setBalls(immeredObj)
 
-      _resetBallStyle()
+      _resetBallStyle(ele)
   }
 
-  const _resetBallStyle = () => {
+  const _resetBallStyle = (ele) => {
     ele.style = null
     ele.children[0].style = null
     ele.style.display = 'none'
