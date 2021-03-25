@@ -74,7 +74,8 @@ const GoodsNav = props => {
   return (
     <Scroller
       ref={props.myRef}
-      data={navItems}>
+      data={navItems}
+      className={props.className}>
       {
         navItems.map((item, index) => {
           return (

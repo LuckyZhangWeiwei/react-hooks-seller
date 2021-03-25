@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 import BScroll from '@better-scroll/core'
 import './index.styl'
 
@@ -43,7 +44,7 @@ class Scroller extends React.Component {
   render() {
     return (
       <div 
-        className="scroll-container"
+        className={classnames('scroll-container', this.props.className)}
         style={this.props.myStyle}
         ref={this.scrollerContainerRef}>
         <div>

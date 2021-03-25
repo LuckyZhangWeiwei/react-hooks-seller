@@ -131,7 +131,8 @@ const GoodsPanel = props => {
 
   return (
     <>
-      <Scroller 
+      <Scroller
+        className={props.className}
         ref={props.myRef}
         probeType={3}
         data={category}

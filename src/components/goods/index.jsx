@@ -1228,25 +1228,23 @@ const Goods = props => {
   return (
     <>
       <div className="goods-container">
-        <div className="goods-panel">
-          <GoodsPanel
-            category={goodsCategory}
-            myRef={goodsPanelRef}
-            addFood={(category, food, target) => onAddFood(category, food, target)}
-            subtractFood={(category, food) => onSubtractFood(category, food)}
-            jumpToDetailPage={food => onJumpToDetailPage(food)}
-            adjustNavPosition={acitveNavIndex => adjustNavPos(acitveNavIndex)}
-            changeNavItemIndex={acitveNavIndex => onChangeNavItemIndex(acitveNavIndex)}
-          />
-        </div>
-        <div className="goods-nav">
-          <GoodsNav
-            category={goodsCategory}
-            navItemClick={navItem => onNavItemClick(navItem)}
-            myRef={goodsNavRef} 
-            ActiveNavIndex={activeNavIndex}
-          />
-        </div>
+        <GoodsPanel
+          className='goods-panel'
+          category={goodsCategory}
+          myRef={goodsPanelRef}
+          addFood={(category, food, target) => onAddFood(category, food, target)}
+          subtractFood={(category, food) => onSubtractFood(category, food)}
+          jumpToDetailPage={food => onJumpToDetailPage(food)}
+          adjustNavPosition={acitveNavIndex => adjustNavPos(acitveNavIndex)}
+          changeNavItemIndex={acitveNavIndex => onChangeNavItemIndex(acitveNavIndex)}
+        />
+        <GoodsNav
+          className='goods-nav'
+          category={goodsCategory}
+          navItemClick={navItem => onNavItemClick(navItem)}
+          myRef={goodsNavRef} 
+          ActiveNavIndex={activeNavIndex}
+        />
       </div>
       {
         showPopupModel &&
