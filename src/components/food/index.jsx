@@ -38,13 +38,9 @@ const Food = props => {
     props.hide()
   }
 
-  const getPageheight = () => {
-    return document.body.clientHeight
-  }
-
   return (
     <div className="food-container">
-      <Scroller data={food} myStyle={{maxHeight: getPageheight()}}>
+      <Scroller data={food}>
         <div className="food-content">
           <div className="image-header">
             <img src={food.image} alt="" />
