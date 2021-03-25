@@ -86,19 +86,14 @@ const Balls = props => {
         }
       })
       setBalls(immeredObj)
+
+      _resetBallStyle()
   }
 
-  const onExit = ele => {
+  const _resetBallStyle = () => {
     ele.style = null
     ele.children[0].style = null
     ele.style.display = 'none'
-  }
-
-  const onExiting = ele => {}
-
-  const onExited = ele => {
-    if (ele.style.display !== 'none')
-      ele.style.display = 'none'
   }
 
   return (
@@ -112,11 +107,7 @@ const Balls = props => {
                 timeout={400}
                 onEnter={(ele, isAppearing) => onEnter(ele, isAppearing)}
                 onEntering={(ele, isAppearing) => onEntering(ele, isAppearing)}
-                onEntered={(ele, isAppearing) => onEntered(ele, isAppearing)}
-                onExit={(ele, isAppearing) => onExit(ele)}
-                onExiting={(ele, isAppearing) => onExiting(ele)}
-                onExited={(ele, isAppearing) => onExited(ele)}
-                >
+                onEntered={(ele, isAppearing) => onEntered(ele, isAppearing)}>
                 <div 
                   className="ball" 
                   style={{display: ball.show ? 'block' : 'none'}}>
