@@ -19,7 +19,7 @@ const GoodslItem = props => {
           alt={food.name}
           width={IMAGE_SIZE}
           height={IMAGE_SIZE}
-          effect="blur"/>
+          effect="blur" />
       </div>
       <div className="content">
         <h2 className="name">{food.name}</h2>
