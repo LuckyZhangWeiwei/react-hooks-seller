@@ -13,8 +13,6 @@ import './index.styl'
 const Goods = props => {
   const seller = props.seller
 
-  let goodsPanelHeight = 0
-
   const [goodsCategory, setGoodsCategory] = useState([])
   const [selectFoods, setSelectFoods] = useState([])
   const [activeNavIndex, setActiveNavIndex] = useState(0)
@@ -26,9 +24,10 @@ const Goods = props => {
 
   const goodsNavRef = useRef(null)
   const goodsPanelRef = useRef(null)
-  const scrollPosRef = useRef(null)
+  const initScrollPosRef = useRef(null)
   const goodsPanelHeightRef = useRef(0)
   const navHeightSumRef = useRef(0)
+  const navScrolledHeightRef = useRef(0)
 
   useEffect(() => {
     // getGoods().then(res => {
@@ -1226,10 +1225,10 @@ const Goods = props => {
   }
 
   const adjustNavPos = (activeNavIndex, y) => {   // up  y(distance) > 0, down y < 0
-    // const scrollDistance = y - scrollPosRef.current
+    // const scrollDistance = y - initScrollPosRef.current
     // let scala = Math.min(Math.max(scrollDistance / goodsPanelHeightRef.current, -1), 1)
-    // const value = navHeightSumRef.current - goodsPanelHeightRef.current + y
-    // goodsNavRef.current.scroller.scrollTo(0, -value * scala, 300)
+    // const value = navHeightSumRef.current - goodsPanelHeightRef.current - navScrolledHeightRef.current
+    // goodsNavRef.current.scroller.scrollTo(0, Math.min(value * scala, 0), 300)
   }
 
   const scrollStart = () => {
@@ -1238,7 +1237,12 @@ const Goods = props => {
     if (startPos !== 0) {
       startPos = startPos.toString().replace('translateY(', '').replace('px)', '')
     } 
-    scrollPosRef.current = startPos
+    initScrollPosRef.current = startPos
+
+    // let navScrolledHeight =  document.querySelector('.goods-container').children[2].style.transform.split(' ')[1] ? 
+    //                     document.querySelector('.goods-container').children[2].style.transform.split(' ')[1] : 0
+    
+    //   navScrolledHeightRef.current = navScrolledHeight
   }
 
   const onChangeNavItemIndex = activeNavIndex => {
