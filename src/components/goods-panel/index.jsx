@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import produce from 'immer'
 import Scroller from './../scroller'
 import GoodsFixedCategory from './../goods-fixed-category'
 import CartControl from './../cart-control'
@@ -53,9 +54,10 @@ const GoodsPanel = props => {
 
   const [listHeight, setListHeight] = useState([])
 
-  const [currentNavItemIndex, setCurrentNavItemIndex] = useState(0)
-
-  const [currentNavItemText, setCurrentNavItemText] = useState(null)
+  const [currentItem, setCurrentItem] = useState({
+    index: 0,
+    text: null
+  })
 
   const categoryContainerRef = useRef(null)
 
@@ -76,14 +78,18 @@ const GoodsPanel = props => {
         }
         setListHeight(tempList)
       }
-      setCurrentNavItemText(category[0].name) // add init value
+      const immeredState = produce(currentItem, draft => {
+        draft.text = category[0].name
+       })
+       // add init value
+       setCurrentItem(immeredState)
     }
   }, [props.category])
 
   useEffect(() => {
-    props.changeNavItemIndex(currentNavItemIndex)
-    props.adjustNavPosition(currentNavItemIndex)
-  }, [currentNavItemIndex])
+    props.changeNavItemIndex(currentItem.index)
+    props.adjustNavPosition(currentItem.index)
+  }, [currentItem.index])
 
   const onFoodsPanelScrolling = pos => {
     const { y } = pos
@@ -98,8 +104,11 @@ const GoodsPanel = props => {
       let h1 = listHeight[i]
 			let h2 = listHeight[i + 1]
       if (-y >= h1 && -y < h2) {
-        setCurrentNavItemIndex(i + 1)
-        setCurrentNavItemText(category[i + 1].name)
+       const immeredState = produce(currentItem, draft => {
+        draft.index = i + 1
+        draft.text = category[i + 1].name
+       })
+       setCurrentItem(immeredState)
         // handle fixed title transition
         if(h2 - FIXED_TITLE_HEIGHT <= -y) {
           let detla2 = -(FIXED_TITLE_HEIGHT-(h2 + y))
@@ -110,8 +119,11 @@ const GoodsPanel = props => {
         return
       }
     }
-    setCurrentNavItemIndex(0)
-    setCurrentNavItemText(category[0].name)
+    const immeredState = produce(currentItem, draft => {
+      draft.index = 0
+      draft.text = category[0].name
+     })
+     setCurrentItem(immeredState)
     // handle fixed title transition
     if (listHeight[0] - (-y) < FIXED_TITLE_HEIGHT) {
       let detla = -(FIXED_TITLE_HEIGHT-(listHeight[0] + y))
@@ -170,7 +182,7 @@ const GoodsPanel = props => {
         </>
       </Scroller>
       <GoodsFixedCategory
-        categoryTitle={currentNavItemText}
+        categoryTitle={currentItem.text}
         myRef={goodsFixedCategoryRef}
       />
     </>
