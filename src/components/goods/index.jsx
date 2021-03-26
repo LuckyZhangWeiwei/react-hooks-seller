@@ -25,10 +25,6 @@ const Goods = props => {
 
   const goodsNavRef = useRef(null)
   const goodsPanelRef = useRef(null)
-  const initScrollPosRef = useRef(null)
-  const goodsPanelHeightRef = useRef(0)
-  const navHeightSumRef = useRef(0)
-  const navScrolledHeightRef = useRef(0)
 
   useEffect(() => {
     // getGoods().then(res => {
@@ -1123,14 +1119,6 @@ const Goods = props => {
       })
     })
     setSelectFoods(array)
-
-
-    let navItemHeightSum = 0
-    goodsCategory.forEach(category => {
-      navItemHeightSum += 56
-    })
-    navHeightSumRef.current = navItemHeightSum
-
   }, [goodsCategory])
 
   useEffect(() => {
@@ -1146,10 +1134,6 @@ const Goods = props => {
       setShowPopupModel(false)
     }
   }, [selectFoods])
-
-  useEffect(() => {
-    goodsPanelHeightRef.current = document.querySelector('.goods-container').children[0].clientHeight
-  }, [])
 
   const onNavItemClick = item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
@@ -1240,20 +1224,6 @@ const Goods = props => {
     // goodsNavRef.current.scroller.scrollTo(0, Math.min(value * scala, 0), 300)
   }
 
-  const scrollStart = () => {
-    // let startPos = goodsPanelRef.current.scroller.wrapper.children[0].style.transform.split(' ')[1] ?
-    //                 goodsPanelRef.current.scroller.wrapper.children[0].style.transform.split(' ')[1] : 0
-    // if (startPos !== 0) {
-    //   startPos = startPos.toString().replace('translateY(', '').replace('px)', '')
-    // } 
-    // initScrollPosRef.current = startPos
-
-    // // let navScrolledHeight =  document.querySelector('.goods-container').children[2].style.transform.split(' ')[1] ? 
-    // //                     document.querySelector('.goods-container').children[2].style.transform.split(' ')[1] : 0
-    
-    // //   navScrolledHeightRef.current = navScrolledHeight
-  }
-
   const onChangeNavItemIndex = activeNavIndex => {
     setActiveNavIndex(activeNavIndex)
   }
@@ -1275,7 +1245,6 @@ const Goods = props => {
           jumpToDetailPage={food => onJumpToDetailPage(food)}
           adjustNavPosition={(acitveNavIndex, y) => adjustNavPos(acitveNavIndex, y)}
           changeNavItemIndex={acitveNavIndex => onChangeNavItemIndex(acitveNavIndex)}
-          onScrollStart={() => scrollStart()}
           isJumpScroll={isJumpScroll}
           onScrollEnd={() => setIsJumpScroll(false)}
         />

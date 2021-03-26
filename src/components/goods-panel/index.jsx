@@ -89,7 +89,7 @@ const GoodsPanel = props => {
     if (!props.isJumpScroll) {
       props.changeNavItemIndex(currentItem.index)
     }
-    // props.adjustNavPosition(currentItem.index)
+    props.adjustNavPosition(currentItem.index)
   }, [currentItem.index])
 
   const onFoodsPanelScrolling = pos => {
@@ -161,7 +161,6 @@ const GoodsPanel = props => {
         probeType={3}
         data={category}
         listenScroll={pos => onFoodsPanelScrolling(pos) }
-        scrollStart={() => props.onScrollStart()}
         scrollEnd={() => props.onScrollEnd()}>
         <>
           {
