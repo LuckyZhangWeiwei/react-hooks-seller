@@ -90,7 +90,7 @@ const GoodsPanel = props => {
       props.changeNavItemIndex(currentItem.index)
     }
     props.adjustNavPosition(currentItem.index)
-  }, [currentItem.index])
+  }, [currentItem])
 
   const onFoodsPanelScrolling = pos => {
     const { y } = pos

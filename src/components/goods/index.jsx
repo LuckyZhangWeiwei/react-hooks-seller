@@ -1232,7 +1232,6 @@ const Goods = props => {
           size += items[index].clientHeight
         }
       }
-  
       let translate = middleTranslate - size
       translate = Math.max(minTranslate, Math.min(0, translate))
       if (goodsNavRef.current.scroller)
