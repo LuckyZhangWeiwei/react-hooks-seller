@@ -131,7 +131,7 @@ const GoodsPanel = props => {
         // handle the first fixed category transition up
         const value = goodsFixedCategoryRef.current.style.transform
         if (value) {
-          if (goodsFixedCategoryRef.current.style.transform !== 'translate3d(0, 0, 0)') {
+          if (value !== 'translate3d(0, 0, 0)') {
             // fixed some time fixed categorty transion "too" up bug
           goodsFixedCategoryRef.current.style.transform = 'translate3d(0, 0, 0)'
           }
