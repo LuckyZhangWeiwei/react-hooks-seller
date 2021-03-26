@@ -1291,7 +1291,7 @@ const Goods = props => {
                 setShowTransition(false)
                 setTimeout(() => {
                   setShowPopupModel(false)    
-                }, 310);
+                }, 301);
               } else {
                 setShowPopupModel(true)
               }
