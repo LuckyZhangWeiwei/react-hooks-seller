@@ -133,7 +133,7 @@ const Food = props => {
               <h1 className="title">商品评价</h1>
               <div className="rating-wrapper">
                {
-                 computedRatings && computedRatings.length &&
+                 computedRatings &&
                  <ul>
                    {
                      computedRatings.map((rating, index) => {
