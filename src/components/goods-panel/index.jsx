@@ -138,9 +138,7 @@ const GoodsPanel = props => {
         ref={props.myRef}
         probeType={3}
         data={category}
-        listenScroll={pos => { setTimeout(() => {
-          onFoodsPanelScrolling(pos)
-        }, 80)} }>
+        listenScroll={pos => onFoodsPanelScrolling(pos) }>
         <>
           {
             category.map((item, index) => {
