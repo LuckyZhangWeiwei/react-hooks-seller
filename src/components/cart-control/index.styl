@@ -7,6 +7,10 @@
   .cart-decrease
     display inline-block
     transform translate3d(27px, 0, 0)
+    height: 24px
+    width: 24px
+    line-height: 24px
+    color: #00a0dc
     .inner
       display inline-block
       line-height: 24px
@@ -26,11 +30,14 @@
         transform rotate(180deg)
      &.move-exit
       transform translate3d(0, 0, 0)
+      opacity 1
      &.move-exit-active
       transition all 0.3s linear
       transform translate3d(39px, 0, 0)
+      opacity 0
      &.move-exit-done
       transform translate3d(39px, 0, 0)
+      opacity 0
   .cart-count
     width: 12px
     line-height: 24px
@@ -39,7 +46,6 @@
     color $color-grey
   .cart-add
     display inline-block
-    padding 0 3px
     line-height 24px
     font-size $fontsize-large-xxx
     color $color-blue

@@ -16,7 +16,7 @@ const CartControl = props => {
     }
   }, [food.count])
 
-  const descrease = (e) => {
+  const descrease = e => {
     e.stopPropagation()
     if (food.count === 1) {
       useTransition &&  setShowTransition(false)
@@ -24,7 +24,6 @@ const CartControl = props => {
     setTimeout(() => {
       props.onDescrease(food)  
     }, 301);
-    
   }
 
   const add = (e) => {
@@ -45,10 +44,9 @@ const CartControl = props => {
             classNames="move" 
             in={showTransition}>
             <div 
-              className="cart-decrease"
+              className="cart-decrease inner icon-remove_circle_outline"
               style={{transform: !useTransition ? 'translate3d(0, 0, 0)' : null}}
               onClick={e => descrease(e)}>
-              <span className="inner icon-remove_circle_outline" />
             </div>
           </CSSTransition>
         }
