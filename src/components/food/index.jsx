@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import ReactDOM from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Scroller from './../scroller'
 import CartControl from './../cart-control'
 import SplitLine from './../split-line'
@@ -43,7 +44,10 @@ const Food = props => {
       <Scroller data={food}>
         <div className="food-content">
           <div className="image-header">
-            <img src={food.image} alt="" />
+            <LazyLoadImage
+              src={food.image}
+              alt=""
+            />
             <div className="back" onClick={() => hide()}>
               <i className="icon-arrow_lift" />
             </div>
