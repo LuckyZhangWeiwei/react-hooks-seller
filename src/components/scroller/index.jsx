@@ -10,14 +10,16 @@ class Scroller extends React.Component {
     this.scrollerContainerRef = React.createRef()
   }
 
-  componentWillReceiveProps(props) {
-    if (props.data.length) {
-      this.scroller.refresh()  
-    }
-  }
+  // componentWillReceiveProps(props) {
+    // if (props.data.length) {
+    //   this.scroller.refresh()  
+    // }
+  // }
 
   componentDidMount() {
-    this._initScroll()  
+    setTimeout(() => {
+      this._initScroll()  
+    }, 8);
   }
 
   _initScroll () {

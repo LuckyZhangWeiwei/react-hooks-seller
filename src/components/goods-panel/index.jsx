@@ -7,6 +7,7 @@ import CartControl from './../cart-control'
 import './index.styl'
 
 const FIXED_TITLE_HEIGHT = 26
+const IMAGE_SIZE = 57
 
 const GoodslItem = props => {
   const {food, item, descrease, increase, onClickFoodItem} = props
@@ -16,10 +17,9 @@ const GoodslItem = props => {
         <LazyLoadImage 
           src={food.image} 
           alt={food.name}
-          width="57"
-          height="57"
-          effect="blur"
-        />
+          width={IMAGE_SIZE}
+          height={IMAGE_SIZE}
+          effect="blur"/>
       </div>
       <div className="content">
         <h2 className="name">{food.name}</h2>
@@ -41,8 +41,7 @@ const GoodslItem = props => {
             food={food}
             onDescrease={(food) => descrease(item, food)}
             onAdd={(food, e) => increase(item, food, e)}
-            useTransition={true}
-          />
+            useTransition={true} />
         </div>
       </div>
     </li>
@@ -100,7 +99,7 @@ const GoodsPanel = props => {
       goodsFixedCategoryRef.current.style.display = "block"
     }
 
-    for (let i = 0; i < listHeight.length - 1; i++) {
+    for (let i = 0; i < listHeight.length; i++) {
       let h1 = listHeight[i]
 			let h2 = listHeight[i + 1]
       if (-y >= h1 && -y < h2) {
