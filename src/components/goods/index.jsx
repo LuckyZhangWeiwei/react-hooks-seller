@@ -1217,12 +1217,26 @@ const Goods = props => {
      setFood(immeredFood)
   }
 
-  const adjustNavPos = (activeNavIndex, y) => {   // up  y(distance) > 0, down y < 0
-    console.log(activeNavIndex)
-    // const scrollDistance = y - initScrollPosRef.current
-    // let scala = Math.min(Math.max(scrollDistance / goodsPanelHeightRef.current, -1), 1)
-    // const value = navHeightSumRef.current - goodsPanelHeightRef.current - navScrolledHeightRef.current
-    // goodsNavRef.current.scroller.scrollTo(0, Math.min(value * scala, 0), 300)
+  const adjustNavPos = (activeNavIndex, y) => {
+      const viewportSize = document.querySelector('.goods-container').children[2].clientHeight
+      const scrollerSize = document.querySelector('.goods-container').children[2].children[0].clientHeight
+      const minTranslate = Math.min(0, viewportSize - scrollerSize)
+      const middleTranslate = viewportSize / 2
+      const items  = document.querySelector('.goods-container').children[2].children[0].children
+      let size = 0
+      for (let index = 0; index < items.length; index++) {
+        if(items[index].classList.contains('active')) {
+          size += items[index].clientHeight / 2
+          break
+        } else {
+          size += items[index].clientHeight
+        }
+      }
+  
+      let translate = middleTranslate - size
+      translate = Math.max(minTranslate, Math.min(0, translate))
+      if (goodsNavRef.current.scroller)
+        goodsNavRef.current.scroller.scrollTo(0, translate, 300)
   }
 
   const onChangeNavItemIndex = activeNavIndex => {
