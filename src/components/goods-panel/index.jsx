@@ -6,6 +6,8 @@ import GoodsFixedCategory from './../goods-fixed-category'
 import CartControl from './../cart-control'
 import './index.styl'
 
+const FIXED_TITLE_HEIGHT = 26
+
 const GoodslItem = props => {
   const {food, item, descrease, increase, onClickFoodItem} = props
   return (
@@ -49,8 +51,6 @@ const GoodslItem = props => {
 
 const GoodsPanel = props => {
   const category = props.category
-
-  const FIXED_TITLE_HEIGHT = 26
 
   const [listHeight, setListHeight] = useState([])
 
