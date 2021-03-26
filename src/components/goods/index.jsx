@@ -21,6 +21,7 @@ const Goods = props => {
   const [showBallFlying, setShowBallFlying] = useState(null)
   const [showFoodDetail, setShowFoodDetail] = useState(false)
   const [food, setFood] = useState(null)
+  const [isJumpScroll, setIsJumpScroll] = useState(false)
 
   const goodsNavRef = useRef(null)
   const goodsPanelRef = useRef(null)
@@ -1152,7 +1153,15 @@ const Goods = props => {
 
   const onNavItemClick = item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
-    goodsPanelRef.current.scrollToElement(ele, 0)
+    goodsPanelRef.current.scrollToElement(ele, 300)
+
+    const clickedNavItemIndex = goodsCategory.findIndex(category => {
+      return category.name === item.name
+    })
+
+    setActiveNavIndex(clickedNavItemIndex)
+
+    setIsJumpScroll(true)
   }
 
   const onAddFood = (selectedCategory, selectedFood, target) => {
@@ -1232,17 +1241,17 @@ const Goods = props => {
   }
 
   const scrollStart = () => {
-    let startPos = goodsPanelRef.current.scroller.wrapper.children[0].style.transform.split(' ')[1] ?
-                    goodsPanelRef.current.scroller.wrapper.children[0].style.transform.split(' ')[1] : 0
-    if (startPos !== 0) {
-      startPos = startPos.toString().replace('translateY(', '').replace('px)', '')
-    } 
-    initScrollPosRef.current = startPos
+    // let startPos = goodsPanelRef.current.scroller.wrapper.children[0].style.transform.split(' ')[1] ?
+    //                 goodsPanelRef.current.scroller.wrapper.children[0].style.transform.split(' ')[1] : 0
+    // if (startPos !== 0) {
+    //   startPos = startPos.toString().replace('translateY(', '').replace('px)', '')
+    // } 
+    // initScrollPosRef.current = startPos
 
-    // let navScrolledHeight =  document.querySelector('.goods-container').children[2].style.transform.split(' ')[1] ? 
-    //                     document.querySelector('.goods-container').children[2].style.transform.split(' ')[1] : 0
+    // // let navScrolledHeight =  document.querySelector('.goods-container').children[2].style.transform.split(' ')[1] ? 
+    // //                     document.querySelector('.goods-container').children[2].style.transform.split(' ')[1] : 0
     
-    //   navScrolledHeightRef.current = navScrolledHeight
+    // //   navScrolledHeightRef.current = navScrolledHeight
   }
 
   const onChangeNavItemIndex = activeNavIndex => {
@@ -1267,6 +1276,8 @@ const Goods = props => {
           adjustNavPosition={(acitveNavIndex, y) => adjustNavPos(acitveNavIndex, y)}
           changeNavItemIndex={acitveNavIndex => onChangeNavItemIndex(acitveNavIndex)}
           onScrollStart={() => scrollStart()}
+          isJumpScroll={isJumpScroll}
+          onScrollEnd={() => setIsJumpScroll(false)}
         />
         <GoodsNav
           className='goods-nav'

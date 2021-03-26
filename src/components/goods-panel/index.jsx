@@ -86,7 +86,9 @@ const GoodsPanel = props => {
   }, [props.category])
 
   useEffect(() => {
-    props.changeNavItemIndex(currentItem.index)
+    if (!props.isJumpScroll) {
+      props.changeNavItemIndex(currentItem.index)
+    }
     // props.adjustNavPosition(currentItem.index)
   }, [currentItem.index])
 
@@ -104,7 +106,9 @@ const GoodsPanel = props => {
 			let h2 = listHeight[i + 1]
       if (-y >= h1 && -y < h2) {
        const immeredState = produce(currentItem, draft => {
-        draft.index = i + 1
+         if (!props.isJumpScroll) {
+          draft.index = i + 1
+         }
         draft.text = category[i + 1].name
        })
        setCurrentItem(immeredState)
@@ -118,7 +122,9 @@ const GoodsPanel = props => {
       } else if (-y < listHeight[0] && -y > 0) {
         // handle on first category
         const immeredState = produce(currentItem, draft => {
-          draft.index = 0
+          if (!props.isJumpScroll) {
+            draft.index = 0
+          }
           draft.text = category[0].name
          })
          setCurrentItem(immeredState)
@@ -155,7 +161,8 @@ const GoodsPanel = props => {
         probeType={3}
         data={category}
         listenScroll={pos => onFoodsPanelScrolling(pos) }
-        scrollStart={() => props.onScrollStart()}>
+        scrollStart={() => props.onScrollStart()}
+        scrollEnd={() => props.onScrollEnd()}>
         <>
           {
             category.map((item, index) => {

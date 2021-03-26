@@ -38,6 +38,11 @@ class Scroller extends React.Component {
         this.start()
       })
     }
+    if (this.props.scrollEnd) {
+      this.scroller.on('scrollEnd', () => {
+        this.props.scrollEnd()
+      })
+    }
   }
 
   scrollToElement() {
