@@ -1214,6 +1214,7 @@ const Goods = props => {
     // if (activeNavIndex >= 4) {
     //   goodsNavRef.current.scroller.scrollBy(0, -156, 300)
     // }
+    console.log(goodsPanelRef.current)
   }
 
   const onChangeNavItemIndex = activeNavIndex => {
