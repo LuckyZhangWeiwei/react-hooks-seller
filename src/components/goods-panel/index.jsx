@@ -122,19 +122,24 @@ const GoodsPanel = props => {
       } else if (-y < listHeight[0] && -y > 0) {
         // handle on first category
         const immeredState = produce(currentItem, draft => {
-          if (!props.isJumpScroll) {
-            draft.index = 0
+        if (!props.isJumpScroll) {
+          draft.index = 0
+        }
+        draft.text = category[0].name
+        })
+        setCurrentItem(immeredState)
+        // handle the first fixed category transition up
+        const value = goodsFixedCategoryRef.current.style.transform
+        if (value) {
+          if (goodsFixedCategoryRef.current.style.transform !== 'translate3d(0, 0, 0)') {
+            // fixed some time fixed categorty transion "too" up bug
+          goodsFixedCategoryRef.current.style.transform = 'translate3d(0, 0, 0)'
           }
-          draft.text = category[0].name
-         })
-         setCurrentItem(immeredState)
-         // handle the first fixed category transition up
-         goodsFixedCategoryRef.current.style.transform = `translate3d(0, 0, 0)` // fixed some time fixed categorty transion "too" up bug
-           
-          if (listHeight[0] - FIXED_TITLE_HEIGHT <= -y) {
-            let detla = -(FIXED_TITLE_HEIGHT-(listHeight[0] + y))
-            goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${detla}px, 0)`  
-          }  
+        }
+        if (listHeight[0] - FIXED_TITLE_HEIGHT <= -y) {
+          let detla = -(FIXED_TITLE_HEIGHT-(listHeight[0] + y))
+          goodsFixedCategoryRef.current.style.transform = `translate3d(0, ${detla}px, 0)`  
+        }  
       }
     }
   }
