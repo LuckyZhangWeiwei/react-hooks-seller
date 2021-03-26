@@ -1254,7 +1254,7 @@ const Goods = props => {
               setShowTransition(false)
               setTimeout(() => {
                 setShowPopupModel(false)  
-              }, 310);
+              }, 301);
             }}
           >
           <CSSTransition timeout={300} classNames="slide" in={showTransition}>
