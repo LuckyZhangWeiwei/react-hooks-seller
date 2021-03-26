@@ -20,7 +20,11 @@ const CartControl = props => {
     e.stopPropagation()
     if (food.count === 1) {
       useTransition &&  setShowTransition(false)
-    } props.onDescrease(food)  
+    }
+    setTimeout(() => {
+      props.onDescrease(food)  
+    }, 301);
+    
   }
 
   const add = (e) => {
