@@ -33,10 +33,19 @@ class Scroller extends React.Component {
         this.props.listenScroll(pos)  
       })
     }
+    if(this.props.scrollStart) {
+      this.scroller.on('scrollStart', () => {
+        this.start()
+      })
+    }
   }
 
   scrollToElement() {
     this.scroller &&	this.scroller.scrollToElement.apply(this.scroller, arguments)
+  }
+
+  start() {
+    this.scroller && this.props.scrollStart.apply(this.scroller, arguments)
   }
 
   refresh() {

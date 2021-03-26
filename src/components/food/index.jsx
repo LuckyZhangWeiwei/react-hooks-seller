@@ -33,7 +33,6 @@ const Food = props => {
         ret.push(rating)
       }
     })
-    console.log(ret)
     setComputedRatings(ret)
 
   }, [ratings, commentsSelectedType])

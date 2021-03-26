@@ -87,7 +87,7 @@ const GoodsPanel = props => {
 
   useEffect(() => {
     props.changeNavItemIndex(currentItem.index)
-    props.adjustNavPosition(currentItem.index)
+    // props.adjustNavPosition(currentItem.index)
   }, [currentItem.index])
 
   const onFoodsPanelScrolling = pos => {
@@ -131,6 +131,8 @@ const GoodsPanel = props => {
           }  
       }
     }
+
+    props.adjustNavPosition(currentItem.index, y)
   }
 
   const onClickFoodItem = food => {
@@ -152,7 +154,8 @@ const GoodsPanel = props => {
         ref={props.myRef}
         probeType={3}
         data={category}
-        listenScroll={pos => onFoodsPanelScrolling(pos) }>
+        listenScroll={pos => onFoodsPanelScrolling(pos) }
+        scrollStart={() => props.onScrollStart()}>
         <>
           {
             category.map((item, index) => {
