@@ -137,8 +137,6 @@ const GoodsPanel = props => {
           }  
       }
     }
-
-    props.adjustNavPosition(currentItem.index, y)
   }
 
   const onClickFoodItem = food => {

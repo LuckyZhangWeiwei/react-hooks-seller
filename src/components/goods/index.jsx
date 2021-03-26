@@ -1218,6 +1218,7 @@ const Goods = props => {
   }
 
   const adjustNavPos = (activeNavIndex, y) => {   // up  y(distance) > 0, down y < 0
+    console.log(activeNavIndex)
     // const scrollDistance = y - initScrollPosRef.current
     // let scala = Math.min(Math.max(scrollDistance / goodsPanelHeightRef.current, -1), 1)
     // const value = navHeightSumRef.current - goodsPanelHeightRef.current - navScrolledHeightRef.current
