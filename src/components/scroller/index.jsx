@@ -20,7 +20,9 @@ class Scroller extends React.Component {
     this.scroller = new BScroll(this.scrollerContainerRef.current, {
       probeType: this.props.probeType ? this.props.probeType : 0,
       click: this.props.click ?  this.props.click : true,
-      directionLockThreshold: this.props.directionLockThreshold ? this.props.directionLockThreshold : 5
+      directionLockThreshold: this.props.directionLockThreshold ? this.props.directionLockThreshold : 5,
+      scrollX: this.props.scrollX ? true : false,
+      stopPropagation: this.props.stopPropagation ? true : false
     })
     
     if (this.props.listenScroll) {
