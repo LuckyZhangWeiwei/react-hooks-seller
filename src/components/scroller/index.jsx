@@ -9,13 +9,7 @@ class Scroller extends React.Component {
     super(props)
     this.scrollerContainerRef = React.createRef()
   }
-
-  // componentWillReceiveProps(props) {
-    // if (props.data.length) {
-    //   this.scroller.refresh()  
-    // }
-  // }
-
+ 
   componentDidMount() {
     setTimeout(() => {
       this._initScroll()  
@@ -25,7 +19,8 @@ class Scroller extends React.Component {
   _initScroll () {
     this.scroller = new BScroll(this.scrollerContainerRef.current, {
       probeType: this.props.probeType ? this.props.probeType : 0,
-      click: true
+      click: this.props.click ?  this.props.click : true,
+      directionLockThreshold: this.props.directionLockThreshold ? this.props.directionLockThreshold : 5
     })
     
     if (this.props.listenScroll) {
