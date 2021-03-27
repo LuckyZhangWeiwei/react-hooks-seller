@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom'
 import { useState, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import SupportIcon from './../support-ico'
+import Star from './../star'
 
 import './index.styl'
 
@@ -35,7 +36,11 @@ const HeaderDetail = props => {
                 <div className="detail-wrapper clear-fix">
                   <div className="detail-main">
                     <h1 className="name">{seller.name}</h1>
-                    <div className="star-wrapper"></div>
+                    <div className="star-wrapper">
+                      <Star
+                        size="48"
+                        score={seller.score}/>
+                    </div>
                     <div className="title">
                       <div className="line" />
                       <div className="text">优惠信息</div>
