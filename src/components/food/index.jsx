@@ -156,7 +156,7 @@ const Food = props => {
             <div className="rating">
               <h1 className="title">商品评价</h1>
               <RatingSelector
-                ratings={computedRatings}
+                ratings={ratings}
                 onlyContent={onlyConent}
                 selectType={commentsSelectedType}
                 desc={DESC}
