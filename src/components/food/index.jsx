@@ -149,9 +149,8 @@ const Food = props => {
                             <span 
                               className={
                                 classnames({'icon-thumb_up': rating.rateType === 0, 'icon-thumb_down': rating.rateType === 1 })
-                              }>
-                              {rating.text}
-                            </span>
+                              }/>
+                            {rating.text}
                           </p>
                         </li>
                        )
