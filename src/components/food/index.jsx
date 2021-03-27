@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import ReactDOM from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -6,10 +6,16 @@ import  classnames from 'classnames'
 import Scroller from './../scroller'
 import CartControl from './../cart-control'
 import SplitLine from './../split-line'
+import RatingSelector from './../rating-selector'
 import './index.styl'
 
 const ALL = 2
 const IMAGAE_SIZE = 12
+const DESC = {
+  all: '全部',
+  positive: '推荐',
+  negative: '吐槽'
+}
 
 const Food = props => {
   const { food, subtractFood, addFood, category } = props
@@ -20,6 +26,8 @@ const Food = props => {
   const [ratings, setRatings] = useState([])
 
   const [computedRatings, setComputedRatings] = useState([])
+
+  const foodContainerRef = useRef(null)
 
   useEffect(() => {
     setRatings(food.ratings)
@@ -35,7 +43,11 @@ const Food = props => {
     })
     setComputedRatings(ret)
 
-  }, [ratings, commentsSelectedType])
+  }, [ratings, commentsSelectedType, onlyConent])
+
+  useEffect(() => {
+    foodContainerRef.current && foodContainerRef.current.refresh()
+  }, [computedRatings])
 
   const getSelectedCategory = (goodsCategory, selectedFood) => {
     for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
@@ -66,9 +78,18 @@ const Food = props => {
     props.hide()
   }
 
+  const select = value => {
+    console.log('value', value)
+    setCommentsSelectedType(value)
+  }
+
+  const toggle = () => {
+    setOnlyContent(!onlyConent)
+  }
+
   return (
     <div className="food-container">
-      <Scroller data={food}>
+      <Scroller data={food} ref={foodContainerRef}>
         <div className="food-content">
           <div className="image-header">
             <LazyLoadImage
@@ -130,6 +151,14 @@ const Food = props => {
             <SplitLine />
             <div className="rating">
               <h1 className="title">商品评价</h1>
+              <RatingSelector
+                ratings={computedRatings}
+                onlyContent={onlyConent}
+                selectType={commentsSelectedType}
+                desc={DESC}
+                onSelect={value => select(value)}
+                onToggle={() => toggle()}
+              />
               <div className="rating-wrapper">
                {
                  computedRatings &&
