@@ -7,6 +7,7 @@ import Scroller from './../scroller'
 import CartControl from './../cart-control'
 import SplitLine from './../split-line'
 import RatingSelector from './../rating-selector'
+import moment from 'moment'
 import './index.styl'
 
 const ALL = 2
@@ -79,12 +80,15 @@ const Food = props => {
   }
 
   const select = value => {
-    console.log('value', value)
     setCommentsSelectedType(value)
   }
 
   const toggle = () => {
     setOnlyContent(!onlyConent)
+  }
+
+  const format = time => {
+    return moment(time).format('YYYY-MM-DD hh:mm')
   }
 
   return (
@@ -169,10 +173,15 @@ const Food = props => {
                         <li key={index} className="rating-item border-bottom-1px">
                           <div className="user">
                             <span className="name">{rating.username}</span>
-                            <img src={rating.avatar} alt="" className="avatar" height={IMAGAE_SIZE} width={IMAGAE_SIZE}/>
+                            <img 
+                              src={rating.avatar} 
+                              alt="" 
+                              className="avatar" 
+                              height={IMAGAE_SIZE} 
+                              width={IMAGAE_SIZE}/>
                           </div>
                           <div className="time">
-                            {rating.rateTime}
+                            {format(rating.rateTime)}
                           </div>
                           <p className="text">
                             <span 
