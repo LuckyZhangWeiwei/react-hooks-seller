@@ -93,7 +93,7 @@ const Food = props => {
               }
             </div>
             {
-              food.count && 
+              food.count > 0 && 
               <div className="cart-control-wrapper">
                 {
                   food &&
