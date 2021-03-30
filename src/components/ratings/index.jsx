@@ -302,8 +302,8 @@ const Rating = props => {
   useEffect(() => {
     setTimeout(() => {
       scrollerRef.current.refresh()
-    }, 50);
-  }, [computedRatings])
+    }, 100);
+  }, [computedRatings, ratings, onlyContent, selectType])
 
   const select = value => {
     setSelectType(value)

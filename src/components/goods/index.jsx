@@ -1125,7 +1125,7 @@ const Goods = props => {
     setTimeout(() => {
       goodsPanelRef.current.refresh()
       goodsNavRef.current.refresh()
-    }, 50);
+    }, 100);
   }, [goodsCategory])
 
   useEffect(() => {
