@@ -1122,8 +1122,10 @@ const Goods = props => {
   }, [goodsCategory])
 
   useEffect(() => {
-    goodsPanelRef.current.refresh()
-    goodsNavRef.current.refresh()
+    setTimeout(() => {
+      goodsPanelRef.current.refresh()
+      goodsNavRef.current.refresh()
+    }, 50);
   }, [goodsCategory])
 
   useEffect(() => {
