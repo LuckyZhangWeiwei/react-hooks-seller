@@ -300,7 +300,9 @@ const Rating = props => {
   }, [ratings, onlyContent, selectType])
 
   useEffect(() => {
-    scrollerRef.current.refresh()
+    setTimeout(() => {
+      scrollerRef.current.refresh()
+    }, 50);
   }, [computedRatings])
 
   const select = value => {
