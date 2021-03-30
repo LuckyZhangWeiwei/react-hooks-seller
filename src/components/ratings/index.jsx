@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from 'react'
 import moment from 'moment'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Scroller from './../scroller'
 import Star from './../star'
 import SplitLine from './../split-line'
@@ -300,7 +301,7 @@ const Rating = props => {
 
   useEffect(() => {
     scrollerRef.current.refresh()
-  }, [ratings, computedRatings])
+  }, [computedRatings])
 
   const select = value => {
     setSelectType(value)
@@ -363,12 +364,12 @@ const Rating = props => {
                    return (
                      <li key={index} className="rating-item border-bottom-1px">
                         <div className="avatar">
-                          <img 
+                           <LazyLoadImage 
                             src={rating.avatar}
-                            width={IMAGE_SIZE} 
-                            height={IMAGE_SIZE} 
                             alt=""
-                          />
+                            width={IMAGE_SIZE}
+                            height={IMAGE_SIZE}
+                            effect="blur" />
                         </div>
                         <div className="content">
                           <h1 className="name">{rating.username}</h1>
