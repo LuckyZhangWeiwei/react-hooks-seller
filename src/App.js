@@ -18,10 +18,12 @@ function App() {
     },{
       title: '评价',
       component: Rating
-    },{
+    }
+    ,{
       title: '商家',
       component: Seller
-    }]
+    }
+  ]
   }
   
   useEffect(() => {

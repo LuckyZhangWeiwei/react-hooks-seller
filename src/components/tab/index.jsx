@@ -47,9 +47,10 @@ const Tab = props => {
 
   return (
     <div>
-      <TabBar transfromX={transfromX}>
+      {
+        tabInfo &&
+        <TabBar transfromX={transfromX} itemCount={tabInfo.length}>
         {
-          tabInfo &&
           tabInfo.map((item, index) => {
            return (
             <TabBarItem
@@ -66,6 +67,8 @@ const Tab = props => {
           })
         }
       </TabBar> 
+      }
+     
       <TabContent
         data={tabInfo}
         seller={props.seller}
