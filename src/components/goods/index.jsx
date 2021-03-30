@@ -1122,6 +1122,11 @@ const Goods = props => {
   }, [goodsCategory])
 
   useEffect(() => {
+    goodsPanelRef.current.refresh()
+    goodsNavRef.current.refresh()
+  }, [goodsCategory])
+
+  useEffect(() => {
     if (showPopupModel) {
       setShowTransition(true)
     } else {
