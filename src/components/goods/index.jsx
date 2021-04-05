@@ -1254,6 +1254,25 @@ const Goods = props => {
     setShowFoodDetail(true)
   }
 
+  const ClearCart = () => {
+    _clearCartList()
+    setShowPopupModel(false)
+  }
+
+  const _clearCartList = () => {
+    const immeredState = produce(goodsCategory, draft => {
+      draft.forEach(category => {
+        category.foods.forEach(food => {
+          if(food.count) {
+            delete food.count
+          }
+        })
+      })
+     })
+
+     setGoodsCategory(immeredState)
+  }
+
   return (
     <>
       <div className="goods-container">
@@ -1294,6 +1313,7 @@ const Goods = props => {
               goodsCategory={goodsCategory}
               addFood={(category, food, target) => onAddFood(category, food, target)}
               subtractFood={(category, food) => onSubtractFood(category, food)}
+              ClearCart={() => ClearCart()}
             />
           </CSSTransition>
         </ModelLayer>
