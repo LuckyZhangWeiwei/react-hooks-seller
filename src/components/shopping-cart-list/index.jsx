@@ -1,19 +1,21 @@
-import {useState} from 'react'
+import {useState, useCallback, memo} from 'react'
 import Scroller from './../scroller'
 import CartControl from './../cart-control'
 import Dialog from './../dialog'
 
 import './index.styl'
 
-const ShoppingCartLine = props => {
+const ShoppingCartLine = memo(props => {
   const { food, selectedGoodsCategory, addFood, subtractFood } = props
 
-  const onAddFood = (food, target) => {
+  const onAddFood = useCallback((food, target) => {
     addFood(selectedGoodsCategory, food, target)
-  }
-  const onDescrease = food => {
+  }, [food, selectedGoodsCategory])
+
+  const onDescrease =useCallback(food => {
     subtractFood(selectedGoodsCategory, food)
-  }
+  }, [food, selectedGoodsCategory])
+
   return (
     <div className="food">
       <span className="name">{food.name}</span>
@@ -28,17 +30,18 @@ const ShoppingCartLine = props => {
       </div>
     </div>
   )
-}
+})
 
 const ShoppingCartList = props => {
   const { ClearCart } = props
   const [showDialog, setShowDialog] = useState(false)
 
-  const clearShoppingCart = e => {
+  const clearShoppingCart = useCallback(e => {
     e.stopPropagation()
     setShowDialog(true)
-  }
-  const getSelectedCategory = (goodsCategory, selectedFood) => {
+  }, [props.food, props.selectedGoodsCategory])
+
+  const getSelectedCategory =useCallback((goodsCategory, selectedFood) => {
     for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
       for (let foodIndex = 0; foodIndex < goodsCategory[categoryIndex].foods.length; foodIndex++) {
         if (goodsCategory[categoryIndex].foods[foodIndex].name === selectedFood.name) {
@@ -46,7 +49,7 @@ const ShoppingCartList = props => {
         }
       }
     }
-  }
+  }, [props.food, props.selectedGoodsCategory])
 
   return (
     <>
@@ -89,4 +92,4 @@ const ShoppingCartList = props => {
   )
 }
 
-export default ShoppingCartList
+export default memo(ShoppingCartList)

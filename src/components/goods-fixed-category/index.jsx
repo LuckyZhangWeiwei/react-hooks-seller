@@ -1,3 +1,4 @@
+import {memo} from 'react'
 import './index.styl'
 
 const GoodsFixedCategory = props => {
@@ -10,4 +11,6 @@ const GoodsFixedCategory = props => {
   )
 }
 
-export default GoodsFixedCategory
+export default memo(GoodsFixedCategory, (preProps, nextProps) => {
+  return preProps.categoryTitle === nextProps.categoryTitle
+})

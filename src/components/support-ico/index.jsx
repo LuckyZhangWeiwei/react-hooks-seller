@@ -1,3 +1,4 @@
+import {memo} from 'react'
 import './index.styl'
 
 const SupportIco = props => {
@@ -10,4 +11,4 @@ const SupportIco = props => {
   )
 }
 
-export default SupportIco
+export default memo(SupportIco)

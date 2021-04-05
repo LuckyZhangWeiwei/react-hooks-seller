@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, memo, useCallback } from 'react'
 import BScroll from '@better-scroll/core'
 import Slide from '@better-scroll/slide'
 import './index.styl'
@@ -33,13 +33,13 @@ const TabContent = props => {
     }
   }, [props.currentIndex])
 
-  const _initTab = () => {
+  const _initTab = useCallback(() => {
     if (!props.data) return
     _setTabWidth()
     _initScroll()
-  }
+  }, [props.data])
 
-  const _initScroll = () => {
+  const _initScroll = useCallback(() => {
     if (!sliderRef.current) return
     BScroll.use(Slide)
     scrollRef.current = new BScroll(sliderRef.current, {
@@ -56,9 +56,9 @@ const TabContent = props => {
       bounce: false,
       stopPropagation: true
     })
-  }
+  }, [])
 
-  const _setTabWidth = () =>{
+  const _setTabWidth = useCallback(() =>{
     let tabItems = document.querySelectorAll('.slide-page')
     if (!tabItems) return
     let tabItemWidth = sliderRef.current.clientWidth
@@ -67,7 +67,7 @@ const TabContent = props => {
     }
     let totalWidth = tabItems.length * tabItemWidth
     document.querySelector('.slide-banner-content').style.width = `${totalWidth}px`
-  }
+  }, [])
 
   return (
     <>
@@ -96,4 +96,4 @@ const TabContent = props => {
     </>
   )
 }
-export default TabContent
+export default memo(TabContent)

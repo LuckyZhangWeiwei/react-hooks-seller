@@ -1,3 +1,4 @@
+import {memo} from 'react'
 import './index.styl'
 
 const Bubble = props => {
@@ -8,4 +9,4 @@ const Bubble = props => {
   )
 }
 
-export default Bubble
+export default memo(Bubble)

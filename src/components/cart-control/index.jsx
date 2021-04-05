@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo, useCallback } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import './index.styl'
 
 const CartControl = props => {
 
-  const { food, useTransition } = props // useTransition - when from shopping cart, we don't need transtiton 
+  const { food, category, useTransition } = props // useTransition - when from shopping cart, we don't need transtiton 
 
   const [showTransition, setShowTransition] = useState(false)
 
@@ -16,20 +16,25 @@ const CartControl = props => {
     }
   }, [food.count])
 
-  const descrease = e => {
+  const descrease = useCallback((e) => {
     e.stopPropagation()
     if (food.count === 1) {
       useTransition &&  setShowTransition(false)
     }
-    setTimeout(() => {
+    if(food.count === 1) {
+      setTimeout(() => {
+        props.onDescrease(food)  
+      }, 301);
+    } else {
       props.onDescrease(food)  
-    }, 301);
-  }
+    }
+   
+  }, [food, category])
 
-  const add = (e) => {
+  const add = useCallback(e => {
     e.stopPropagation()
     props.onAdd(food, e)
-  }
+  }, [food, category])
 
   return (
     <>
@@ -64,4 +69,4 @@ const CartControl = props => {
   )
 }
 
-export default CartControl
+export default memo(CartControl)

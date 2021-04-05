@@ -1,4 +1,5 @@
 
+import { memo } from 'react'
 import './index.styl'
 const TabBarItem = props => {
   return (
@@ -11,4 +12,4 @@ const TabBarItem = props => {
   )
 }
 
-export default TabBarItem
+export default memo(TabBarItem)

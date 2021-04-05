@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import TabBarSlider from './../tab-bar-indicator'
 import './index.styl'
 
@@ -11,4 +12,4 @@ const TabBar = props => {
     </div>
   )
 }
-export default TabBar
+export default memo(TabBar)

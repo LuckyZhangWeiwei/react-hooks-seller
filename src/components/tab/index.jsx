@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo, useCallback } from 'react'
 import classnames from 'classnames'
 import TabBar from './tab-bar'
 import TabBarItem from './tab-bar-item'
@@ -24,11 +24,11 @@ const Tab = props => {
     }
   }, [props.data])
  
-  const goToPage = pageIndex => {
+  const goToPage = useCallback(pageIndex => {
     setCurrentIndex(pageIndex)
-  }
+  }, [])
 
-  const onScrollValueChanged = value => {
+  const onScrollValueChanged = useCallback(value => {
     setTransfromX(value)
      _transformShoppingCart(value)
      if (value < 1) { // when from tab2 moving to tab1
@@ -36,14 +36,14 @@ const Tab = props => {
         setShowShoppingCart(true)
        }
      }
-  }
+  }, [])
 
-  const _transformShoppingCart = value => {
+  const _transformShoppingCart = useCallback(value => {
     const shoppingCard = document.querySelector('.shopcart-container')
     if (shoppingCard) {
       shoppingCard.style.transform = `translateX(${-value * shoppingCard.clientWidth}px)`
     }
-  }
+  }, [])
 
   return (
     <div>
@@ -81,4 +81,4 @@ const Tab = props => {
   )
 }
 
-export default Tab
+export default memo(Tab)

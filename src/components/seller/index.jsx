@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, memo, useCallback } from 'react'
 import Scroller from './../scroller'
 import SupportIcon from './../support-ico'
 import Star from './../star'
@@ -125,4 +125,4 @@ const Seller = props => {
   )
 }
 
-export default Seller
+export default memo(Seller)

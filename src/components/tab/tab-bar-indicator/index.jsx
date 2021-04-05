@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, memo } from 'react'
 import './index.styl'
 
 const TabBarSlider = props => {
@@ -19,4 +19,4 @@ const TabBarSlider = props => {
   )
 }
 
-export default TabBarSlider
+export default memo(TabBarSlider)

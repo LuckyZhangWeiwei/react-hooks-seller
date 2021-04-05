@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import ReactDOM from 'react-dom'
 import ShopingCart from '../shoping-cart'
 import Balls from './../balls'
@@ -27,5 +28,5 @@ const ShopingCartSticky = props => {
   )
 }
 
-export default ShopingCartSticky
+export default memo(ShopingCartSticky)
 

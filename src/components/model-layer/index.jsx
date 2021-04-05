@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom'
+import {memo} from 'react'
 import './index.styl'
 
 const ModelLayer = props => {
@@ -14,4 +15,4 @@ const ModelLayer = props => {
   )
 }
 
-export default ModelLayer
+export default memo(ModelLayer)

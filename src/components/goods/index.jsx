@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback, memo } from 'react'
 import produce from 'immer'
 import { CSSTransition } from 'react-transition-group'
 import { getGoods } from './../../api'
@@ -1142,7 +1142,7 @@ const Goods = props => {
     }
   }, [selectFoods])
 
-  const onNavItemClick = item => {
+  const onNavItemClick = useCallback(item => {
     const ele = document.querySelector(`[data-category=${item.name}]`)
     goodsPanelRef.current.scrollToElement(ele, 300)
 
@@ -1153,12 +1153,10 @@ const Goods = props => {
     setActiveNavIndex(clickedNavItemIndex)
 
     setIsJumpScroll(true)
-  }
+  }, [selectFoods])
 
-  const onAddFood = (selectedCategory, selectedFood, target) => {
-   
+  const onAddFood = useCallback((selectedCategory, selectedFood, target) => {
     if (!selectedCategory || !selectedFood) return
-    
     const immeredState = produce(draft => {
 
     const selectedCateIndex = goodsCategory.findIndex(category => {
@@ -1189,9 +1187,9 @@ const Goods = props => {
    if (target.target.classList[0] !== 'buy') {
     setShowBallFlying({selectedCategory, selectedFood, target})
    }
-  }
+  }, [selectFoods, showFoodDetail, goodsCategory])
 
-  const onSubtractFood = (selectedCategory, selectedFood) => {
+  const onSubtractFood = useCallback((selectedCategory, selectedFood) => {
     if (!selectedCategory || !selectedFood) return
 
     const immeredState = produce(draft => {
@@ -1222,44 +1220,44 @@ const Goods = props => {
       }
      })
      setFood(immeredFood)
-  }
+  }, [selectFoods, showFoodDetail, goodsCategory]) 
 
-  const adjustNavPos = (activeNavIndex, y) => {
-      const viewportSize = document.querySelector('.goods-container').children[2].clientHeight
-      const scrollerSize = document.querySelector('.goods-container').children[2].children[0].clientHeight
-      const minTranslate = Math.min(0, viewportSize - scrollerSize)
-      const middleTranslate = viewportSize / 2
-      const items  = document.querySelector('.goods-container').children[2].children[0].children
-      let size = 0
-      for (let index = 0; index < items.length; index++) {
-        if(items[index].classList.contains('active')) {
-          size += items[index].clientHeight / 2
-          break
-        } else {
-          size += items[index].clientHeight
-        }
+  const adjustNavPos = useCallback((activeNavIndex, y) => {
+    const viewportSize = document.querySelector('.goods-container').children[2].clientHeight
+    const scrollerSize = document.querySelector('.goods-container').children[2].children[0].clientHeight
+    const minTranslate = Math.min(0, viewportSize - scrollerSize)
+    const middleTranslate = viewportSize / 2
+    const items  = document.querySelector('.goods-container').children[2].children[0].children
+    let size = 0
+    for (let index = 0; index < items.length; index++) {
+      if(items[index].classList.contains('active')) {
+        size += items[index].clientHeight / 2
+        break
+      } else {
+        size += items[index].clientHeight
       }
-      let translate = middleTranslate - size
-      translate = Math.max(minTranslate, Math.min(0, translate))
-      if (goodsNavRef.current.scroller)
-        goodsNavRef.current.scroller.scrollTo(0, translate, 300)
-  }
+    }
+    let translate = middleTranslate - size
+    translate = Math.max(minTranslate, Math.min(0, translate))
+    if (goodsNavRef.current.scroller)
+      goodsNavRef.current.scroller.scrollTo(0, translate, 300)
+}, []) 
 
-  const onChangeNavItemIndex = activeNavIndex => {
+  const onChangeNavItemIndex = useCallback(activeNavIndex => {
     setActiveNavIndex(activeNavIndex)
-  }
+  }, []) 
   
-  const onJumpToDetailPage = food => {
+  const onJumpToDetailPage = useCallback(food => {
     setFood(food)
     setShowFoodDetail(true)
-  }
+  }, [activeNavIndex])
 
-  const ClearCart = () => {
+  const ClearCart = useCallback(() => {
     _clearCartList()
     setShowPopupModel(false)
-  }
+  }, [selectFoods, showFoodDetail]) 
 
-  const _clearCartList = () => {
+  const _clearCartList = useCallback(() => {
     const immeredState = produce(goodsCategory, draft => {
       draft.forEach(category => {
         category.foods.forEach(food => {
@@ -1269,9 +1267,15 @@ const Goods = props => {
         })
       })
      })
-
      setGoodsCategory(immeredState)
-  }
+     const immeredFood = produce(food, draft => {
+
+      if (draft && draft.count) {
+        delete draft.count
+      }
+     })
+     setFood(immeredFood)
+  }, [selectFoods, showFoodDetail]) 
 
   return (
     <>
@@ -1355,4 +1359,4 @@ const Goods = props => {
   )
 }
 
-export default Goods
+export default memo(Goods)

@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo, useCallback } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import SupportIcon from './../support-ico'
 import Star from './../star'
@@ -16,13 +16,13 @@ const HeaderDetail = props => {
     }
   }, [props.show])
 
-  const hide = () => {
+  const hide = useCallback(() => {
     setShowTransition(false)
 
     setTimeout(() => {
       props.hideHeaderDetail()    
     }, 310)
-  }
+  }, [])
 
   return (
     <>
@@ -88,4 +88,4 @@ const HeaderDetail = props => {
  )
 }
 
-export default HeaderDetail
+export default memo(HeaderDetail)

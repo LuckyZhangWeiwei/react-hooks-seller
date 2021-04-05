@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef, useCallback, memo} from 'react'
 import moment from 'moment'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Scroller from './../scroller'
@@ -18,6 +18,10 @@ const IMAGE_SIZE = 28
 const scrollOptions = {
   click: false,
   directionLockThreshold: 0
+}
+
+const format = time => {
+  return moment(time).format('YYYY-MM-DD hh:mm')
 }
 
 const Rating = props => {
@@ -305,17 +309,13 @@ const Rating = props => {
     }, 100);
   }, [computedRatings, ratings, onlyContent, selectType])
 
-  const select = value => {
+  const select = useCallback(value => {
     setSelectType(value)
-  }
+  }, [])
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     setOnlyContent(!onlyContent)
-  }
-
-  const format = time => {
-    return moment(time).format('YYYY-MM-DD hh:mm')
-  }
+  }, [onlyContent])
 
   return (
     <div className="ratings">
@@ -410,4 +410,4 @@ const Rating = props => {
   )
 }
 
-export default Rating
+export default memo(Rating)

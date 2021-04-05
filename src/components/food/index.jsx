@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef, useCallback, useMemo, memo} from 'react'
 import ReactDOM from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -16,6 +16,10 @@ const DESC = {
   all: '全部',
   positive: '推荐',
   negative: '吐槽'
+}
+
+const format = time => {
+  return moment(time).format('YYYY-MM-DD hh:mm')
 }
 
 const Food = props => {
@@ -50,7 +54,7 @@ const Food = props => {
     foodContainerRef.current && foodContainerRef.current.refresh()
   }, [computedRatings])
 
-  const getSelectedCategory = (goodsCategory, selectedFood) => {
+  const getSelectedCategory = useCallback((goodsCategory, selectedFood) => {
     for (let categoryIndex = 0; categoryIndex < goodsCategory.length; categoryIndex++) {
       for (let foodIndex = 0; foodIndex < goodsCategory[categoryIndex].foods.length; foodIndex++) {
         if (goodsCategory[categoryIndex].foods[foodIndex].name === selectedFood.name) {
@@ -58,38 +62,34 @@ const Food = props => {
         }
       }
     }
-  }
+  }, [category, food])
 
-  const addFirst = (target) => {
+  const addFirst = useCallback(target => {
     const selectedCategory = getSelectedCategory(category, food)
     addFood(selectedCategory, food, target)
-  }
+  }, [category, food])
 
-  const onAddFood = (food, target) => {
+  const onAddFood = useCallback((food, target) => {
     const selectedCategory = getSelectedCategory(category, food)
     addFood(selectedCategory, food, target)
-  }
+  }, [category, food])
 
-  const onDescrease = food => {
+  const onDescrease = useCallback(food => {
     const selectedCategory = getSelectedCategory(category, food)
     subtractFood(selectedCategory, food)
-  }
+  }, [category, food])
 
-  const hide = () => {
+  const hide = useCallback(() => {
     props.hide()
-  }
+  }, [])
 
-  const select = value => {
+  const select = useCallback(value => {
     setCommentsSelectedType(value)
-  }
+  }, [])
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     setOnlyContent(!onlyConent)
-  }
-
-  const format = time => {
-    return moment(time).format('YYYY-MM-DD hh:mm')
-  }
+  }, [])
 
   return (
     <div className="food-container">
@@ -127,6 +127,7 @@ const Food = props => {
                     onAdd={(food, target) => onAddFood(food, target)}
                     onDescrease={() => onDescrease(food)}
                     useTransition={true}
+                    category={category}
                   />
                 }
               </div>
@@ -244,4 +245,4 @@ const FoodPortal = props => {
   )
 }
 
-export default FoodPortal
+export default memo(FoodPortal)

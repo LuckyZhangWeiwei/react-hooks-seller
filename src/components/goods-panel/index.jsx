@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, memo, useCallback } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import produce from 'immer'
 import Scroller from './../scroller'
@@ -9,7 +9,7 @@ import './index.styl'
 const FIXED_TITLE_HEIGHT = 26
 const IMAGE_SIZE = 57
 
-const GoodslItem = props => {
+const GoodslItem = memo(props => {
   const {food, item, descrease, increase, onClickFoodItem} = props
   return (
     <li className="food-item" onClick={() => onClickFoodItem(food)}>
@@ -46,7 +46,7 @@ const GoodslItem = props => {
       </div>
     </li>
   )
-}
+})
 
 const GoodsPanel = props => {
   const category = props.category
@@ -83,7 +83,7 @@ const GoodsPanel = props => {
        // add init value
        setCurrentItem(immeredState)
     }
-  }, [props.category])
+  }, [category])
 
   useEffect(() => {
     if (!props.isJumpScroll) {
@@ -92,7 +92,7 @@ const GoodsPanel = props => {
     props.adjustNavPosition(currentItem.index)
   }, [currentItem])
 
-  const onFoodsPanelScrolling = pos => {
+  const onFoodsPanelScrolling = useCallback(pos => {
     const { y } = pos
     // when pull down the scroller, should hide the fixed title
     if (y > 0) {
@@ -142,19 +142,19 @@ const GoodsPanel = props => {
         }  
       }
     }
-  }
+  }, [currentItem])
 
-  const onClickFoodItem = food => {
+  const onClickFoodItem = useCallback(food => {
     props.jumpToDetailPage(food)
-  }
+  }, [])
 
-  const descrease = (category, food) => {
+  const descrease = useCallback((category, food) => {
     props.subtractFood(category, food)
-  }
+  }, [category])
 
-  const increase = (category, food, e) => {
+  const increase = useCallback((category, food, e) => {
     props.addFood(category, food, e)
-  }
+  }, [category])
 
   return (
     <>
@@ -203,4 +203,4 @@ const GoodsPanel = props => {
   )
 }
 
-export default GoodsPanel
+export default memo(GoodsPanel)

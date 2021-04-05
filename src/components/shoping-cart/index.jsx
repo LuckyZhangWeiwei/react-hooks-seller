@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo, useCallback } from 'react'
 import classnames from 'classnames'
 import Bubble from '../bubble'
 import './index.styl'
@@ -33,13 +33,13 @@ const ShopingCart = props => {
     }
   }, [props.selectFoods])
 
-  const payClass = () => {
+  const payClass = useCallback(() => {
     if (!totalCount || totalPrice < minPrice) {
       return 'not-enough'
     } else {
       return 'enough'
     }
-  }
+  }, [props.selectFoods, totalPrice, totalCount])
 
   const pay = (e) => {
     e.stopPropagation()
@@ -78,4 +78,4 @@ const ShopingCart = props => {
   )
 }
 
-export default ShopingCart
+export default memo(ShopingCart)

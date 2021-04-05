@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, memo} from 'react'
 import './index.styl'
 import classnames from 'classnames'
 
@@ -65,4 +65,4 @@ const RatingSelector = props => {
   )
 }
 
-export default RatingSelector
+export default memo(RatingSelector)

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, memo} from 'react'
 import './index.styl'
 
 const LENGTH = 5
@@ -40,4 +40,4 @@ const Star = props => {
   )
 }
 
-export default Star
+export default memo(Star)

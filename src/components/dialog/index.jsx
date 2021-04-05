@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import './index.styl'
 
@@ -54,4 +54,4 @@ const Dialog = props => {
   )
 }
 
-export default Dialog
+export default memo(Dialog)

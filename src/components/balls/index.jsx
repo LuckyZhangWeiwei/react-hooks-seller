@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback, memo } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import produce from 'immer'
 import './index.styl'
@@ -30,7 +30,7 @@ const Balls = props => {
     setBalls(ret)
   }, [])
 
-  const _triggerDrop = el => {
+  const _triggerDrop = useCallback(el => {
     let tempObj = {}
     const immeredObj = produce(balls, draft => {
       for (let i = 0; i < draft.length; i++) {
@@ -51,9 +51,9 @@ const Balls = props => {
 
     dropBalls.current.push(tempObj)
     setBalls(immeredObj)
-  }
+  }, [balls])
 
-  const onEnter = (ele, isAppearing) => {
+  const onEnter =useCallback((ele, isAppearing) => {
       const dropBall = dropBalls.current[dropBalls.current.length - 1]
       const rect = dropBall.el.target.getBoundingClientRect()
       const x = rect.left - 32
@@ -62,17 +62,17 @@ const Balls = props => {
       ele.style.transform = ele.style.webkitTransform =  `translate3d(0, ${y}px, 0)`
       const inner = ele.getElementsByClassName(innerCls)[0]
       inner.style.transform = inner.style.webkitTransform =  `translate3d(${x}px, 0, 0)`  
-  }
+  }, [balls])
 
-  const onEntering = (ele, isAppearing) => {
+  const onEntering = useCallback((ele, isAppearing) => {
       ele.style.transition = 'all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)'
       ele.style.transform = ele.style.webkitTransform =  `translate3d(0, 0, 0)`
       const inner = ele.getElementsByClassName(innerCls)[0]
       inner.style.transition = 'all 0.4s linear'
       inner.style.transform = inner.style.webkitTransform =  `translate3d(0, 0, 0)`
-  }
+  }, [balls])
 
-  const onEntered = (ele, isAppearing) => {
+  const onEntered = useCallback((ele, isAppearing) => {
       const droppedBall = dropBalls.current.shift()
 
       const immeredObj = produce(balls, draft => {
@@ -88,13 +88,13 @@ const Balls = props => {
       setBalls(immeredObj)
 
       _resetBallStyle(ele)
-  }
+  }, [balls])
 
-  const _resetBallStyle = (ele) => {
+  const _resetBallStyle = useCallback((ele) => {
     ele.style = null
     ele.children[0].style = null
     ele.style.display = 'none'
-  }
+  }, [])
 
   return (
     <div className="ball-container">
