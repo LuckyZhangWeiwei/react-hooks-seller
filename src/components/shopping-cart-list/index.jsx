@@ -77,7 +77,9 @@ const ShoppingCartList = props => {
       </div>
       {
         showDialog &&
-        <Dialog title="清空购物车？"
+        <Dialog 
+          title="清空购物车？"
+          show={showDialog}
           hideDialog={() => setShowDialog(false)}
           ClearCart={() => ClearCart()}
         />

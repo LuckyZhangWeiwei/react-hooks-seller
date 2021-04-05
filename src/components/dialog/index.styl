@@ -4,12 +4,19 @@
   margin: auto
   background: #fff
   border-radius: 3px
-  transform: translate(-50%,-50%)
   position: absolute;
   left: 50%;
   width: 75%
   max-width: 100%;
   top: 50%;
+  &.scala-enter
+    transform: scale(0.9) translate(-50%,-50%);
+    transform-origin:0 0
+  &.scala-enter-active
+    transform: scale(1.1) translate(-50%,-50%);
+    transition all 0.3s ease-in-out
+  &.scala-enter-done
+    transform: scale(1) translate(-50%,-50%);
   .content
     margin-top: 10px
     color: #666
