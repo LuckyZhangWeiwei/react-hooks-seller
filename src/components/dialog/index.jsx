@@ -18,37 +18,37 @@ const Dialog = props => {
 
   return (
     <ModelLayer style={{zIndex: 999}}>
-       <CSSTransition 
-            timeout={200} 
-            classNames="scala" 
-            in={showTransition}>
-            <div className="dialog-main">
-              <div className="content">
-                {title}
-              </div>
-              <div>
-                <a 
-                  className="btn" 
-                  onClick={
-                    e => {
-                      e.stopPropagation()
-                        props.hideDialog()  
-                      } 
-                    }>
-                  取消
-                </a>
-                <a 
-                  className="btn hightlight" 
-                  onClick={
-                    e => {
-                      e.stopPropagation()
-                      props.ClearCart()
-                      }
-                  }>
-                  确定
-                </a>
-              </div>
+       <CSSTransition
+          timeout={200} 
+          classNames="scala" 
+          in={showTransition}>
+          <div className="dialog-main">
+            <div className="content">
+              {title}
             </div>
+            <div className="btn-container">
+              <label
+                className="btn" 
+                onClick={
+                  e => {
+                    e.stopPropagation()
+                      props.hideDialog()  
+                    } 
+                  }>
+                取消
+              </label>
+              <label
+                className="btn hightlight" 
+                onClick={
+                  e => {
+                    e.stopPropagation()
+                    props.ClearCart()
+                    }
+                }>
+                确定
+              </label>
+            </div>
+          </div>
       </CSSTransition>
     </ModelLayer>
   )

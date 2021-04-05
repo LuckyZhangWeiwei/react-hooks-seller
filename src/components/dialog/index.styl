@@ -1,6 +1,5 @@
 .dialog-main
   text-align: center
-  display: block
   margin: auto
   background: #fff
   border-radius: 3px
@@ -9,9 +8,12 @@
   width: 75%
   max-width: 100%;
   top: 50%;
+  border: none
+  font-size: 0
+  padding: 5px
+  transform-origin:0 0
   &.scala-enter
     transform: scale(0.9) translate(-50%,-50%);
-    transform-origin:0 0
   &.scala-enter-active
     transform: scale(1.1) translate(-50%,-50%);
     transition all 0.3s ease-in-out
@@ -23,18 +25,24 @@
     vertical-align: baseline;
     border-bottom: 1px solid #ebebeb
     padding: 15px 0
-  .btn
-    display: inline-block
-    background-clip: padding-box;
-    background-color: #fff;
-    box-sizing: border-box;
-    color: #999;
-    font-size: 16px;
-    line-height: 1;
-    margin: 0;
-    padding: 17px 10px;
-    text-align: center;
-    text-decoration: none;
-    width: 45%
-  .hightlight
-    color #fc9153
+    font-size: 16px
+  .btn-container
+    margin: 0
+    padding: 0
+    font-size: 0
+    .btn
+      display: inline-block
+      background-clip: padding-box;
+      background-color: #fff;
+      box-sizing: border-box;
+      color: #999;
+      font-size: 16px;
+      line-height: 1;
+      margin: 0;
+      padding: 17px 10px;
+      text-align: center;
+      text-decoration: none;
+      width: 50%
+      border: none
+    .hightlight
+      color #fc9153
