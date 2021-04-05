@@ -82,6 +82,7 @@ const ShoppingCartList = props => {
           show={showDialog}
           hideDialog={() => setShowDialog(false)}
           ClearCart={() => ClearCart()}
+          hide={() => setShowDialog(false)}
         />
       }
    </>
