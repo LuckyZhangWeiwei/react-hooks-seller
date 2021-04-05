@@ -28,7 +28,6 @@ const Dialog = props => {
               </div>
               <div>
                 <a 
-                  href="javascript:;" 
                   className="btn" 
                   onClick={
                     e => {
@@ -39,7 +38,6 @@ const Dialog = props => {
                   取消
                 </a>
                 <a 
-                  href="javascript:;" 
                   className="btn hightlight" 
                   onClick={
                     e => {
