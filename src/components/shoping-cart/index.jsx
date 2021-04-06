@@ -43,7 +43,8 @@ const ShopingCart = props => {
 
   const pay = (e) => {
     e.stopPropagation()
-    alert(1)
+    if (props.selectFoods.length <= 0) return
+    alert(JSON.stringify(props.selectFoods))
   }
 
   return (
