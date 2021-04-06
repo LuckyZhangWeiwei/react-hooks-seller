@@ -41,11 +41,11 @@ const ShopingCart = props => {
     }
   }, [props.selectFoods, totalPrice, totalCount])
 
-  const pay = (e) => {
+  const pay = useCallback(e => {
     e.stopPropagation()
-    if (props.selectFoods.length <= 0) return
+    if (!totalCount || totalPrice < minPrice) return
     alert(JSON.stringify(props.selectFoods))
-  }
+  }, [props.selectFoods, totalPrice, totalCount])
 
   return (
     <div className="shopcart-container"  onClick={() => props.click()}>
