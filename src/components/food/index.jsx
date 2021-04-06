@@ -100,9 +100,6 @@ const Food = props => {
               src={food.image}
               alt=""
             />
-            <div className="back" onClick={() => hide()}>
-              <i className="icon-arrow_lift" />
-            </div>
           </div>
           <div className="content">
             <h1 className="title">{food.name}</h1>
@@ -207,6 +204,9 @@ const Food = props => {
             </div>
         </div>
       </Scroller>
+      <div className="back" onClick={() => hide()}>
+        <i className="icon-arrow_lift" />
+      </div>
     </div>
   )
 }
