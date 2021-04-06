@@ -307,15 +307,15 @@ const Rating = props => {
     setTimeout(() => {
       scrollerRef.current.refresh()
     }, 100);
-  }, [computedRatings, ratings, onlyContent, selectType])
+  }, [onlyContent, selectType])
 
   const select = useCallback(value => {
     setSelectType(value)
-  }, [computedRatings, ratings, onlyContent, selectType])
+  }, [onlyContent, selectType])
 
   const toggle = useCallback(() => {
     setOnlyContent(!onlyContent)
-  }, [computedRatings, ratings, onlyContent, selectType])
+  }, [onlyContent])
 
   return (
     <div className="ratings">
