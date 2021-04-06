@@ -85,11 +85,11 @@ const Food = props => {
 
   const select = useCallback(value => {
     setCommentsSelectedType(value)
-  }, [])
+  }, [commentsSelectedType, onlyConent])
 
   const toggle = useCallback(() => {
     setOnlyContent(!onlyConent)
-  }, [])
+  }, [onlyConent])
 
   return (
     <div className="food-container">
