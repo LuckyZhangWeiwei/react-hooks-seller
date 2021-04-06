@@ -311,11 +311,11 @@ const Rating = props => {
 
   const select = useCallback(value => {
     setSelectType(value)
-  }, [])
+  }, [computedRatings, ratings, onlyContent, selectType])
 
   const toggle = useCallback(() => {
     setOnlyContent(!onlyContent)
-  }, [onlyContent])
+  }, [computedRatings, ratings, onlyContent, selectType])
 
   return (
     <div className="ratings">
